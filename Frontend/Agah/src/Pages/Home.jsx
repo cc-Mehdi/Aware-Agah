@@ -1,8 +1,9 @@
 import React from 'react'
+import ProductStatusList from './../components/product_status_card_list'
 
 const Home = () => {
     return (
-        <div className='text-2xl'>Home</div>
+        <ProductStatusList />
     )
 }
 
