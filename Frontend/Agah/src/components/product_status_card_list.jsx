@@ -1,55 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import ProductStatusCard from './product_status_card'; // Adjust the import path if necessary
+import React, { useEffect, useState, useRef } from 'react';
+import ProductStatusCard from './product_status_card';
 
 const ProductStatusCardList = () => {
-    // State to store the products
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [goldData, setGoldData] = useState([]);
+    const isMounted = useRef(false); // for fixing bug (this component send 2 request when loaded and this code fix this send just 1 request)
 
-    // Fetch product data when the component mounts
     useEffect(() => {
-        // Function to fetch data from API
-        const fetchProductData = async () => {
+        const fetchData = async () => {
             try {
-                const response = await fetch('https://api.metalpriceapi.com/v1/latest?api_key=05c5d4d6f8fba5579c62aafd2efb52f8&base=USD&currencies=IRR'); // Replace with your API endpoint
-                if (!response.ok) {
-                    throw new Error('Failed to fetch products');
-                }
+                const response = await fetch('https://brsapi.ir/FreeTsetmcBourseApi/Api_Free_Gold_Currency.json');
                 const data = await response.json();
-                setProducts(data);  // Assuming the response is an array of product objects
-                setLoading(false);   // Data has been loaded
-
-                console.log("قیمت هر 1 دلار به تومان برابر است با : " + String(data.rates["IRR"]).split('.')[0]);
-
-            } catch (err) {
-                setError(err.message);
-                setLoading(false);  // Even on error, stop the loading state
+                setGoldData(data.gold || []);
+            } catch (error) {
+                console.error('Error fetching gold prices:', error);
             }
         };
 
-        fetchProductData(); // Trigger the API call
-    }, []); // Empty dependency array means this runs only once when the component mounts
+        if (!isMounted.current) {
+            fetchData(); // Fetch only once
+            isMounted.current = true;
+        }
 
-    if (loading) {
-        return <div>Loading...</div>; // Display loading message
-    }
+        const interval = setInterval(() => {
+            fetchData();
+        }, 600000);
 
-    if (error) {
-        return <div>Error: {error}</div>; // Display error message if fetching fails
-    }
+        return () => clearInterval(interval);
+    }, []);
 
     return (
-        <div className="product-status-card-list">
-            {products.map((product) => (
-                <ProductStatusCard
-                    key={product.id}  // Unique key for each item
-                    name={product.name}
-                    amount={product.amount}
-                    changedPercent={product.changedPercent}
-                    changedAmount={product.changedAmount}
-                />
-            ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+            {goldData.length > 0 ? (
+                goldData.map((item, index) => (
+                    <ProductStatusCard
+                        key={index}
+                        name={item.name}
+                        amount={item.price}
+                        unit={item.unit}
+                        changedPercent="0%"
+                        changedAmount="0"
+                    />
+                ))
+            ) : (
+                <p className="text-white">Loading...</p>
+            )}
         </div>
     );
 };
