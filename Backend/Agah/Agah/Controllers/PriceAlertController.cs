@@ -25,7 +25,7 @@ namespace Agah.Controllers
             return Ok(new { message = "Price alert set successfully!" });
         }
 
-        [HttpGet]
+        [HttpGet("GetProductNames")]
         public async Task<IActionResult> GetProductNames()
         {
             // Create the list
