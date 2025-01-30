@@ -68,7 +68,7 @@ const set_price_alert_box = () => {
                     } />
                 </div>
 
-                <button onClick={handleSendAlert} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                <button onClick={handleSendAlert} type="button" className="text-white w-full py-5 mt-7 hover:bg-gray-800 cursor-pointer bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-600 dark:border-gray-700">ثبت</button>
             </div>
 
         </>
