@@ -22,7 +22,9 @@ namespace Agah.Controllers
                 CreatedAt = DateTime.UtcNow
             };
 
-            return Ok(new { message = "Price alert set successfully!" });
+            var res = JsonConvert.SerializeObject(userSelectedRange);
+
+            return Ok(new { message = "Price alert set successfully!", result = res });
         }
 
         [HttpGet("GetProductNames")]
