@@ -1,6 +1,7 @@
 import { React, useState, useEffect, useRef } from 'react'
 import Dropdown from './dropdown'
 import NumericalInput from './numerical_input'
+import PlatformSelector from './radiobutton_platform_selector'
 import { sendPriceAlert } from './../services/api_SetPriceAlert';
 import { getProductNames } from './../services/api_GetProductNames';
 
@@ -57,6 +58,14 @@ const set_price_alert_box = () => {
                 <div className='w-full flex my-2'>
                     <NumericalInput inputName={"MinPrice"} label={"حداقل"} />
                     <NumericalInput inputName={"MaxPrice"} label={"حداکثر"} />
+                </div>
+                <div className='w-full my-2'>
+                    <PlatformSelector platforms={
+                        [{ 'id': '1', 'title': 'ایمیل', 'description': 'اطلاع رسانی با ایمیل' },
+                        { 'id': '2', 'title': 'تلفن', 'description': 'اطلاع رسانی با تماس تلفنی' },
+                        { 'id': '3', 'title': 'پیامک', 'description': 'اطلاع رسانی با پیامک' },
+                        { 'id': '4', 'title': 'نوتیف درون برنامه', 'description': 'اطلاع رسانی با نوتیفیکیشن' }]
+                    } />
                 </div>
 
                 <button onClick={handleSendAlert} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
