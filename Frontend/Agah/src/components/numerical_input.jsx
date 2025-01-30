@@ -26,7 +26,7 @@ export default function NumericalInput({ inputName, label }) {
                 id={inputName}
                 name={inputName}
                 type="text" // Changed to "text" to allow commas
-                className="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500 dark:text-white"
+                className="block w-full p-2 py-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500 dark:text-white"
                 value={value}
                 onChange={handleInputChange}
                 placeholder={label}
