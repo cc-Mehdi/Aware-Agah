@@ -1,0 +1,62 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|c:\\users\\cc-mehdi\\desktop\\aware-aghah\\backend\\agah\\agah\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|solutionrelative:agah\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|c:\\users\\cc-mehdi\\desktop\\aware-aghah\\backend\\agah\\agah\\controllers\\pricealertcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|solutionrelative:agah\\controllers\\pricealertcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Program.cs",
+              "RelativeDocumentMoniker": "Agah\\Program.cs",
+              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Program.cs",
+              "RelativeToolTip": "Agah\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-29T19:04:44.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PriceAlertController.cs",
+              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Controllers\\PriceAlertController.cs",
+              "RelativeDocumentMoniker": "Agah\\Controllers\\PriceAlertController.cs",
+              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Controllers\\PriceAlertController.cs",
+              "RelativeToolTip": "Agah\\Controllers\\PriceAlertController.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAAABUAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-29T19:06:55.183Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
