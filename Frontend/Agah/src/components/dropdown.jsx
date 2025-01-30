@@ -17,7 +17,7 @@ export default function dropdown({ inputName, label, dataSource }) {
             <select
                 id={inputName}
                 name={inputName}
-                className="block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500 bg-black dark:border-gray-500 dark:text-white"
+                className="block w-full p-2 py-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 focus:ring-blue-500 focus:border-blue-500 bg-black dark:border-gray-500 dark:text-white"
                 value={selectedData}
                 onChange={(e) => setSelectedData(e.target.value)}
             >
