@@ -10,9 +10,9 @@ const set_price_alert_box = () => {
         try {
             const response = await sendPriceAlert({
                 userId: 5,
-                product: "طلا",
-                minPrice: 500000,
-                maxPrice: 600000,
+                product: document.querySelector("#Product").value,
+                minPrice: document.querySelector("#MinPrice").value,
+                maxPrice: document.querySelector("#MaxPrice").value,
                 createdAt: "2025-01-29T19:11:58.386Z"
             });
 
