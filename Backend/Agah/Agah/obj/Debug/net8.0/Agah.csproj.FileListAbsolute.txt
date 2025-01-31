@@ -32,3 +32,4 @@ C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\Agah.pd
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\Agah.genruntimeconfig.cache
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\ref\Agah.dll
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\tailwind.extension.json
