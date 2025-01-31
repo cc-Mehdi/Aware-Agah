@@ -17,6 +17,7 @@ namespace Agah.Controllers
             {
                 UserId = request.UserId,
                 Product = request.Product,
+                Platform = request.Platform,
                 MinPrice = request.MinPrice,
                 MaxPrice = request.MaxPrice,
                 CreatedAt = DateTime.UtcNow
@@ -49,8 +50,9 @@ namespace Agah.Controllers
     {
         public int UserId { get; set; }
         public string Product { get; set; }
-        public decimal MinPrice { get; set; }
-        public decimal MaxPrice { get; set; }
+        public string Platform { get; set; }
+        public string MinPrice { get; set; }
+        public string MaxPrice { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }
