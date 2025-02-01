@@ -1,11 +1,7 @@
 ﻿using Datalayer.Models;
-using Datalayer.Repositories;
 using Datalayer.Repositories.IRepositories;
-﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Net.Http.Json;
-using System.Text.Json.Serialization;
 
 namespace Agah.Controllers
 {
@@ -41,7 +37,7 @@ namespace Agah.Controllers
 
                 // Create new model and add them to database
                 _unitOfWork.ReserveRepository.Add(new Reserve()
-            {
+                {
                     User_Id = bodyContent.UserId,
                     User = user,
                     Product_Id = bodyContent.ProductId,
