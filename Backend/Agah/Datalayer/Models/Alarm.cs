@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Datalayer.Models
 {
@@ -29,7 +28,6 @@ namespace Datalayer.Models
 
         [Display(Name = "تاریخ حذف")]
         [DataType(DataType.DateTime)]
-        [AllowNull]
-        public DateTime DeletedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
     }
 }

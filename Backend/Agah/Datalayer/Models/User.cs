@@ -30,9 +30,7 @@ namespace Datalayer.Models
         [MinLength(11, ErrorMessage = "مقدار {0} باید 11 کاراکتر باشد")]
         [MaxLength(11, ErrorMessage = "مقدار {0} باید 11 کاراکتر باشد")]
         [DataType(DataType.PhoneNumber)]
-
-        [AllowNull]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         [DefaultValue(false)]
         public bool IsPhoneVerivied { get; set; }
@@ -48,9 +46,9 @@ namespace Datalayer.Models
         [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; }
 
+
         [Display(Name = "تاریخ حذف")]
         [DataType(DataType.DateTime)]
-        [AllowNull]
-        public DateTime DeletedAt { get; set; }
+        public DateTime? DeletedAt { get; set; }
     }
 }
