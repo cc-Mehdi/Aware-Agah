@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,7 +10,6 @@ namespace Datalayer.Models
         public int Id { get; set; }
 
         [ForeignKey("Product")]
-        [DeleteBehavior(DeleteBehavior.NoAction)]
         public int Product_Id { get; set; }
         public Product Product { get; set; }
 

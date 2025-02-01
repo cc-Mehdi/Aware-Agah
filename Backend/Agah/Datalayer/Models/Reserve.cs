@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,19 +10,16 @@ namespace Datalayer.Models
         public int Id { get; set; }
 
         [ForeignKey("User")]
-        [DeleteBehavior(DeleteBehavior.NoAction)]
         public int User_Id { get; set; }
         public User User { get; set; }
 
 
         [ForeignKey("Product")]
-        [DeleteBehavior(DeleteBehavior.NoAction)]
         public int Product_Id { get; set; }
         public Product Product { get; set; }
 
 
         [ForeignKey("Alarm")]
-        [DeleteBehavior(DeleteBehavior.NoAction)]
         public int Alarm_Id { get; set; }
         public Alarm Alarm { get; set; }
 
@@ -44,5 +40,9 @@ namespace Datalayer.Models
         [Display(Name = "تاریخ ایجاد")]
         [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; }
+
+        [Display(Name = "تاریخ حذف")]
+        [DataType(DataType.DateTime)]
+        public DateTime? DeletedAt { get; set; }
     }
 }
