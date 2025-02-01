@@ -37,12 +37,11 @@ const set_price_alert_box = () => {
     const handleSendAlert = async () => {
         try {
             const response = await sendPriceAlert({
-                userId: 5,
-                product: document.querySelector("#Product").value,
+                userId: 2,
+                alarmId: selectedPlatform,
+                productId: document.querySelector("#Product").value,
                 minPrice: document.querySelector("#MinPrice").value,
                 maxPrice: document.querySelector("#MaxPrice").value,
-                platform: selectedPlatform,
-                createdAt: "2025-01-29T19:11:58.386Z"
             });
 
             console.log('API Response:', response);
