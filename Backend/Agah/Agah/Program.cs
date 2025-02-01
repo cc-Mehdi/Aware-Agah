@@ -1,3 +1,8 @@
+using Datalayer.Data;
+using Datalayer.Repositories;
+using Datalayer.Repositories.IRepositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
