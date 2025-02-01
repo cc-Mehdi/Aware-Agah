@@ -1,4 +1,4 @@
-export const sendPriceAlert = async ({ userId, product, minPrice, maxPrice, platform, createdAt }) => {
+export const sendPriceAlert = async ({ userId, productId, alarmId, minPrice, maxPrice }) => {
     try {
         const response = await fetch('https://localhost:44314/api/PriceAlert', {
             method: 'POST',
@@ -8,11 +8,10 @@ export const sendPriceAlert = async ({ userId, product, minPrice, maxPrice, plat
             },
             body: JSON.stringify({
                 userId,
-                product,
+                productId,
+                alarmId,
                 minPrice,
                 maxPrice,
-                platform,
-                createdAt: createdAt || new Date().toISOString()
             })
         });
 
