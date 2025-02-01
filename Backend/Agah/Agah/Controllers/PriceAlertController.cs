@@ -1,3 +1,6 @@
+﻿using Datalayer.Models;
+using Datalayer.Repositories;
+using Datalayer.Repositories.IRepositories;
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -10,22 +13,56 @@ namespace Agah.Controllers
     [ApiController]
     public class PriceAlertController : ControllerBase
     {
-        [HttpPost]
-        public async Task<IActionResult> SetPriceAlert([FromBody] PriceAlertRequest request)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public PriceAlertController(IUnitOfWork unitOfWork)
         {
-            var userSelectedRange = new PriceAlertRequest
+            _unitOfWork = unitOfWork;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SetPriceAlert([FromBody] Reserve_ViewModel bodyContent)
+        {
+            try
             {
-                UserId = request.UserId,
-                Product = request.Product,
-                Platform = request.Platform,
-                MinPrice = request.MinPrice,
-                MaxPrice = request.MaxPrice,
-                CreatedAt = DateTime.UtcNow
-            };
+                // Validation Id's
+                var user = _unitOfWork.UserRepository.GetFirstOrDefault(u => u.Id == bodyContent.UserId);
+                if(user == null)
+                    return BadRequest(new { message = "کاربر یافت نشد" });
 
-            var res = JsonConvert.SerializeObject(userSelectedRange);
+                var product = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == bodyContent.ProductId);
+                if (product == null)
+                    return BadRequest(new { message = "محصول یافت نشد" });
 
-            return Ok(new { message = "Price alert set successfully!", result = res });
+                var alarm = _unitOfWork.AlarmRepository.GetFirstOrDefault(u => u.Id == bodyContent.AlarmId);
+                if (alarm == null)
+                    return BadRequest(new { message = "هشدار یافت نشد" });
+
+
+                // Create new model and add them to database
+                _unitOfWork.ReserveRepository.Add(new Reserve()
+            {
+                    User_Id = bodyContent.UserId,
+                    User = user,
+                    Product_Id = bodyContent.ProductId,
+                    Product = product,
+                    Alarm_Id = bodyContent.AlarmId,
+                    Alarm = alarm,
+                    MinPrice = bodyContent.MinPrice,
+                    MaxPrice = bodyContent.MaxPrice,
+                    CreatedAt = DateTime.Now
+                });
+
+                // Save database
+                _unitOfWork.Save();
+
+                // Return result
+                return Ok(new { message = "عملیات با موفقیت انجام شد" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
+            }
         }
 
         [HttpGet("GetProductNames")]
@@ -46,13 +83,12 @@ namespace Agah.Controllers
         }
     }
 
-    public class PriceAlertRequest
+    public class Reserve_ViewModel
     {
         public int UserId { get; set; }
-        public string Product { get; set; }
-        public string Platform { get; set; }
-        public string MinPrice { get; set; }
-        public string MaxPrice { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public int ProductId { get; set; }
+        public int AlarmId { get; set; }
+        public decimal MinPrice { get; set; }
+        public decimal MaxPrice { get; set; }
     }
 }
