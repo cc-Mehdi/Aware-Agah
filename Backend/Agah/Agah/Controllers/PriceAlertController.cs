@@ -50,7 +50,7 @@ namespace Agah.Controllers
                 });
 
                 // Save database
-                _unitOfWork.Save();
+                await _unitOfWork.SaveAsync();
 
                 // Return result
                 return Ok(new { message = "عملیات با موفقیت انجام شد" });
