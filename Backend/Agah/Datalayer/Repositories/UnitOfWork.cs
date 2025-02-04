@@ -27,9 +27,9 @@ namespace Datalayer.Repositories
             _db.Dispose();
         }
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
         }
     }
 }

@@ -8,6 +8,6 @@ namespace Datalayer.Repositories.IRepositories
         IAlarmRepository AlarmRepository {get; set;}
         IProductLogRepository ProductLogRepository {get; set;}
         IReserveRepository ReserveRepository {get; set;}
-        void Save();
+        Task SaveAsync();
     }
 }
