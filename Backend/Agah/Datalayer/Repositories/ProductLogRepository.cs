@@ -1,6 +1,7 @@
 ﻿using Datalayer.Data;
 using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Datalayer.Repositories
 {
@@ -10,6 +11,11 @@ namespace Datalayer.Repositories
         public ProductLogRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
+        }
+
+        public List<ProductLog> GetAllByInclude()
+        {
+            return _db.ProductLog.Include(u => u.Product).ToList();
         }
 
         public void Update(ProductLog item)
