@@ -28,7 +28,7 @@ namespace Agah.Controllers
                 List<string> list = _unitOfWork.ProductRepository.GetAll().Select(u=> u.Title).ToList();
 
                 return Ok(new {result = list});
-        }
+            }
             catch (Exception ex)
             {
                 return BadRequest($"ما با خطای {ex.Message} رو به رو شده ایم 😖");
