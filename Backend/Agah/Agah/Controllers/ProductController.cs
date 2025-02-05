@@ -35,7 +35,25 @@ namespace Agah.Controllers
             }
         }
 
-                return Ok(result);
+        [HttpGet("GetProductsLog")]
+        public async Task<IActionResult> GetProductsLog()
+        {
+            try
+            {
+                var list = _unitOfWork.ProductLogRepository.GetAllByInclude()
+                    .OrderByDescending(u=> u.CreatedAt)
+                    .GroupBy(u => u.Product_Id)
+                    .Select(g => g.First())
+                    .Select(u => new Product_ProductLog_ViewModel() 
+                    { 
+                        Product_Id = u.Product_Id,
+                        ProductName = u.Product.Title,
+                        Price = u.Price.ToString("N0"),
+                        CreateAt = u.CreatedAt.ToString(),
+                        Unit = "تومان"
+                    }).ToList();
+
+                return Ok(new { result = list });
             }
             catch (Exception ex)
             {
