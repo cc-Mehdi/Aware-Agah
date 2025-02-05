@@ -61,7 +61,7 @@ namespace Agah.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("SeedProducts")]
         public async Task<IActionResult> SeedProducts() // this method responsible for adding new products to database. read the api and split the product name and added to Product table in db.
         {
             string url = "https://milli.gold/api/v1/public/milli-price/detail";
