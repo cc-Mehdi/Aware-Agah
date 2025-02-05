@@ -185,14 +185,13 @@ namespace Agah.Controllers
 
     }
 
-    // Define a model to map the API response
-    public class Product_MilliAPI_Response_ViewModel
+    public class Product_ProductLog_ViewModel
     {
-        [JsonProperty("price18")]
-        public string Price18 { get; set; }
-
-        [JsonProperty("date")]
-        public DateTime Date { get; set; }
+        public int Product_Id { get; set; }
+        public string ProductName { get; set; }
+        public string Price { get; set; }
+        public string Unit { get; set; }
+        public string CreateAt { get; set; }
     }
 }
 
