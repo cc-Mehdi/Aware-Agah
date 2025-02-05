@@ -1,6 +1,6 @@
 export const getProductNames = async () => {
     try {
-        const response = await fetch('https://localhost:44314/api/PriceAlert/GetProductNames', {
+        const response = await fetch('https://localhost:44314/api/Product/GetProducts', {
             method: 'Get',
         });
 

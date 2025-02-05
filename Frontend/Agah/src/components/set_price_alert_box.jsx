@@ -18,10 +18,7 @@ const set_price_alert_box = () => {
             try {
                 const response = await getProductNames();
 
-                // Ensure we correctly parse the inner JSON
-                const parsedData = JSON.parse(response.result);
-
-                setProductList(parsedData);
+                setProductList(response.result);
             } catch (error) {
                 console.error("Failed to fetch product names:", error);
                 setProductList(["خطا در دریافت داده‌ها"]);
