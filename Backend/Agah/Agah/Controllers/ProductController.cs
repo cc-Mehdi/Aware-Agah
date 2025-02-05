@@ -106,7 +106,7 @@ namespace Agah.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return BadRequest($"Error: {ex.Message}");
+                    return BadRequest($"ما با خطای {ex.Message} رو به رو شده ایم 😖");
                 }
             }
         }
@@ -178,7 +178,7 @@ namespace Agah.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return BadRequest($"Error: {ex.Message}");
+                    return BadRequest($"ما با خطای {ex.Message} رو به رو شده ایم 😖");
                 }
             }
         }
