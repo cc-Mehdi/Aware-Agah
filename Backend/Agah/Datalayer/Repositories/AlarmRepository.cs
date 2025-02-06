@@ -15,7 +15,10 @@ namespace Datalayer.Repositories
         public void Update(Alarm item)
         {
             var objFromDb = _db.Alarm.FirstOrDefault(u => u.Id == item.Id);
-            objFromDb.Title = item.Title;
+            objFromDb.EnglishName = item.EnglishName;
+            objFromDb.PersianName = item.PersianName;
+            objFromDb.ShortDescription = item.ShortDescription;
+            objFromDb.IsActive = item.IsActive;
             objFromDb.AlarmPrice = item.AlarmPrice;
             objFromDb.CreatedAt = item.CreatedAt;
             objFromDb.DeletedAt = item.DeletedAt;
