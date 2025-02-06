@@ -50,7 +50,7 @@ namespace Agah.Controllers
                         ProductName = u.Product.Title,
                         Price = u.Price.ToString("N0"),
                         CreateAt = u.CreatedAt.ToString(),
-                        Unit = "تومان"
+                        Unit = "ريال"
                     }).ToList();
 
                 return Ok(new { result = list });
