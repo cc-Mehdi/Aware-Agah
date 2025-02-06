@@ -2,8 +2,8 @@ import { React, useState, useEffect, useRef } from 'react'
 import Dropdown from './dropdown'
 import NumericalInput from './numerical_input'
 import PlatformSelector from './radiobutton_platform_selector'
-import { sendPriceAlert } from './../services/api_SetPriceAlert';
-import { getProductNames } from './../services/api_GetProductNames';
+import { setPriceRangeReservation } from '../services/api_SetPriceRangeReservation';
+import { getProductNames } from '../services/api_GetProductNames';
 
 const set_price_alert_box = () => {
 
@@ -33,7 +33,7 @@ const set_price_alert_box = () => {
 
     const handleSendAlert = async () => {
         try {
-            const response = await sendPriceAlert({
+            const response = await setPriceRangeReservation({
                 userId: 2,
                 alarmId: selectedPlatform,
                 productId: document.querySelector("#Product").value,

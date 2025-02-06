@@ -1,6 +1,6 @@
-export const sendPriceAlert = async ({ userId, productId, alarmId, minPrice, maxPrice }) => {
+export const setPriceRangeReservation = async ({ userId, productId, alarmId, minPrice, maxPrice }) => {
     try {
-        const response = await fetch('https://localhost:44314/api/PriceAlert', {
+        const response = await fetch('https://localhost:44314/api/PriceAlert/SetPriceRangeReservation', {
             method: 'POST',
             headers: {
                 'Accept': '*/*',

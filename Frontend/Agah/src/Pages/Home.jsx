@@ -1,12 +1,12 @@
 import React from 'react'
 import ProductStatusList from './../components/product_status_card_list'
-import SetPriceAlertBox from './../components/set_price_alert_box'
+import SetPriceRangeReservation from '../components/setPriceRangeReservation_section'
 
 const Home = () => {
     return (
         <>
             <ProductStatusList />
-            <SetPriceAlertBox />
+            <SetPriceRangeReservation />
         </>
     )
 }
