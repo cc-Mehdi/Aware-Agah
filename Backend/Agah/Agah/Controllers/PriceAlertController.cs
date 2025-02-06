@@ -15,8 +15,8 @@ namespace Agah.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SetPriceAlert([FromBody] Reserve_ViewModel bodyContent)
+        [HttpPost("SetPriceRangeReservation")]
+        public async Task<IActionResult> SetPriceRangeReservation([FromBody] Reserve_ViewModel bodyContent)
         {
             try
             {
