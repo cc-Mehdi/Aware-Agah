@@ -33,6 +33,8 @@ namespace Agah.Controllers
                 if (alarm == null)
                     return BadRequest(new { message = "هشدار یافت نشد" });
 
+                // Delete old user reservation
+                _unitOfWork.ReserveRepository.Remove(_unitOfWork.ReserveRepository.GetFirstOrDefault(u => u.User_Id == bodyContent.UserId));
 
                 // Create new model and add them to database
                 _unitOfWork.ReserveRepository.Add(new Reserve()
