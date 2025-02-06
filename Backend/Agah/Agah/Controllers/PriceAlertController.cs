@@ -1,7 +1,6 @@
 ﻿using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace Agah.Controllers
 {
@@ -23,7 +22,7 @@ namespace Agah.Controllers
             {
                 // Validation Id's
                 var user = _unitOfWork.UserRepository.GetFirstOrDefault(u => u.Id == bodyContent.UserId);
-                if(user == null)
+                if (user == null)
                     return BadRequest(new { message = "کاربر یافت نشد" });
 
                 var product = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == bodyContent.ProductId);
@@ -44,8 +43,8 @@ namespace Agah.Controllers
                     Product = product,
                     Alarm_Id = bodyContent.AlarmId,
                     Alarm = alarm,
-                    MinPrice = bodyContent.MinPrice,
-                    MaxPrice = bodyContent.MaxPrice,
+                    MinPrice = decimal.Parse(bodyContent.MinPrice.ToString().Replace(",", "")),
+                    MaxPrice = decimal.Parse(bodyContent.MaxPrice.ToString().Replace(",", "")),
                     CreatedAt = DateTime.Now
                 });
 
