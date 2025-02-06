@@ -25,7 +25,7 @@ namespace Agah.Controllers
         {
             try
             {
-                List<string> list = _unitOfWork.ProductRepository.GetAll().Select(u=> u.Title).ToList();
+                var list = _unitOfWork.ProductRepository.GetAll().Select(u=> new { u.Id, u.Title }).ToList();
 
                 return Ok(new {result = list});
             }
