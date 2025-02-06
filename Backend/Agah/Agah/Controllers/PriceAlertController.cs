@@ -60,21 +60,35 @@ namespace Agah.Controllers
             }
         }
 
-        [HttpGet("GetProductNames")]
-        public async Task<IActionResult> GetProductNames()
+        [HttpGet("CheckPriceInReserveds/{userId}")]
+        public async Task<IActionResult> CheckPriceInReserveds(int userId)
         {
-            // Create the list
-            List<string> items = new List<string>
+            try
         {
-            "گرم طلای 18 عیار",
-            "سکه بهار آزادی"
-        };
+                var reserve = _unitOfWork.ReserveRepository.GetFirstOrDefault(u => u.User_Id == userId);
+                if (reserve == null)
+                    return BadRequest(new { message = "رزرو بازه زمانی برای کاربر انتخابی یافت نشد" });
 
-            // Convert the list to JSON
-            string json = JsonConvert.SerializeObject(items);
+                string productName = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == reserve.Product_Id).Title;
 
+                // get last products price
+                decimal lastProductsPrice = _unitOfWork.ProductLogRepository.GetAllByInclude()
+                    .Where(u=> u.Product_Id == reserve.Product_Id)
+                    .OrderByDescending(u => u.CreatedAt)
+                    .GroupBy(u => u.Product_Id)
+                    .Select(g => g.First())
+                    .Select(u => u.Price)
+                    .FirstOrDefault();
 
-            return Ok(new { result = json });
+                if (lastProductsPrice < reserve.MinPrice || lastProductsPrice > reserve.MaxPrice)
+                    return Ok(new { result = $"قیمت محصول {productName} از محدوده ثبت شده خارج شده است.\nقیمت فعلی محصول : {lastProductsPrice.ToString("N0")}\nبازه رزرو شده : {reserve.MinPrice.ToString("N0")} - {reserve.MaxPrice.ToString("N0")}" });
+
+                return Ok(new { result = "قیمت در بازه رزرو شده میباشد" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
+            }
         }
     }
 
