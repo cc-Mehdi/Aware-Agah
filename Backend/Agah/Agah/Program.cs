@@ -1,6 +1,8 @@
+using Agah.API_s;
 using Datalayer.Data;
 using Datalayer.Repositories;
 using Datalayer.Repositories.IRepositories;
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +29,11 @@ builder.Services.AddCors(options =>
     });
 });
 
+// Add Hangfire services
+builder.Services.AddHangfire(config =>
+    config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHangfireServer();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -42,6 +49,13 @@ app.UseCors("AllowLocalhost");
 
 app.UseAuthorization();
 
+app.UseHangfireDashboard("/Hangfire");
+
 app.MapControllers();
+
+RecurringJob.AddOrUpdate(
+    "update-product-log",
+    () => ApiJobService.CallUpdateProductLogApi(),
+    Cron.Minutely);
 
 app.Run();
