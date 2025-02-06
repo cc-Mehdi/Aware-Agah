@@ -64,7 +64,7 @@ namespace Agah.Controllers
         public async Task<IActionResult> CheckPriceInReserveds(int userId)
         {
             try
-        {
+            {
                 var reserve = _unitOfWork.ReserveRepository.GetFirstOrDefault(u => u.User_Id == userId);
                 if (reserve == null)
                     return BadRequest(new { message = "رزرو بازه زمانی برای کاربر انتخابی یافت نشد" });
