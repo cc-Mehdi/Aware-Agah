@@ -24,7 +24,7 @@ const ProductStatusCardList = () => {
 
         const interval = setInterval(() => {
             fetchData();
-        }, 600000);
+        }, 5000);
 
         return () => clearInterval(interval);
     }, []);
