@@ -18,7 +18,7 @@ const set_price_alert_box = () => {
             try {
                 const response = await getProductNames();
 
-                setProductList(response.result);
+                setProductList(response || []);
             } catch (error) {
                 console.error("Failed to fetch product names:", error);
                 setProductList(["خطا در دریافت داده‌ها"]);

@@ -9,7 +9,7 @@ export const getProductNames = async () => {
         }
 
         const data = await response.json();
-        return data;
+        return data.result;
     } catch (error) {
         console.error('Error:', error);
         throw error;
