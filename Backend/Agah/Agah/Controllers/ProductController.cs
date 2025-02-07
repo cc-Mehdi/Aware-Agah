@@ -25,7 +25,7 @@ namespace Agah.Controllers
         {
             try
             {
-                var list = _unitOfWork.ProductRepository.GetAll().Select(u=> new { u.Id, u.Title }).ToList();
+                var list = _unitOfWork.ProductRepository.GetAll().Select(u=> new { u.Id, u.PersianName, u.IconName }).ToList();
 
                 return Ok(new {result = list});
             }
@@ -47,7 +47,7 @@ namespace Agah.Controllers
                     .Select(u => new Product_ProductLog_ViewModel() 
                     { 
                         Product_Id = u.Product_Id,
-                        ProductName = u.Product.Title,
+                        ProductName = u.Product.PersianName,
                         Price = u.Price.ToString("N0"),
                         CreateAt = u.CreatedAt.ToString(),
                         Unit = "ريال"
@@ -81,7 +81,7 @@ namespace Agah.Controllers
                         string key = apiResponse.FirstOrDefault().Key;
 
                         // Check if key exists in Product table
-                        var existingProduct = _unitOfWork.ProductRepository.GetFirstOrDefault(p => p.Title == key);
+                        var existingProduct = _unitOfWork.ProductRepository.GetFirstOrDefault(p => p.EnglishName == key);
 
                         if (existingProduct != null)
                         {
@@ -92,7 +92,7 @@ namespace Agah.Controllers
                             // Add new product
                             var newProduct = new Product
                             {
-                                Title = key,
+                                EnglishName = key,
                                 CreatedAt = DateTime.UtcNow
                             };
 
@@ -132,13 +132,13 @@ namespace Agah.Controllers
                         string responseValue = apiResponse.FirstOrDefault().Value;
 
                         // Get last submited product log
-                        var lastProductLog = _unitOfWork.ProductLogRepository.GetAllByFilter(u=> u.Product.Title == responseKey).OrderByDescending(u=> u.CreatedAt).FirstOrDefault();
+                        var lastProductLog = _unitOfWork.ProductLogRepository.GetAllByFilter(u=> u.Product.EnglishName == responseKey).OrderByDescending(u=> u.CreatedAt).FirstOrDefault();
 
                         decimal.TryParse(responseValue, out decimal price); // Get current product price
 
                         if (lastProductLog == null) // if not save any product log for this product
                         {
-                            int productId = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Title == responseKey).Id; // Get product id
+                            int productId = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.EnglishName == responseKey).Id; // Get product id
 
                             if (productId == 0)
                                 return Ok("Not submited any product log for this product");

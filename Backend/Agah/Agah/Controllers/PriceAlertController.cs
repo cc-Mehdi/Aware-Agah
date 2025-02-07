@@ -71,7 +71,7 @@ namespace Agah.Controllers
                 if (reserve == null)
                     return BadRequest(new { message = "رزرو بازه زمانی برای کاربر انتخابی یافت نشد" });
 
-                string productName = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == reserve.Product_Id).Title;
+                string productName = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == reserve.Product_Id).PersianName;
 
                 // get last products price
                 decimal lastProductsPrice = _unitOfWork.ProductLogRepository.GetAllByInclude()
