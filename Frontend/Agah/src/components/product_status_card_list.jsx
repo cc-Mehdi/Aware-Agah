@@ -11,7 +11,7 @@ const ProductStatusCardList = () => {
         const fetchData = async () => {
             try {
                 const response = await getProductsLog();
-                setGoldData(response.result || []);
+                setGoldData(response || []);
             } catch (error) {
                 console.error('Error fetching gold prices:', error);
             }
@@ -43,11 +43,7 @@ const ProductStatusCardList = () => {
                         goldData.map((item, index) => (
                             <ProductStatusCard
                                 key={index}
-                                name={item.productName}
-                                amount={item.price}
-                                unit={item.unit}
-                                changedPercent="0%"
-                                changedAmount="0"
+                                dataSourceItem={item}
                             />
                         ))
                     ) : (

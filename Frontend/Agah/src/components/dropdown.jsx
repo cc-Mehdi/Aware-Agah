@@ -25,7 +25,7 @@ export default function dropdown({ inputName, label, dataSource }) {
                 </option>
                 {safeDataSource.map((data) => (
                     <option key={data.id} value={data.id}>
-                        {data.title}
+                        {data.persianName}
                     </option>
                 ))}
             </select>
