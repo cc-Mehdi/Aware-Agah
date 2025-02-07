@@ -1,4 +1,4 @@
-﻿using Datalayer.Models;
+using Datalayer.Models;
 using Datalayer.Repositories;
 using Datalayer.Repositories.IRepositories;
 using Microsoft.AspNetCore.Http;
@@ -48,6 +48,7 @@ namespace Agah.Controllers
                     { 
                         Product_Id = u.Product_Id,
                         ProductName = u.Product.PersianName,
+                        ProductIconName = u.Product.IconName,
                         Price = u.Price.ToString("N0"),
                         CreateAt = u.CreatedAt.ToString(),
                         Unit = "ريال"
@@ -189,6 +190,7 @@ namespace Agah.Controllers
     {
         public int Product_Id { get; set; }
         public string ProductName { get; set; }
+        public string ProductIconName { get; set; }
         public string Price { get; set; }
         public string Unit { get; set; }
         public string CreateAt { get; set; }
