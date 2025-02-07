@@ -1,4 +1,4 @@
-﻿using Datalayer.Models;
+using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -99,7 +99,7 @@ namespace Agah.Controllers
         public int UserId { get; set; }
         public int ProductId { get; set; }
         public int AlarmId { get; set; }
-        public decimal MinPrice { get; set; }
-        public decimal MaxPrice { get; set; }
+        public string MinPrice { get; set; }
+        public string MaxPrice { get; set; }
     }
 }
