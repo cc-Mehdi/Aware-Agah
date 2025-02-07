@@ -15,7 +15,9 @@ namespace Datalayer.Repositories
         public void Update(Product item)
         {
             var objFromDb = _db.Product.FirstOrDefault(u => u.Id == item.Id);
-            objFromDb.Title = item.Title;
+            objFromDb.EnglishName = item.EnglishName;
+            objFromDb.PersianName = item.PersianName;
+            objFromDb.IconName = item.IconName;
             objFromDb.CreatedAt = item.CreatedAt;
             objFromDb.DeletedAt = item.DeletedAt;
         }
