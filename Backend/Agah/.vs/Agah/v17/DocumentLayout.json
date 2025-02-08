@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|c:\\users\\cc-mehdi\\desktop\\aware-aghah\\backend\\agah\\agah\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|solutionrelative:agah\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|c:\\users\\cc-mehdi\\desktop\\aware-aghah\\backend\\agah\\agah\\api\u0027s\\apijobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|solutionrelative:agah\\api\u0027s\\apijobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|c:\\users\\cc-mehdi\\desktop\\aware-aghah\\backend\\agah\\agah\\controllers\\pricealertcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|solutionrelative:agah\\controllers\\pricealertcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DE697B74-74A7-48B9-A09B-AD4989BEE151}|Datalayer\\Datalayer.csproj|c:\\users\\cc-mehdi\\desktop\\aware-aghah\\backend\\agah\\datalayer\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DE697B74-74A7-48B9-A09B-AD4989BEE151}|Datalayer\\Datalayer.csproj|solutionrelative:datalayer\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DE697B74-74A7-48B9-A09B-AD4989BEE151}|Datalayer\\Datalayer.csproj|c:\\users\\cc-mehdi\\desktop\\aware-aghah\\backend\\agah\\datalayer\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DE697B74-74A7-48B9-A09B-AD4989BEE151}|Datalayer\\Datalayer.csproj|solutionrelative:datalayer\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|c:\\users\\cc-mehdi\\desktop\\aware-aghah\\backend\\agah\\agah\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|solutionrelative:agah\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,60 +22,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ProductController.cs",
-              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Controllers\\ProductController.cs",
-              "RelativeDocumentMoniker": "Agah\\Controllers\\ProductController.cs",
-              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Controllers\\ProductController.cs",
-              "RelativeToolTip": "Agah\\Controllers\\ProductController.cs",
-              "ViewState": "AQIAADwAAAAAAAAAAAAiwEYAAAATAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T07:40:28.231Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PriceAlertController.cs",
-              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Controllers\\PriceAlertController.cs",
-              "RelativeDocumentMoniker": "Agah\\Controllers\\PriceAlertController.cs",
-              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Controllers\\PriceAlertController.cs",
-              "RelativeToolTip": "Agah\\Controllers\\PriceAlertController.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAAAqwEkAAACBAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T07:39:51.183Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ProductRepository.cs",
-              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Datalayer\\Repositories\\ProductRepository.cs",
-              "RelativeDocumentMoniker": "Datalayer\\Repositories\\ProductRepository.cs",
-              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Datalayer\\Repositories\\ProductRepository.cs",
-              "RelativeToolTip": "Datalayer\\Repositories\\ProductRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T07:11:48.71Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Product.cs",
-              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Datalayer\\Models\\Product.cs",
-              "RelativeDocumentMoniker": "Datalayer\\Models\\Product.cs",
-              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Datalayer\\Models\\Product.cs",
-              "RelativeToolTip": "Datalayer\\Models\\Product.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAABMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T07:06:54.882Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -91,6 +35,45 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Program.cs",
+              "RelativeDocumentMoniker": "Agah\\Program.cs",
+              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Program.cs",
+              "RelativeToolTip": "Agah\\Program.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABgAAABHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-08T17:11:09.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApiJobService.cs",
+              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\API\u0027s\\ApiJobService.cs",
+              "RelativeDocumentMoniker": "Agah\\API\u0027s\\ApiJobService.cs",
+              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\API\u0027s\\ApiJobService.cs",
+              "RelativeToolTip": "Agah\\API\u0027s\\ApiJobService.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAgwDEAAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-07T08:59:04.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PriceAlertController.cs",
+              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Controllers\\PriceAlertController.cs",
+              "RelativeDocumentMoniker": "Agah\\Controllers\\PriceAlertController.cs",
+              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Controllers\\PriceAlertController.cs",
+              "RelativeToolTip": "Agah\\Controllers\\PriceAlertController.cs",
+              "ViewState": "AQIAADAAAAAAAAAAAAAowEIAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-07T08:58:51.858Z",
+              "EditorCaption": ""
             }
           ]
         }
