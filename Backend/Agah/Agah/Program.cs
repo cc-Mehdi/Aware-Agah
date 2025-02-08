@@ -58,4 +58,8 @@ RecurringJob.AddOrUpdate(
     () => ApiJobService.CallUpdateProductLogApi(),
     Cron.Minutely);
 
+RecurringJob.AddOrUpdate(
+    "check-price-in-reserve",
+    () => ApiJobService.CallCheckPriceInReservedsApi(),
+    Cron.Minutely);
 app.Run();
