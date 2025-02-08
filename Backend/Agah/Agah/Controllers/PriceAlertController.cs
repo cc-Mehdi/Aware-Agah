@@ -92,6 +92,14 @@ namespace Agah.Controllers
                 return BadRequest(new { message = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
             }
         }
+
+        [HttpGet("GetReserves")]
+        public async Task<IActionResult> GetReserves()
+        {
+            var reservesUserIdList = _unitOfWork.ReserveRepository.GetAll();
+
+            return Ok(reservesUserIdList);
+        }
     }
 
     public class Reserve_ViewModel
