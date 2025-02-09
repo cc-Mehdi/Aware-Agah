@@ -5,6 +5,5 @@ namespace Datalayer.Repositories.IRepositories
     public interface IProductLogRepository : IRepository<ProductLog>
     {
         void Update(ProductLog item);
-        List<ProductLog> GetAllByInclude();
     }
 }

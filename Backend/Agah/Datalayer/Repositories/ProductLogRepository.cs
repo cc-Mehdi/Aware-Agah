@@ -13,11 +13,6 @@ namespace Datalayer.Repositories
             _db = db;
         }
 
-        public List<ProductLog> GetAllByInclude()
-        {
-            return _db.ProductLog.Include(u => u.Product).ToList();
-        }
-
         public void Update(ProductLog item)
         {
             var objFromDb = _db.ProductLog.FirstOrDefault(u => u.Id == item.Id);
