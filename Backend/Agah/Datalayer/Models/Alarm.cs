@@ -32,7 +32,7 @@ namespace Datalayer.Models
         [Display(Name = "شرح مختصر")]
         [Required(ErrorMessage = "لطفا مقدار {0} را وارد کنید")]
         [MaxLength(500, ErrorMessage = "مقدار {0} باید حداکثر 500 کاراکتر باشد")]
-        [DataType(DataType.Text)]
+        [DataType(DataType.MultilineText)]
         public string? ShortDescription { get; set; }
 
         [Display(Name = "وضعیت")]
