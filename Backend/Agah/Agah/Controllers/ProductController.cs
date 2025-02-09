@@ -40,7 +40,7 @@ namespace Agah.Controllers
         {
             try
             {
-                var list = _unitOfWork.ProductLogRepository.GetAllByInclude()
+                var list = _unitOfWork.ProductLogRepository.GetAll(includeProperties: u=> u.Product)
                     .OrderByDescending(u=> u.CreatedAt)
                     .GroupBy(u => u.Product_Id)
                     .Select(g => g.First())

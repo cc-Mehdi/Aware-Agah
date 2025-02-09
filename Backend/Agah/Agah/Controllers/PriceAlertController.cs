@@ -74,7 +74,7 @@ namespace Agah.Controllers
                 string productName = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == reserve.Product_Id).PersianName;
 
                 // get last products price
-                decimal lastProductsPrice = _unitOfWork.ProductLogRepository.GetAllByInclude()
+                decimal lastProductsPrice = _unitOfWork.ProductLogRepository.GetAll(includeProperties: u=> u.Product)
                     .Where(u=> u.Product_Id == reserve.Product_Id)
                     .OrderByDescending(u => u.CreatedAt)
                     .GroupBy(u => u.Product_Id)
