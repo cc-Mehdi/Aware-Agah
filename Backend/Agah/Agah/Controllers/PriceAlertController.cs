@@ -1,4 +1,5 @@
-﻿using Datalayer.Models;
+﻿using Agah.Services;
+using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -74,8 +75,8 @@ namespace Agah.Controllers
                 string productName = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == reserve.Product_Id).PersianName;
 
                 // get last products price
-                decimal lastProductsPrice = _unitOfWork.ProductLogRepository.GetAll(includeProperties: u=> u.Product)
-                    .Where(u=> u.Product_Id == reserve.Product_Id)
+                decimal lastProductsPrice = _unitOfWork.ProductLogRepository.GetAll(includeProperties: u => u.Product)
+                    .Where(u => u.Product_Id == reserve.Product_Id)
                     .OrderByDescending(u => u.CreatedAt)
                     .GroupBy(u => u.Product_Id)
                     .Select(g => g.First())
@@ -83,8 +84,17 @@ namespace Agah.Controllers
                     .FirstOrDefault();
 
                 if (lastProductsPrice < reserve.MinPrice || lastProductsPrice > reserve.MaxPrice)
-                    return Ok(new { result = $"قیمت محصول {productName} از محدوده ثبت شده خارج شده است.\nقیمت فعلی محصول : {lastProductsPrice.ToString("N0")}\nبازه رزرو شده : {reserve.MinPrice.ToString("N0")} - {reserve.MaxPrice.ToString("N0")}" });
-
+                {
+                    NotificationService notificationService = new NotificationService(_unitOfWork);
+                    await notificationService.SendNotification(new Notification_MessageOptions()
+                    {
+                        User = reserve.User,
+                        NotificationType = reserve.Alarm.EnglishName,
+                        MessageSubject = $"قیمت {reserve.Product.PersianName} بیش از حد تغییر کرده است!",
+                        MessageContent = $"قیمت محصول {productName} از محدوده ثبت شده خارج شده است.\nقیمت فعلی محصول : {lastProductsPrice.ToString("N0")}\nبازه رزرو شده : {reserve.MinPrice.ToString("N0")} - {reserve.MaxPrice.ToString("N0")}",
+                    });
+                    return Ok(new { result = "پیام اطلاع رسانی در صف ارسال قرار گرفت" });
+                }
                 return Ok(new { result = "قیمت در بازه رزرو شده میباشد" });
             }
             catch (Exception ex)
