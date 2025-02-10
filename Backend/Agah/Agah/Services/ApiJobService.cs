@@ -2,7 +2,7 @@
 using Datalayer.Repositories.IRepositories;
 using Newtonsoft.Json;
 
-namespace Agah.API_s
+namespace Agah.Services
 {
     public static class ApiJobService
     {
