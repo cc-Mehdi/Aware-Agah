@@ -24,22 +24,36 @@ namespace Datalayer.Repositories
         public IEnumerable<T> GetAll(params Expression<Func<T, Object>>[] includeProperties)
         {
             IQueryable<T> query = _dbSet;
+            
+            foreach (var includeProperty in includeProperties)
+                query = query.Include(includeProperty);
+            
             return query.ToList();
         }
 
         public IEnumerable<T> GetAllByFilter(Expression<Func<T, bool>>? filter = null, params Expression<Func<T, Object>>[] includeProperties)
         {
             IQueryable<T> query = _dbSet;
+            
             if (filter != null)
                 query = query.Where(filter);
+
+            foreach (var includeProperty in includeProperties)
+                query = query.Include(includeProperty);
+            
             return query.ToList();
         }
 
         public T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null, params Expression<Func<T, Object>>[] includeProperties)
         {
             IQueryable<T> query = _dbSet;
+            
             if (filter != null)
                 query = query.Where(filter);
+
+            foreach (var includeProperty in includeProperties)
+                query = query.Include(includeProperty);
+
             return query.FirstOrDefault();
         }
 
