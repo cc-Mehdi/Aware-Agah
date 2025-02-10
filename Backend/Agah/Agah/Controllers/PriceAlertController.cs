@@ -67,7 +67,7 @@ namespace Agah.Controllers
         {
             try
             {
-                var reserve = _unitOfWork.ReserveRepository.GetFirstOrDefault(u => u.User_Id == userId);
+                var reserve = _unitOfWork.ReserveRepository.GetFirstOrDefault(u => u.User_Id == userId, u=> u.User, u=> u.Product ,u=> u.Alarm);
                 if (reserve == null)
                     return BadRequest(new { message = "رزرو بازه زمانی برای کاربر انتخابی یافت نشد" });
 
