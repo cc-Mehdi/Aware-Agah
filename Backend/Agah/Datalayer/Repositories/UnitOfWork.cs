@@ -14,6 +14,7 @@ namespace Datalayer.Repositories
             AlarmRepository = new AlarmRepository(_db);
             ProductLogRepository = new ProductLogRepository(_db);
             ReserveRepository = new ReserveRepository(_db);
+            Notification_UserRepository = new Notification_UserRepository(_db);
         }
 
         public IUserRepository UserRepository{ get; set; }
@@ -21,6 +22,7 @@ namespace Datalayer.Repositories
         public IAlarmRepository AlarmRepository { get; set; }
         public IProductLogRepository ProductLogRepository { get; set; }
         public IReserveRepository ReserveRepository { get; set; }
+        public INotification_UserRepository Notification_UserRepository { get; set; }
 
         public void Dispose()
         {
