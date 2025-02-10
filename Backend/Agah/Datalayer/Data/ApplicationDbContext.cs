@@ -1,4 +1,5 @@
 ﻿using Datalayer.Models;
+using Datalayer.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Datalayer.Data
@@ -14,5 +15,6 @@ namespace Datalayer.Data
         public DbSet<ProductLog> ProductLog { get; set; }
         public DbSet<Alarm> Alarm { get; set; }
         public DbSet<Reserve> Reserve { get; set; }
+        public DbSet<Notification_User> Notification_User { get; set; }
     }
 }
