@@ -30,7 +30,7 @@ namespace Agah.Controllers
                         break;
                 }
 
-                return Ok(new { message = "عملیات با موفقیت انجام شد" });
+                return BadRequest(new { message = "امکان ارسال اعلان با روش انتخاب شده وجود ندارد" });
             }
             catch (Exception ex)
             {
