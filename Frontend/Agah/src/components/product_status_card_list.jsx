@@ -2,6 +2,7 @@
 import ProductStatusCard from './product_status_card';
 import { getProductsLog } from './../services/api_GetProductsLog';
 import Skeleton from './skeleton';
+import moment from "moment-jalaali";
 
 
 const ProductStatusCardList = () => {
@@ -35,6 +36,10 @@ const ProductStatusCardList = () => {
             <div className='bg-white border-gray-200 my-5 px-6 py-14 rounded-lg border shadow-sm dark:bg-gray-800 dark:border-gray-700'>
 
                 <div className='mb-10'>
+                    <p className="mb-10 text-md text-gray-500 w-full text-start font-normal dark:text-gray-400">
+                        <span className="text-gray-900 tracking-tight dark:text-gray-300">امروز : </span>
+                        <span class="font-normal text-gray-700 dark:text-gray-400" dir="ltr">{moment(goldData.createdAt).format("jYYYY-jMM-jDD | HH:mm:ss")} {/* convert to persian date */}</span>
+                    </p>
                     <h5 className="text-gray-900 text-2xl font-semibold tracking-tight dark:text-white">قیمت محصولات</h5>
                     <span className="text-gray-500 text-lg font-bold">لیست قیمت محصولات مرتبط با طلا</span>
                 </div>
