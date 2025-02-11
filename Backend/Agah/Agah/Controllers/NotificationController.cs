@@ -24,7 +24,7 @@ namespace Agah.Controllers
                 switch (alarmType)
                 {
                     case "Alert":
-                        var notificationsList = _unitOfWork.Notification_UserRepository.GetAllByFilter(u => u.UserId == userId, includeProperties: u => u.User);
+                        var notificationsList = _unitOfWork.Notification_UserRepository.GetAllByFilter(u => u.UserId == userId, includeProperties: u => u.User).OrderByDescending(u=>u.CreatedAt);
                         return Ok(notificationsList);
                     default:
                         break;
