@@ -1,0 +1,17 @@
+﻿C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Controllers\NotificationController.cs
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Controllers\PriceAlertController.cs
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Controllers\ProductController.cs
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Program.cs
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Services\ApiJobService.cs
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Services\NotificationService.cs
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\ViewModels\GenericViewModels.cs
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\Agah.GlobalUsings.g.cs
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\Agah.AssemblyInfo.cs
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\Agah.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\appsettings.Development.json
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\appsettings.json
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\tailwind.extension.json
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Agah.http
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\sonar-project.properties
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Properties\launchSettings.json

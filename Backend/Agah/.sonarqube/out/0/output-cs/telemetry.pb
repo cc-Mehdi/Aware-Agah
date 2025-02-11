@@ -1,0 +1,1 @@
+cRMC:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Datalayer\Datalayer.csproj¢net8.0òCSharp12

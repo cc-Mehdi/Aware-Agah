@@ -1,0 +1,12 @@
+{
+pC:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\Agah.MvcApplicationPartsAssemblyInfo.csutf-8h
+]C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\Agah.AssemblyInfo.csutf-8‚
+wC:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.csutf-8j
+_C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\Agah.GlobalUsings.g.csutf-8`
+WC:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\ViewModels\GenericViewModels.csutf-8`
+WC:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Services\NotificationService.csutf-8Z
+QC:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Services\ApiJobService.csutf-8K
+BC:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Program.csutf-8a
+XC:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Controllers\ProductController.csutf-8d
+[C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Controllers\PriceAlertController.csutf-8f
+]C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\Controllers\NotificationController.csutf-8
