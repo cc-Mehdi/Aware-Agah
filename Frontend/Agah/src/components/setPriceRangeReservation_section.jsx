@@ -4,12 +4,14 @@ import NumericalInput from './numerical_input'
 import PlatformSelector from './radiobutton_platform_selector'
 import { setPriceRangeReservation } from '../services/api_SetPriceRangeReservation';
 import { getProductNames } from '../services/api_GetProductNames';
+import Toastr from './toastr';
 
 const set_price_alert_box = () => {
 
     const [productList, setProductList] = useState([]);
     const isMounted = useRef(false); // for fixing bug (this component send 2 request when loaded and this code fix this send just 1 request)
     const [selectedPlatform, setSelectedPlatform] = useState();
+    const [toastr, setToastr] = useState(null); // State to manage Toastr message
 
 
     // Fetch product names when the component mounts
@@ -41,15 +43,25 @@ const set_price_alert_box = () => {
                 maxPrice: document.querySelector("#MaxPrice").value,
             });
 
-            console.log('API Response:', response);
+            if (response.status === 200) {
+                setToastr({ type: "success", title: response.message || "عملیات با موفقیت انجام شد" });
+                // Hide Toastr after a few seconds
+                setTimeout(() => setToastr(null), 5000);
+            }
+            else
+                setToastr({ type: "error", title: "عملیات با شکست مواجه شد" });
+
         } catch (error) {
-            console.error('API Error:', error);
+            setToastr({ type: "error", title: error });
         }
     };
 
     return (
         <>
             <div className="w-full p-6 py-14 flex flex-col justify-center items-center bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+
+                {/* Conditionally render Toastr */}
+                {toastr && <Toastr toastrType={toastr.type} title={toastr.title} />}
 
                 <div className='w-full mb-10'>
                     <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">انتخاب بازه قیمت</h5>
