@@ -20,7 +20,7 @@ export const setPriceRangeReservation = async ({ userId, productId, alarmId, min
         }
 
         const data = await response.json();
-        return data;
+        return { status: response.status, ...data };
     } catch (error) {
         console.error('Error:', error);
         throw error;
