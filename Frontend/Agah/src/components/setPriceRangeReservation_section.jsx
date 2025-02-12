@@ -5,9 +5,12 @@ import PlatformSelector from './radiobutton_platform_selector'
 import { setPriceRangeReservation } from '../services/api_SetPriceRangeReservation';
 import { getProductNames } from '../services/api_GetProductNames';
 import Toastr from './toastr';
+import { useDispatch } from "react-redux";
+import { setError } from "./../redux/errorSlice";
 
 const set_price_alert_box = () => {
 
+    const dispatch = useDispatch();
     const [productList, setProductList] = useState([]);
     const isMounted = useRef(false); // for fixing bug (this component send 2 request when loaded and this code fix this send just 1 request)
     const [selectedPlatform, setSelectedPlatform] = useState();
@@ -52,7 +55,7 @@ const set_price_alert_box = () => {
                 setToastr({ type: "error", title: "عملیات با شکست مواجه شد" });
 
         } catch (error) {
-            setToastr({ type: "error", title: error });
+            dispatch(setError(error.message)); // ارسال خطا به Redux
         }
     };
 
