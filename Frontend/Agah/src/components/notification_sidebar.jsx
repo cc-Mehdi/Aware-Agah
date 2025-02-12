@@ -59,8 +59,8 @@ const NotificationSidebar = () => {
                 className={`fixed top-0 right-0 z-40 w-100 h-screen bg-gray-50 dark:bg-gray-800 shadow-lg transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"
                     }`}
             >
-                <div className="h-full px-3 py-4 overflow-y-auto">
-                    <button type="button" class="text-white w-full py-2 hover:bg-gray-800 cursor-pointer bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-600 dark:border-gray-700">
+                <div className="h-full px-3 py-4 overflow-y-auto custom-scrollbar">
+                    <button type="button" className="text-white w-full py-2 hover:bg-gray-800 cursor-pointer bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-600 dark:border-gray-700">
                         <i className="fa-solid fa-check-double me-2"></i>
                         <span>
                             خواندن همه
@@ -79,6 +79,23 @@ const NotificationSidebar = () => {
                     </ul>
                 </div>
             </aside >
+
+            <style jsx>{`
+                .custom-scrollbar::-webkit-scrollbar {
+                    width: 6px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-track {
+                    background:rgb(0, 1, 80);
+                    border-radius: 10px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                    background: #888;
+                    border-radius: 10px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                    background: #555;
+                }
+            `}</style>
         </>
     );
 };
