@@ -1,12 +1,12 @@
 ﻿import { useState } from "react";
 
-export default function dropdown({ inputName, label, dataSource, defaultDataSource = null }) {
+export default function dropdown({ inputName, label, dataSource }) {
     const [selectedData, setSelectedData] = useState("");
 
     // Ensure `dataSource` is always an array
     const safeDataSource = Array.isArray(dataSource) && dataSource.length > 0
         ? dataSource
-        : defaultDataSource;
+        : [{ id: 0, title: "مقداری وجود ندارد" }];
 
     return (
         <div className="bg-white border-gray-200 w-full rounded-lg border shadow-sm dark:bg-gray-800 dark:border-gray-700">
