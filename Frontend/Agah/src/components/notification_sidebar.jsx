@@ -85,7 +85,7 @@ const NotificationSidebar = () => {
                     width: 6px;
                 }
                 .custom-scrollbar::-webkit-scrollbar-track {
-                    background:rgb(0, 1, 80);
+                    background: #f1f1f1;
                     border-radius: 10px;
                 }
                 .custom-scrollbar::-webkit-scrollbar-thumb {
