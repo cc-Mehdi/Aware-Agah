@@ -1,6 +1,14 @@
 import React from "react";
+import Skeleton from "./skeleton.jsx";
 
 const RadioButtonPlatformSelector = ({ inputName, dataSource, selectedValue, onChange }) => {
+
+    if (dataSource === 'no_data') {
+        return (
+            <Skeleton />
+        )
+    }
+
     return (
         <ul className="grid w-full gap-6 md:grid-cols-2">
             {dataSource.map((platform) => (
