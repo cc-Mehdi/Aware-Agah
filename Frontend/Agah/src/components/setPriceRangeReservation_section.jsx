@@ -25,7 +25,7 @@ const set_price_alert_box = () => {
                 const response = await getProductNames();
                 setProductList(response || []);
             } catch (error) {
-                console.error("Failed to fetch product names:", error);
+                dispatch(setError(error.message)); // ارسال خطا به Redux
                 setProductList(["خطا در دریافت داده‌ها"]);
             }
         };
