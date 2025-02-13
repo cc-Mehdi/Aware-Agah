@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|c:\\users\\cc-mehdi\\desktop\\aware-aghah\\backend\\agah\\agah\\controllers\\alarmscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|solutionrelative:agah\\controllers\\alarmscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,6 +27,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AlarmsController.cs",
+              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Controllers\\AlarmsController.cs",
+              "RelativeDocumentMoniker": "Agah\\Controllers\\AlarmsController.cs",
+              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Controllers\\AlarmsController.cs*",
+              "RelativeToolTip": "Agah\\Controllers\\AlarmsController.cs*",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAABVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-13T07:47:26.169Z",
+              "EditorCaption": ""
             }
           ]
         }
