@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { getNotifications } from './../services/api_GetNotifications';
 import { readAllNotifications } from './../services/api_ReadAllNotifications';
 import NotificationCard from './notification_card';
 
@@ -11,7 +12,7 @@ const NotificationSidebar = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await GetNotifications({ userId: 2, alarmEnglishName: "Alert" }); // TODO: Dynamic UserID
+                const response = await getNotifications({ userId: 2, alarmEnglishName: "Alert" }); // TODO: Dynamic UserID
                 setnotReadedNotificationsCount(response.filter(notification => !notification.isRead).length);
                 setNotifications(response);
 

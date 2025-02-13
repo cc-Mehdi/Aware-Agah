@@ -1,4 +1,4 @@
-export const GetNotifications = async ({ userId, alarmEnglishName }) => {
+export const getNotifications = async ({ userId, alarmEnglishName }) => {
     try {
         const response = await fetch(`https://localhost:44314/api/Notification/GetNotifications/${userId}/${alarmEnglishName}`, {
             method: 'Get',
