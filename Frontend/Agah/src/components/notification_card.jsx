@@ -10,7 +10,7 @@ const notification_card = (notificationItem) => {
             <span className="font-normal text-gray-700 dark:text-gray-400 flex flex-row-reverse justify-between" dir='ltr'>
                 {moment(notification.createdAt).format("jYYYY-jMM-jDD | HH:mm:ss")} {/* convert to persian date */}
                 {notification.isRead && (
-                    <i class="fa-solid fa-check-double me-2" aria-hidden="true"></i>
+                    <i className="fa-solid fa-check-double me-2" aria-hidden="true"></i>
                 )}
             </span>
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{notification.messageSubject}</h5>
