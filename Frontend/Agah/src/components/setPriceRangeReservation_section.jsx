@@ -4,6 +4,7 @@ import NumericalInput from './numerical_input'
 import PlatformSelector from './radiobutton_platform_selector'
 import { setPriceRangeReservation } from '../services/api_SetPriceRangeReservation';
 import { getProductNames } from '../services/api_GetProductNames';
+import { getAlarms } from '../services/api_GetAlarms';
 import Toastr from './toastr';
 import { useDispatch } from "react-redux";
 import { setError } from "./../redux/errorSlice";
@@ -12,25 +13,38 @@ const set_price_alert_box = () => {
 
     const dispatch = useDispatch();
     const [productList, setProductList] = useState([]);
+    const [alarmList, setAlarmList] = useState([]);
     const isMounted = useRef(false); // for fixing bug (this component send 2 request when loaded and this code fix this send just 1 request)
     const [selectedPlatform, setSelectedPlatform] = useState();
     const [toastr, setToastr] = useState(null); // State to manage Toastr message
 
 
-    // Fetch product names when the component mounts
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchProducts = async () => {     // Fetch product names when the component mounts
             try {
                 const response = await getProductNames();
-
                 setProductList(response || []);
             } catch (error) {
                 console.error("Failed to fetch product names:", error);
                 setProductList(["خطا در دریافت داده‌ها"]);
             }
         };
+
+        const fetchAlarms = async () => {     // Fetch product names when the component mounts
+            try {
+                const response = await getAlarms();
+                setAlarmList(response || []);
+            } catch (error) {
+                dispatch(setError(error.message)); // ارسال خطا به Redux
+                setAlarmList("no_data");
+            }
+        };
+
+
+        // Fetch api's only once
         if (!isMounted.current) {
-            fetchProducts(); // Fetch only once
+            fetchProducts();
+            fetchAlarms();
             isMounted.current = true;
         }
 
@@ -49,10 +63,11 @@ const set_price_alert_box = () => {
             if (response.status === 200) {
                 setToastr({ type: "success", title: response.message || "عملیات با موفقیت انجام شد" });
                 // Hide Toastr after a few seconds
-                setTimeout(() => setToastr(null), 5000);
             }
             else
                 setToastr({ type: "error", title: "عملیات با شکست مواجه شد" });
+
+            setTimeout(() => setToastr(null), 5000);
 
         } catch (error) {
             dispatch(setError(error.message)); // ارسال خطا به Redux
@@ -79,12 +94,7 @@ const set_price_alert_box = () => {
                     <NumericalInput inputName={"MaxPrice"} label={"حداکثر"} />
                 </div>
                 <div className='w-full my-2'>
-                    <PlatformSelector inputName={'Platform'} dataSource={
-                        [{ 'id': '1', 'title': 'ایمیل', 'description': 'اطلاع رسانی با ایمیل' },
-                        { 'id': '2', 'title': 'تلفن', 'description': 'اطلاع رسانی با تماس تلفنی' },
-                        { 'id': '3', 'title': 'پیامک', 'description': 'اطلاع رسانی با پیامک' },
-                        { 'id': '4', 'title': 'نوتیف درون برنامه', 'description': 'اطلاع رسانی با نوتیفیکیشن' }]
-                    }
+                    <PlatformSelector inputName={'Platform'} dataSource={alarmList}
                         selectedValue={selectedPlatform}
                         onChange={setSelectedPlatform} />
                 </div>
