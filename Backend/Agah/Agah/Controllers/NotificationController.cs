@@ -37,6 +37,38 @@ namespace Agah.Controllers
                 return BadRequest(new { message = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
             }
         }
+
+        [HttpGet("ReadAllNotifications/{userId}")]
+        public async Task<IActionResult> ReadAllNotifications(int userId)
+        {
+            try
+            {
+                // TODO : check user token with user id
+                var user = _unitOfWork.UserRepository.GetFirstOrDefault(u => u.Id == userId);
+
+                if(user == null)
+                    return BadRequest(new { message = "کاربر مورد نظر یافت نشد" });
+
+                var notificationsList = _unitOfWork.Notification_UserRepository.GetAllByFilter(u => u.UserId == userId);
+
+                if (notificationsList == null)
+                    return BadRequest(new { message = "اعلانی برای کاربر مورد نظر یافت نشد" });
+
+                foreach (var notification in notificationsList)
+                {
+                    notification.IsRead = true;
+                    _unitOfWork.Notification_UserRepository.Update(notification);
+                }
+
+                await _unitOfWork.SaveAsync();
+                return Ok(notificationsList);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
+            }
+        }
     }
 
     public class Notification_MessageOptions
