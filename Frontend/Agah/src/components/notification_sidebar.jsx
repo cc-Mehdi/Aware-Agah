@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { GetNotifications } from './../services/api_GetNotifications';
+import { readAllNotifications } from './../services/api_ReadAllNotifications';
 import NotificationCard from './notification_card';
 
 const NotificationSidebar = () => {
@@ -20,8 +20,10 @@ const NotificationSidebar = () => {
             }
         };
 
+
+        // Fetch only once
         if (!isMounted.current) {
-            fetchData(); // Fetch only once
+            fetchData();
             isMounted.current = true;
         }
 
@@ -31,6 +33,12 @@ const NotificationSidebar = () => {
 
         return () => clearInterval(interval);
     }, []);
+
+    const ReadAllNotifications_handler = async () => {
+        const response = await readAllNotifications({ userId: 2 }); // TODO: Dynamic UserID
+        setnotReadedNotificationsCount(response.filter(notification => !notification.isRead).length);
+        setNotifications(response);
+    }
 
     return (
         <>
@@ -60,7 +68,7 @@ const NotificationSidebar = () => {
                     }`}
             >
                 <div className="h-full px-3 py-4 overflow-y-auto">
-                    <button type="button" className="text-white w-full py-2 hover:bg-gray-800 cursor-pointer bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-600 dark:border-gray-700">
+                    <button onClick={ReadAllNotifications_handler} type="button" className="text-white w-full py-2 hover:bg-gray-800 cursor-pointer bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-600 dark:border-gray-700">
                         <i className="fa-solid fa-check-double me-2"></i>
                         <span>
                             خواندن همه
