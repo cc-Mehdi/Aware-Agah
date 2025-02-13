@@ -1,3 +1,4 @@
+using Agah.Filters;
 using Agah.Services;
 using Datalayer.Data;
 using Datalayer.Repositories;
@@ -49,7 +50,11 @@ app.UseCors("AllowLocalhost");
 
 app.UseAuthorization();
 
-app.UseHangfireDashboard("/Hangfire");
+app.UseHangfireDashboard("/Hangfire", new DashboardOptions
+{
+    Authorization = new[] { new BasicAuthAuthorizationFilter("admin", "2ea34b097a6a3bb800f0a13108b92d93") }
+});
+
 
 app.MapControllers();
 
