@@ -52,12 +52,40 @@ const set_price_alert_box = () => {
 
     const handleSendAlert = async () => {
         try {
+
+            // validating form inputs
+            let selectedProductId = document.querySelector("#Product").value;
+            if (selectedProductId === "") {
+                setToastr({ type: "warning", title: "لطفا محصول مورد نظر را انتخاب کنید" });
+                document.querySelector("#Product").focus();
+                return;
+            }
+
+            let selectedMinPrice = document.querySelector("#MinPrice").value;
+            if (selectedMinPrice === "") {
+                setToastr({ type: "warning", title: "لطفا حداقل قیمت مورد نظر را انتخاب کنید" });
+                document.querySelector("#MinPrice").focus();
+                return;
+            }
+
+            let selectedMaxPrice = document.querySelector("#MaxPrice").value;
+            if (selectedMaxPrice === "") {
+                setToastr({ type: "warning", title: "لطفا حداکثر قیمت مورد نظر را انتخاب کنید" });
+                document.querySelector("#MaxPrice").focus();
+                return;
+            }
+
+            if (selectedPlatform === undefined) {
+                setToastr({ type: "warning", title: "لطفا نوع اعلان مورد نظر را انتخاب کنید" });
+                return;
+            }
+
             const response = await setPriceRangeReservation({
                 userId: 2,
                 alarmId: selectedPlatform,
-                productId: document.querySelector("#Product").value,
-                minPrice: document.querySelector("#MinPrice").value,
-                maxPrice: document.querySelector("#MaxPrice").value,
+                productId: selectedProductId,
+                minPrice: selectedMinPrice,
+                maxPrice: selectedMaxPrice,
             });
 
             if (response.status === 200) {
