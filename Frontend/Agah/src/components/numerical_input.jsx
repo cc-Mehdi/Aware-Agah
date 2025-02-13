@@ -19,7 +19,7 @@ export default function NumericalInput({ inputName, label }) {
 
     return (
         <div className="w-full mx-1 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
-            <label htmlFor="numerical-input" className="sr-only">
+            <label htmlFor={inputName} className="sr-only">
                 {label}
             </label>
             <input
