@@ -37,6 +37,10 @@ namespace Datalayer.Models
         [DefaultValue(0)]
         public decimal MaxPrice { get; set; }
 
+        [Display(Name = "وضعیت ارسال")]
+        [DefaultValue(0)]
+        public bool IsSent { get; set; }
+
         [Display(Name = "تاریخ ایجاد")]
         [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; }

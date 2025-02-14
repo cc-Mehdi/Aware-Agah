@@ -20,7 +20,9 @@ namespace Datalayer.Repositories
             objFromDb.Alarm_Id = item.Alarm_Id;
             objFromDb.MinPrice = item.MinPrice;
             objFromDb.MaxPrice = item.MaxPrice;
+            objFromDb.IsSent = item.IsSent;
             objFromDb.CreatedAt = item.CreatedAt;
+            objFromDb.DeletedAt = item.DeletedAt;
         }
     }
 }
