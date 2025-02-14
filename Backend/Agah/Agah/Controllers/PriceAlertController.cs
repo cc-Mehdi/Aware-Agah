@@ -106,7 +106,7 @@ namespace Agah.Controllers
         [HttpGet("GetReserves")]
         public async Task<IActionResult> GetReserves()
         {
-            var reservesUserIdList = _unitOfWork.ReserveRepository.GetAll();
+            var reservesUserIdList = _unitOfWork.ReserveRepository.GetAllByFilter(u=> u.IsSent != true);
 
             return Ok(reservesUserIdList);
         }
