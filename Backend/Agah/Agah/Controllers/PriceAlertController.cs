@@ -1,4 +1,5 @@
 ﻿using Agah.Services;
+using Agah.ViewModels;
 using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
 using Microsoft.AspNetCore.Mvc;
@@ -86,14 +87,23 @@ namespace Agah.Controllers
                 if (lastProductsPrice < reserve.MinPrice || lastProductsPrice > reserve.MaxPrice)
                 {
                     NotificationService notificationService = new NotificationService(_unitOfWork);
-                    await notificationService.SendNotification(new Notification_MessageOptions()
+                    ResponseStatus response = await notificationService.SendNotification(new Notification_MessageOptions()
                     {
                         User = reserve.User,
                         NotificationType = reserve.Alarm.EnglishName,
                         MessageSubject = $"قیمت {reserve.Product.PersianName} بیش از حد تغییر کرده است!",
                         MessageContent = $"قیمت محصول {productName} از محدوده ثبت شده خارج شده است.\nقیمت فعلی محصول : {lastProductsPrice.ToString("N0")}\nبازه رزرو شده : {reserve.MinPrice.ToString("N0")} - {reserve.MaxPrice.ToString("N0")}",
                     });
-                    return Ok(new { result = "پیام اطلاع رسانی در صف ارسال قرار گرفت" });
+                    if(response.StatusCode == 200)
+                    {
+                        // change status of isSent in reserve
+                        reserve.IsSent = true;
+                        _unitOfWork.ReserveRepository.Update(reserve);
+                        await _unitOfWork.SaveAsync();
+                        return Ok(new { result = "پیام اطلاع رسانی در صف ارسال قرار گرفت" });
+                    }
+                    else
+                        return BadRequest(new { message = $"عملیات با خطا مواجه شد" });
                 }
                 return Ok(new { result = "قیمت در بازه رزرو شده میباشد" });
             }
