@@ -13,9 +13,13 @@ namespace Datalayer.Repositories
             _db = db;
         }
 
-        public void Update(ProductLog item)
+        public async Task UpdateAsync(ProductLog item)
         {
-            var objFromDb = _db.ProductLog.FirstOrDefault(u => u.Id == item.Id);
+            var objFromDb = await _db.ProductLog.FirstOrDefaultAsync(u => u.Id == item.Id);
+
+            if (objFromDb == null)
+                return;
+
             objFromDb.Product_Id = item.Product_Id;
             objFromDb.Price = item.Price;
             objFromDb.CreatedAt = item.CreatedAt;

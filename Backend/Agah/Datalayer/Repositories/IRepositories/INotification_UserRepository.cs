@@ -4,6 +4,6 @@ namespace Datalayer.Repositories.IRepositories
 {
     public interface INotification_UserRepository : IRepository<Notification_User>
     {
-        void Update(Notification_User item);
+        Task UpdateAsync(Notification_User item);
     }
 }

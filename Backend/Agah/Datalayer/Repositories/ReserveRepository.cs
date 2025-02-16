@@ -1,6 +1,7 @@
 ﻿using Datalayer.Data;
 using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Datalayer.Repositories
 {
@@ -12,9 +13,13 @@ namespace Datalayer.Repositories
             _db = db;
         }
 
-        public void Update(Reserve item)
+        public async Task UpdateAsync(Reserve item)
         {
-            var objFromDb = _db.Reserve.FirstOrDefault(u => u.Id == item.Id);
+            var objFromDb = await _db.Reserve.FirstOrDefaultAsync(u => u.Id == item.Id);
+
+            if (objFromDb == null)
+                return;
+
             objFromDb.User_Id = item.User_Id;
             objFromDb.Product_Id = item.Product_Id;
             objFromDb.Alarm_Id = item.Alarm_Id;
