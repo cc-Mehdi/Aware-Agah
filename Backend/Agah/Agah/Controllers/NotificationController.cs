@@ -24,8 +24,8 @@ namespace Agah.Controllers
                 switch (alarmType)
                 {
                     case "Alert":
-                        var notificationsList = _unitOfWork.Notification_UserRepository.GetAllByFilter(u => u.UserId == userId, includeProperties: u => u.User).OrderByDescending(u=>u.CreatedAt);
-                        return Ok(notificationsList);
+                        var notificationsList = await _unitOfWork.Notification_UserRepository.GetAllByFilterAsync(u => u.UserId == userId, includeProperties: u => u.User);
+                        return Ok(notificationsList.OrderByDescending(u => u.CreatedAt));
                     default:
                         break;
                 }
@@ -44,12 +44,12 @@ namespace Agah.Controllers
             try
             {
                 // TODO : check user token with user id
-                var user = _unitOfWork.UserRepository.GetFirstOrDefault(u => u.Id == userId);
+                var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Id == userId);
 
                 if(user == null)
                     return BadRequest(new { message = "کاربر مورد نظر یافت نشد" });
 
-                var notificationsList = _unitOfWork.Notification_UserRepository.GetAllByFilter(u => u.UserId == userId);
+                var notificationsList = await _unitOfWork.Notification_UserRepository.GetAllByFilterAsync(u => u.UserId == userId);
 
                 if (notificationsList == null)
                     return BadRequest(new { message = "اعلانی برای کاربر مورد نظر یافت نشد" });
@@ -57,7 +57,7 @@ namespace Agah.Controllers
                 foreach (var notification in notificationsList)
                 {
                     notification.IsRead = true;
-                    _unitOfWork.Notification_UserRepository.Update(notification);
+                    await _unitOfWork.Notification_UserRepository.UpdateAsync(notification);
                 }
 
                 await _unitOfWork.SaveAsync();
