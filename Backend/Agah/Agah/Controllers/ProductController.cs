@@ -25,7 +25,8 @@ namespace Agah.Controllers
         {
             try
             {
-                var list = _unitOfWork.ProductRepository.GetAll().Select(u=> new { u.Id, u.PersianName, u.IconName }).ToList();
+                var products = await _unitOfWork.ProductRepository.GetAllAsync();
+                var list = products.Select(u => new { u.Id, u.PersianName, u.IconName }).ToList();
 
                 return Ok(new {result = list});
             }
@@ -40,19 +41,23 @@ namespace Agah.Controllers
         {
             try
             {
-                var list = _unitOfWork.ProductLogRepository.GetAll(includeProperties: u=> u.Product)
-                    .OrderByDescending(u=> u.CreatedAt)
+                var productLogs = await _unitOfWork.ProductLogRepository.GetAllAsync(includeProperties: u => u.Product);
+
+                var list = productLogs
+                    .OrderByDescending(u => u.CreatedAt)
                     .GroupBy(u => u.Product_Id)
                     .Select(g => g.First())
-                    .Select(u => new Product_ProductLog_ViewModel() 
-                    { 
+                    .Select(u => new Product_ProductLog_ViewModel()
+                    {
                         Product_Id = u.Product_Id,
-                        ProductName = u.Product.PersianName,
-                        ProductIconName = u.Product.IconName,
+                        ProductName = u.Product?.PersianName ?? "",  // Handle null Product
+                        ProductIconName = u.Product?.IconName ?? "", // Handle null Product
                         Price = u.Price.ToString("N0"),
                         CreateAt = u.CreatedAt.ToString(),
                         Unit = "ريال"
-                    }).ToList();
+                    })
+                    .ToList();
+
 
                 return Ok(new { result = list });
             }
@@ -82,7 +87,7 @@ namespace Agah.Controllers
                         string key = apiResponse.FirstOrDefault().Key;
 
                         // Check if key exists in Product table
-                        var existingProduct = _unitOfWork.ProductRepository.GetFirstOrDefault(p => p.EnglishName == key);
+                        var existingProduct = await _unitOfWork.ProductRepository.GetFirstOrDefaultAsync(p => p.EnglishName == key);
 
                         if (existingProduct != null)
                         {
@@ -97,7 +102,7 @@ namespace Agah.Controllers
                                 CreatedAt = DateTime.UtcNow
                             };
 
-                            _unitOfWork.ProductRepository.Add(newProduct);
+                            await _unitOfWork.ProductRepository.AddAsync(newProduct);
                             await _unitOfWork.SaveAsync();
 
                             return Ok($"{key} added");
@@ -133,19 +138,21 @@ namespace Agah.Controllers
                         string responseValue = apiResponse.FirstOrDefault().Value;
 
                         // Get last submited product log
-                        var lastProductLog = _unitOfWork.ProductLogRepository.GetAllByFilter(u=> u.Product.EnglishName == responseKey).OrderByDescending(u=> u.CreatedAt).FirstOrDefault();
+                        var lastProductLogList = await _unitOfWork.ProductLogRepository.GetAllByFilterAsync(u=> u.Product.EnglishName == responseKey);
+                        var lastProductLog = lastProductLogList.OrderByDescending(u => u.CreatedAt).FirstOrDefault();
 
                         decimal.TryParse(responseValue, out decimal price); // Get current product price
 
                         if (lastProductLog == null) // if not save any product log for this product
                         {
-                            int productId = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.EnglishName == responseKey).Id; // Get product id
+                            var productList = await _unitOfWork.ProductRepository.GetFirstOrDefaultAsync(u => u.EnglishName == responseKey);
+                            int productId = productList.Id; // Get product id
 
                             if (productId == 0)
                                 return Ok("Not submited any product log for this product");
 
 
-                            _unitOfWork.ProductLogRepository.Add(new ProductLog()
+                            await _unitOfWork.ProductLogRepository.AddAsync(new ProductLog()
                             {
                                 Product_Id = productId,
                                 Price = price,
@@ -160,7 +167,7 @@ namespace Agah.Controllers
                         {
                             if(lastProductLog.Price != price) // check if price changed after last time
                             {
-                                _unitOfWork.ProductLogRepository.Add(new ProductLog()
+                                await _unitOfWork.ProductLogRepository.AddAsync(new ProductLog()
                                 {
                                     Product_Id = lastProductLog.Product_Id,
                                     Price = price,
