@@ -16,35 +16,22 @@ namespace Datalayer.Repositories
             _dbSet = _db.Set<T>();
         }
 
-        public void Add(T entity)
+        public async Task AddAsync(T entity)
         {
-            _db.Add(entity);
+            await _db.AddAsync(entity);
         }
 
-        public IEnumerable<T> GetAll(params Expression<Func<T, Object>>[] includeProperties)
+        public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, Object>>[] includeProperties)
         {
             IQueryable<T> query = _dbSet;
             
             foreach (var includeProperty in includeProperties)
                 query = query.Include(includeProperty);
             
-            return query.ToList();
+            return await query.ToListAsync();
         }
 
-        public IEnumerable<T> GetAllByFilter(Expression<Func<T, bool>>? filter = null, params Expression<Func<T, Object>>[] includeProperties)
-        {
-            IQueryable<T> query = _dbSet;
-            
-            if (filter != null)
-                query = query.Where(filter);
-
-            foreach (var includeProperty in includeProperties)
-                query = query.Include(includeProperty);
-            
-            return query.ToList();
-        }
-
-        public T GetFirstOrDefault(Expression<Func<T, bool>>? filter = null, params Expression<Func<T, Object>>[] includeProperties)
+        public async Task<IEnumerable<T>> GetAllByFilterAsync(Expression<Func<T, bool>>? filter = null, params Expression<Func<T, Object>>[] includeProperties)
         {
             IQueryable<T> query = _dbSet;
             
@@ -53,8 +40,21 @@ namespace Datalayer.Repositories
 
             foreach (var includeProperty in includeProperties)
                 query = query.Include(includeProperty);
+            
+            return await query.ToListAsync();
+        }
 
-            return query.FirstOrDefault();
+        public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>>? filter = null, params Expression<Func<T, Object>>[] includeProperties)
+        {
+            IQueryable<T> query = _dbSet;
+            
+            if (filter != null)
+                query = query.Where(filter);
+
+            foreach (var includeProperty in includeProperties)
+                query = query.Include(includeProperty);
+
+            return await query.FirstOrDefaultAsync();
         }
 
         public void Remove(T entity)
