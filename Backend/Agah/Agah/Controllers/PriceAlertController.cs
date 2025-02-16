@@ -23,23 +23,23 @@ namespace Agah.Controllers
             try
             {
                 // Validation Id's
-                var user = _unitOfWork.UserRepository.GetFirstOrDefault(u => u.Id == bodyContent.UserId);
+                var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Id == bodyContent.UserId);
                 if (user == null)
                     return BadRequest(new { message = "کاربر یافت نشد" });
 
-                var product = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == bodyContent.ProductId);
+                var product = await _unitOfWork.ProductRepository.GetFirstOrDefaultAsync(u => u.Id == bodyContent.ProductId);
                 if (product == null)
                     return BadRequest(new { message = "محصول یافت نشد" });
 
-                var alarm = _unitOfWork.AlarmRepository.GetFirstOrDefault(u => u.Id == bodyContent.AlarmId);
+                var alarm = await _unitOfWork.AlarmRepository.GetFirstOrDefaultAsync(u => u.Id == bodyContent.AlarmId);
                 if (alarm == null)
                     return BadRequest(new { message = "هشدار یافت نشد" });
 
                 // Delete old user reservation
-                _unitOfWork.ReserveRepository.Remove(_unitOfWork.ReserveRepository.GetFirstOrDefault(u => u.User_Id == bodyContent.UserId));
+                _unitOfWork.ReserveRepository.Remove(await _unitOfWork.ReserveRepository.GetFirstOrDefaultAsync(u => u.User_Id == bodyContent.UserId));
 
                 // Create new model and add them to database
-                _unitOfWork.ReserveRepository.Add(new Reserve()
+                await _unitOfWork.ReserveRepository.AddAsync(new Reserve()
                 {
                     User_Id = bodyContent.UserId,
                     User = user,
@@ -69,20 +69,22 @@ namespace Agah.Controllers
         {
             try
             {
-                var reserve = _unitOfWork.ReserveRepository.GetFirstOrDefault(u => u.User_Id == userId, u=> u.User, u=> u.Product ,u=> u.Alarm);
+                var reserve = await _unitOfWork.ReserveRepository.GetFirstOrDefaultAsync(u => u.User_Id == userId, u=> u.User, u=> u.Product ,u=> u.Alarm);
                 if (reserve == null)
                     return BadRequest(new { message = "رزرو بازه زمانی برای کاربر انتخابی یافت نشد" });
 
-                string productName = _unitOfWork.ProductRepository.GetFirstOrDefault(u => u.Id == reserve.Product_Id).PersianName;
+                var product = await _unitOfWork.ProductRepository.GetFirstOrDefaultAsync(u => u.Id == reserve.Product_Id);
+                string productName = product?.PersianName ?? "";
 
                 // get last products price
-                decimal lastProductsPrice = _unitOfWork.ProductLogRepository.GetAll(includeProperties: u => u.Product)
-                    .Where(u => u.Product_Id == reserve.Product_Id)
+                var lastProductsLog = await _unitOfWork.ProductLogRepository.GetAllAsync(includeProperties: u => u.Product);
+                decimal lastProductsPrice = lastProductsLog.Where(u => u.Product_Id == reserve.Product_Id)
                     .OrderByDescending(u => u.CreatedAt)
                     .GroupBy(u => u.Product_Id)
                     .Select(g => g.First())
                     .Select(u => u.Price)
                     .FirstOrDefault();
+
 
                 if (lastProductsPrice < reserve.MinPrice || lastProductsPrice > reserve.MaxPrice)
                 {
@@ -98,7 +100,7 @@ namespace Agah.Controllers
                     {
                         // change status of isSent in reserve
                         reserve.IsSent = true;
-                        _unitOfWork.ReserveRepository.Update(reserve);
+                        await _unitOfWork.ReserveRepository.UpdateAsync(reserve);
                         await _unitOfWork.SaveAsync();
                         return Ok(new { result = "پیام اطلاع رسانی در صف ارسال قرار گرفت" });
                     }
@@ -116,7 +118,7 @@ namespace Agah.Controllers
         [HttpGet("GetReserves")]
         public async Task<IActionResult> GetReserves()
         {
-            var reservesUserIdList = _unitOfWork.ReserveRepository.GetAllByFilter(u=> u.IsSent != true);
+            var reservesUserIdList = await _unitOfWork.ReserveRepository.GetAllByFilterAsync(u=> u.IsSent != true);
 
             return Ok(reservesUserIdList);
         }
