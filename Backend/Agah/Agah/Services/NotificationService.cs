@@ -18,7 +18,7 @@ namespace Agah.Services
         {
             try
             {
-                var alarm = _unitOfWork.AlarmRepository.GetFirstOrDefault(u => u.EnglishName == messageOptions.NotificationType);
+                var alarm = await _unitOfWork.AlarmRepository.GetFirstOrDefaultAsync(u => u.EnglishName == messageOptions.NotificationType);
 
                 if (alarm == null || alarm.IsActive == false)
                     return new ResponseStatus() { StatusCode = 400, StatusMessage = "آلارم انتخاب شده وجود ندارد یا درحال حاضر غیرفعال میباشد" };
@@ -27,8 +27,10 @@ namespace Agah.Services
                 {
                     case "Alert":
                         // Fetch the old notifications beyond the latest 10 and remove them
-                        var notificationsToRemove = _unitOfWork.Notification_UserRepository
-                            .GetAll() // Ensure this returns IQueryable<T>
+                        var notificationUsersList = await _unitOfWork.Notification_UserRepository
+                            .GetAllAsync();
+
+                        var notificationsToRemove = notificationUsersList // Ensure this returns IQueryable<T>
                             .Where(n => n.UserId == messageOptions.User.Id) // Filter for the specific user
                             .OrderByDescending(n => n.CreatedAt) // Sort by newest first
                             .Skip(9) // Keep the latest 9, remove the rest
@@ -38,7 +40,7 @@ namespace Agah.Services
                         if (notificationsToRemove.Any())
                             _unitOfWork.Notification_UserRepository.RemoveRange(notificationsToRemove);
 
-                        _unitOfWork.Notification_UserRepository.Add(new Notification_User()
+                        await _unitOfWork.Notification_UserRepository.AddAsync(new Notification_User()
                         {
                             UserId = messageOptions.User.Id,
                             MessageSubject = messageOptions.MessageSubject,
