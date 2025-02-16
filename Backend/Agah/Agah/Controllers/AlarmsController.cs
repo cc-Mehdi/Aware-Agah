@@ -1,11 +1,5 @@
-﻿using Datalayer.Models;
-using Datalayer.Repositories;
-using Datalayer.Repositories.IRepositories;
-using Microsoft.AspNetCore.Http;
+﻿using Datalayer.Repositories.IRepositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using System.Runtime.CompilerServices;
 
 namespace Agah.Controllers
 {
@@ -25,9 +19,9 @@ namespace Agah.Controllers
         {
             try
             {
-                var list = _unitOfWork.AlarmRepository.GetAll().Select(u=> new { u.Id, u.PersianName, u.ShortDescription, u.IsActive }).ToList();
+                var list = await _unitOfWork.AlarmRepository.GetAllAsync();
 
-                return Ok(new {result = list});
+                return Ok(new {result = list.Select(u => new { u.Id, u.PersianName, u.ShortDescription, u.IsActive }).ToList() });
             }
             catch (Exception ex)
             {
