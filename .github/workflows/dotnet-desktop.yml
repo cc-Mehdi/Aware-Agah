@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Or 'windows-latest' if needed
 
     steps:
     - name: 🚀 Checkout Repository
@@ -19,11 +19,14 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
+    - name: 📂 List Files for Debugging
+      run: ls -R  # Shows the structure to debug missing files in the runner
+
     - name: 📦 Restore Dependencies
-      run: dotnet restore
+      run: dotnet restore Agah.sln
 
     - name: 🔨 Build Solution
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build Agah.sln --no-restore --configuration Release
 
     - name: 🧪 Run Tests
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test Agah.Tests/Agah.Tests.csproj --no-build --verbosity normal 
