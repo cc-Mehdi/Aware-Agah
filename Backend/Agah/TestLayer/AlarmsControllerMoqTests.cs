@@ -29,7 +29,11 @@ public class AlarmsControllerMoqTests
     public async Task GetAlarms_ShouldReturnAlarms_WhenAlarmsExist()
     {
         // Arrange
-        var fakeAlarms = new List<Alarm>();
+        var fakeAlarms = new List<Alarm>
+        {
+            new Alarm { Id = 1, PersianName = "هشدار ۱", ShortDescription = "توضیح ۱", IsActive = true },
+            new Alarm { Id = 2, PersianName = "هشدار ۲", ShortDescription = "توضیح ۲", IsActive = false }
+        };
 
         _mockAlarmRepo.Setup(repo => repo.GetAllAsync()).ReturnsAsync(fakeAlarms);
 
