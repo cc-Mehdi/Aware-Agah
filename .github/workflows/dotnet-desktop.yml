@@ -19,10 +19,6 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    - name: 📂 Debug List Files in Repo (for troubleshooting)
-      run: ls -R
-      continue-on-error: true  # Doesn't fail if no files found
-
     - name: 📦 Restore Dependencies
       working-directory: Backend/Agah  # Navigating to the correct directory
       run: dotnet restore Agah.sln
