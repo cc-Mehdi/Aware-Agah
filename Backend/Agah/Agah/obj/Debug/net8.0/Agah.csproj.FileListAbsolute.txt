@@ -10,6 +10,7 @@ C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Azure.C
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Hangfire.AspNetCore.dll
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Hangfire.Core.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Hangfire.Dashboard.Authorization.dll
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Hangfire.NetCore.dll
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Hangfire.SqlServer.dll
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Humanizer.dll
@@ -50,6 +51,7 @@ C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Microso
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Mono.TextTemplating.dll
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Owin.dll
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -189,5 +191,3 @@ C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\refint\
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\Agah.pdb
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\Agah.genruntimeconfig.cache
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\ref\Agah.dll
-C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Hangfire.Dashboard.Authorization.dll
-C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Owin.dll
