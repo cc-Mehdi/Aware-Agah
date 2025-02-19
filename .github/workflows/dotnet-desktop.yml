@@ -32,5 +32,5 @@ jobs:
       run: dotnet build Agah.sln --no-restore --configuration Release
 
     - name: 🧪 Run Tests
-      working-directory: Backend/Agah/TestLayer
+      working-directory: Backend/Agah/
       run: dotnet test --no-build --verbosity normal
