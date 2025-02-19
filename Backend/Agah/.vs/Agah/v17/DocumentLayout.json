@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|c:\\users\\cc-mehdi\\desktop\\aware-aghah\\backend\\agah\\agah\\controllers\\alarmscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|solutionrelative:agah\\controllers\\alarmscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{91069F18-7370-456C-A0AB-2C9AF6BF6149}|TestLayer\\TestLayer.csproj|c:\\users\\cc-mehdi\\desktop\\aware-aghah\\backend\\agah\\testlayer\\alarmscontrollermoqtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{91069F18-7370-456C-A0AB-2C9AF6BF6149}|TestLayer\\TestLayer.csproj|solutionrelative:testlayer\\alarmscontrollermoqtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|c:\\users\\cc-mehdi\\desktop\\aware-aghah\\backend\\agah\\agah\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|solutionrelative:agah\\services\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Testing\\BasicTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Testing\\BasicTests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,27 +35,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AlarmsController.cs",
-              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Controllers\\AlarmsController.cs",
-              "RelativeDocumentMoniker": "Agah\\Controllers\\AlarmsController.cs",
-              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Controllers\\AlarmsController.cs",
-              "RelativeToolTip": "Agah\\Controllers\\AlarmsController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAAAFAAAA",
+              "Title": "AlarmsControllerMoqTests.cs",
+              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\TestLayer\\AlarmsControllerMoqTests.cs",
+              "RelativeDocumentMoniker": "TestLayer\\AlarmsControllerMoqTests.cs",
+              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\TestLayer\\AlarmsControllerMoqTests.cs",
+              "RelativeToolTip": "TestLayer\\AlarmsControllerMoqTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-16T20:51:31.318Z",
+              "WhenOpened": "2025-02-19T22:22:25.532Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "NotificationService.cs",
-              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Services\\NotificationService.cs",
-              "RelativeDocumentMoniker": "Agah\\Services\\NotificationService.cs",
-              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Services\\NotificationService.cs",
-              "RelativeToolTip": "Agah\\Services\\NotificationService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACoAAAAeAAAA",
+              "Title": "BasicTests.cs",
+              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Testing\\BasicTests.cs",
+              "RelativeDocumentMoniker": "Testing\\BasicTests.cs",
+              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Testing\\BasicTests.cs",
+              "RelativeToolTip": "Testing\\BasicTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-16T20:50:02.725Z",
+              "WhenOpened": "2025-02-19T22:21:52.729Z",
               "EditorCaption": ""
             }
           ]
