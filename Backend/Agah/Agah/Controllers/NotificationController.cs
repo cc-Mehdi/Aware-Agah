@@ -30,11 +30,11 @@ namespace Agah.Controllers
                         break;
                 }
 
-                return BadRequest(new { message = "امکان ارسال اعلان با روش انتخاب شده وجود ندارد" });
+                return BadRequest(new { statusMessage = "امکان ارسال اعلان با روش انتخاب شده وجود ندارد" });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
+                return BadRequest(new { statusMessage = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
             }
         }
 
@@ -66,7 +66,7 @@ namespace Agah.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
+                return BadRequest(new { statusMessage = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
             }
         }
     }
