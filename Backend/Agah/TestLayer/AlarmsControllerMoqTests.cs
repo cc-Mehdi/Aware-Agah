@@ -5,60 +5,63 @@ using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
 using Microsoft.AspNetCore.Mvc;
 
-public class AlarmsControllerMoqTests
+namespace TestLayer
 {
-    private readonly Mock<IUnitOfWork> _mockUnitOfWork;
-    private readonly Mock<IAlarmRepository> _mockAlarmRepo;
-    private readonly AlarmsController _controller;
-
-    public AlarmsControllerMoqTests()
+    public class AlarmsControllerMoqTests
     {
-        _mockUnitOfWork = new Mock<IUnitOfWork>();
-        _mockAlarmRepo = new Mock<IAlarmRepository>();
+        private readonly Mock<IUnitOfWork> _mockUnitOfWork;
+        private readonly Mock<IAlarmRepository> _mockAlarmRepo;
+        private readonly AlarmsController _controller;
 
-        _mockUnitOfWork.Setup(u => u.AlarmRepository).Returns(_mockAlarmRepo.Object);
+        public AlarmsControllerMoqTests()
+        {
+            _mockUnitOfWork = new Mock<IUnitOfWork>();
+            _mockAlarmRepo = new Mock<IAlarmRepository>();
 
-        _controller = new AlarmsController(_mockUnitOfWork.Object);
-    }
+            _mockUnitOfWork.Setup(u => u.AlarmRepository).Returns(_mockAlarmRepo.Object);
 
-    [Fact]
-    public async Task GetAlarms_ShouldReturnAlarms_WhenAlarmsExist()
-    {
-        // Arrange
-        var fakeAlarms = FakeDataGenerator.GenerateAlarms(2);
+            _controller = new AlarmsController(_mockUnitOfWork.Object);
+        }
 
-        _mockAlarmRepo.Setup(repo => repo.GetAllAsync()).ReturnsAsync(fakeAlarms);
+        [Fact]
+        public async Task GetAlarms_ShouldReturnAlarms_WhenAlarmsExist()
+        {
+            // Arrange
+            var fakeAlarms = FakeDataGenerator.GenerateAlarms(2);
 
-        // Act
-        var result = await _controller.GetAlarms();
+            _mockAlarmRepo.Setup(repo => repo.GetAllAsync()).ReturnsAsync(fakeAlarms);
 
-        // Assert
-        var okResult = Assert.IsType<OkObjectResult>(result);
+            // Act
+            var result = await _controller.GetAlarms();
 
-        // ✅ تبدیل خروجی به JSON برای دسترسی به `result`
-        var jsonString = JsonConvert.SerializeObject(okResult.Value);
-        var response = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonString);
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
 
-        Assert.NotNull(response);
-        Assert.True(response.ContainsKey("result"));
-        Assert.Equal(2, ((Newtonsoft.Json.Linq.JArray)response["result"]).Count);
-    }
+            // ✅ تبدیل خروجی به JSON برای دسترسی به `result`
+            var jsonString = JsonConvert.SerializeObject(okResult.Value);
+            var response = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonString);
 
-    [Fact]
-    public async Task GetAlarms_ShouldReturnEmptyList_WhenNoAlarmsExist()
-    {
-        // Arrange
-        _mockAlarmRepo.Setup(repo => repo.GetAllAsync())
-                      .ReturnsAsync(new List<Alarm>());
+            Assert.NotNull(response);
+            Assert.True(response.ContainsKey("result"));
+            Assert.Equal(2, ((Newtonsoft.Json.Linq.JArray)response["result"]).Count);
+        }
 
-        // Act
-        var result = await _controller.GetAlarms();
+        [Fact]
+        public async Task GetAlarms_ShouldReturnEmptyList_WhenNoAlarmsExist()
+        {
+            // Arrange
+            _mockAlarmRepo.Setup(repo => repo.GetAllAsync())
+                          .ReturnsAsync(new List<Alarm>());
 
-        // Assert
-        var okResult = Assert.IsType<OkObjectResult>(result);
+            // Act
+            var result = await _controller.GetAlarms();
 
-        // ✅ تبدیل خروجی به JSON برای دسترسی به `result`
-        var jsonString = JsonConvert.SerializeObject(okResult.Value);
-        var response = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonString);
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+
+            // ✅ تبدیل خروجی به JSON برای دسترسی به `result`
+            var jsonString = JsonConvert.SerializeObject(okResult.Value);
+            var response = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonString);
+        }
     }
 }
