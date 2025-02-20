@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Xunit;
 using Moq;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Agah.Controllers;
 using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
@@ -29,11 +25,7 @@ public class AlarmsControllerMoqTests
     public async Task GetAlarms_ShouldReturnAlarms_WhenAlarmsExist()
     {
         // Arrange
-        var fakeAlarms = new List<Alarm>
-        {
-            new Alarm { Id = 1, PersianName = "هشدار ۱", ShortDescription = "توضیح ۱", IsActive = true },
-            new Alarm { Id = 2, PersianName = "هشدار ۲", ShortDescription = "توضیح ۲", IsActive = false }
-        };
+        var fakeAlarms = FakeDataGenerator.GenerateAlarms(2);
 
         _mockAlarmRepo.Setup(repo => repo.GetAllAsync()).ReturnsAsync(fakeAlarms);
 
