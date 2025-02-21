@@ -8,11 +8,11 @@ namespace Agah.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PriceAlertController : ControllerBase
+    public class ReserveController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public PriceAlertController(IUnitOfWork unitOfWork)
+        public ReserveController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -71,7 +71,7 @@ namespace Agah.Controllers
             {
                 var reserve = await _unitOfWork.ReserveRepository.GetFirstOrDefaultAsync(u => u.User_Id == userId, u=> u.User, u=> u.Product ,u=> u.Alarm);
                 if (reserve == null)
-                    return BadRequest(new { message = "رزرو بازه زمانی برای کاربر انتخابی یافت نشد" });
+                    return BadRequest(new { statusMessage = "رزرو بازه زمانی برای کاربر انتخابی یافت نشد" });
 
                 var product = await _unitOfWork.ProductRepository.GetFirstOrDefaultAsync(u => u.Id == reserve.Product_Id);
                 string productName = product?.PersianName ?? "";
@@ -102,16 +102,16 @@ namespace Agah.Controllers
                         reserve.IsSent = true;
                         await _unitOfWork.ReserveRepository.UpdateAsync(reserve);
                         await _unitOfWork.SaveAsync();
-                        return Ok(new { result = "پیام اطلاع رسانی در صف ارسال قرار گرفت" });
+                        return Ok(new { statusMessage = "پیام اطلاع رسانی در صف ارسال قرار گرفت" });
                     }
                     else
-                        return BadRequest(new { message = $"عملیات با خطا مواجه شد" });
+                        return BadRequest(new { statusMessage = $"عملیات با خطا مواجه شد" });
                 }
-                return Ok(new { result = "قیمت در بازه رزرو شده میباشد" });
+                return Ok(new { statusMessage = "قیمت در بازه رزرو شده میباشد" });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
+                return BadRequest(new { statusMessage = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
             }
         }
 
