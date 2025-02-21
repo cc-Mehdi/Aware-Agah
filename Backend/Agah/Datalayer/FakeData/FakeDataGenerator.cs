@@ -43,7 +43,7 @@ namespace Datalayer.Models
                     Alarm = alarms[random.Next(alarms.Count)],
                     MinPrice = random.Next(100, 1000),
                     MaxPrice = random.Next(1000, 10000),
-                    IsSent = i % 2 == 0,
+                    IsSent = false,
                     CreatedAt = DateTime.Now.AddDays(-i),
                     DeletedAt = i % 5 == 0 ? DateTime.Now.AddDays(-i) : (DateTime?)null
                 });
