@@ -47,12 +47,12 @@ namespace Agah.Controllers
                 var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Id == userId);
 
                 if(user == null)
-                    return BadRequest(new { message = "کاربر مورد نظر یافت نشد" });
+                    return BadRequest(new { statusMessage = "کاربر مورد نظر یافت نشد" });
 
                 var notificationsList = await _unitOfWork.Notification_UserRepository.GetAllByFilterAsync(u => u.UserId == userId);
 
-                if (notificationsList == null)
-                    return BadRequest(new { message = "اعلانی برای کاربر مورد نظر یافت نشد" });
+                if (notificationsList == null || notificationsList.Count() == 0)
+                    return BadRequest(new { statusMessage = "اعلانی برای کاربر مورد نظر یافت نشد" });
 
                 foreach (var notification in notificationsList)
                 {
