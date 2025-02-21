@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TestLayer
 {
-    public class AlarmsControllerMoqTests
+    public class AlarmControllerMoqTests
     {
         private readonly Mock<IUnitOfWork> _mockUnitOfWork;
         private readonly Mock<IAlarmRepository> _mockAlarmRepo;
         private readonly AlarmsController _controller;
 
-        public AlarmsControllerMoqTests()
+        public AlarmControllerMoqTests()
         {
             _mockUnitOfWork = new Mock<IUnitOfWork>();
             _mockAlarmRepo = new Mock<IAlarmRepository>();
