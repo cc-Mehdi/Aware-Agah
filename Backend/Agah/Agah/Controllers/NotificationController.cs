@@ -51,7 +51,7 @@ namespace Agah.Controllers
 
                 var notificationsList = await _unitOfWork.Notification_UserRepository.GetAllByFilterAsync(u => u.UserId == userId);
 
-                if (notificationsList == null || notificationsList.Count() == 0)
+                if (notificationsList == null || !notificationsList.Any())
                     return BadRequest(new { statusMessage = "اعلانی برای کاربر مورد نظر یافت نشد" });
 
                 foreach (var notification in notificationsList)
