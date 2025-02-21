@@ -13,16 +13,20 @@ namespace TestLayer
     {
         private readonly Mock<IUnitOfWork> _mockUnitOfWork;
         private readonly Mock<INotification_UserRepository> _mockNotificationUserRepository;
+        private readonly Mock<IUserRepository> _mockUserRepository;
         private readonly NotificationController _controller;
 
         public NotificationControllerMoqTest()
         {
             _mockUnitOfWork = new Mock<IUnitOfWork>();
             _mockNotificationUserRepository = new Mock<INotification_UserRepository>();
+            _mockUserRepository = new Mock<IUserRepository>();
             _mockUnitOfWork.Setup(u => u.Notification_UserRepository).Returns(_mockNotificationUserRepository.Object);
+            _mockUnitOfWork.Setup(u => u.UserRepository).Returns(_mockUserRepository.Object);
             _controller = new NotificationController(_mockUnitOfWork.Object);
         }
 
+        // =========> GetNotifications Endpoint
         [Theory]
         [InlineData(1, "Alert")]
         public async Task GetNotifications_ReturnsNotifications_WhenExist(int userId, string alarmType)
@@ -65,11 +69,13 @@ namespace TestLayer
             var notificationsList = TestHelper.ExtractListFromResult<Notification_User>(okResult);
             Assert.Empty(notificationsList);
         }
+        // =========> End GetNotifications Endpoint
 
+        // =========> ReadAllNotifications Endpoint
         [Fact]
         public async Task ReadAllNotifications_UserNotFound_ReturnsBadRequest()
         {
-            TestHelper.SetupUserRepo(_mockUnitOfWork, null);
+            TestHelper.SetupRepository(_mockUnitOfWork, (User)null);
             var result = await _controller.ReadAllNotifications(1);
             TestHelper.AssertBadRequestWithMessage(result, "کاربر مورد نظر یافت نشد");
         }
@@ -77,25 +83,28 @@ namespace TestLayer
         [Fact]
         public async Task ReadAllNotifications_NoNotificationsFound_ReturnsBadRequest()
         {
-            TestHelper.SetupUserRepo(_mockUnitOfWork, new User { Id = 1 });
-            TestHelper.SetupNotificationRepo(_mockNotificationUserRepository, new List<Notification_User>());
-            var result = await _controller.ReadAllNotifications(1);
+            var fakeUsers = FakeDataGenerator.GenerateUsers(1);
+            var fakeNotifications = new List<Notification_User>();
+
+            _mockUserRepository.Setup(repo => repo.GetFirstOrDefaultAsync(It.IsAny<Expression<Func<User, bool>>>())).ReturnsAsync(fakeUsers[0]);
+            _mockNotificationUserRepository.Setup(repo => repo.GetAllByFilterAsync(It.IsAny<Expression<Func<Notification_User, bool>>>())).ReturnsAsync(fakeNotifications);
+
+            var result = await _controller.ReadAllNotifications(fakeUsers[0].Id);
+
+
             TestHelper.AssertBadRequestWithMessage(result, "اعلانی برای کاربر مورد نظر یافت نشد");
         }
 
         [Fact]
         public async Task ReadAllNotifications_MarksAllAsRead_ReturnsOk()
         {
-            var fakeNotifications = new List<Notification_User>
-            {
-                new Notification_User { UserId = 1, IsRead = false },
-                new Notification_User { UserId = 1, IsRead = false }
-            };
-            TestHelper.SetupUserRepo(_mockUnitOfWork, new User { Id = 1 });
-            TestHelper.SetupNotificationRepo(_mockNotificationUserRepository, fakeNotifications);
-            TestHelper.SetupNotificationUpdate(_mockUnitOfWork);
+            var fakeUsers = FakeDataGenerator.GenerateUsers(1);
+            var fakeNotifications = FakeDataGenerator.GenerateNotificationUsers(1, fakeUsers);
 
-            var result = await _controller.ReadAllNotifications(1);
+            _mockUserRepository.Setup(repo => repo.GetFirstOrDefaultAsync(It.IsAny<Expression<Func<User, bool>>>())).ReturnsAsync(fakeUsers[0]);
+            _mockNotificationUserRepository.Setup(repo => repo.GetAllByFilterAsync(It.IsAny<Expression<Func<Notification_User, bool>>>())).ReturnsAsync(fakeNotifications);
+
+            var result = await _controller.ReadAllNotifications(fakeUsers[0].Id);
             var okResult = Assert.IsType<OkObjectResult>(result);
             var returnedNotifications = TestHelper.ExtractListFromResult<Notification_User>(okResult);
 
@@ -105,10 +114,15 @@ namespace TestLayer
         [Fact]
         public async Task ReadAllNotifications_ThrowsException_ReturnsBadRequest()
         {
-            TestHelper.SetupUserRepo(_mockUnitOfWork, new User { Id = 1 });
-            _mockUnitOfWork.Setup(u => u.Notification_UserRepository.GetAllByFilterAsync(It.IsAny<Expression<Func<Notification_User, bool>>>())).ThrowsAsync(new Exception("Test Exception"));
-            var result = await _controller.ReadAllNotifications(1);
+            var fakeUsers = FakeDataGenerator.GenerateUsers(1);
+
+            _mockUserRepository.Setup(repo => repo.GetFirstOrDefaultAsync(It.IsAny<Expression<Func<User, bool>>>())).ReturnsAsync(fakeUsers[0]);
+            _mockNotificationUserRepository.Setup(repo => repo.GetAllByFilterAsync(It.IsAny<Expression<Func<Notification_User, bool>>>())).ThrowsAsync(new Exception("Test Exception"));
+
+            var result = await _controller.ReadAllNotifications(fakeUsers[0].Id);
             TestHelper.AssertBadRequestWithMessage(result, "عملیات با خطا مواجه شد\nخطا : Test Exception");
         }
+        // =========> End ReadAllNotifications Endpoint
+
     }
 }
