@@ -5,12 +5,7 @@ using Datalayer.Repositories.IRepositories;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestLayer
 {
@@ -24,83 +19,52 @@ namespace TestLayer
         {
             _mockUnitOfWork = new Mock<IUnitOfWork>();
             _mockNotificationUserRepository = new Mock<INotification_UserRepository>();
-
             _mockUnitOfWork.Setup(u => u.Notification_UserRepository).Returns(_mockNotificationUserRepository.Object);
-
             _controller = new NotificationController(_mockUnitOfWork.Object);
         }
 
-        [Fact]
-        public async Task GetNotifications_ShouldReturnNotifications_WhenNotificationsExist()
+        [Theory]
+        [InlineData(1, "Alert")]
+        public async Task GetNotifications_ReturnsNotifications_WhenExist(int userId, string alarmType)
         {
-            // Arrange
             var fakeUsers = FakeDataGenerator.GenerateUsers(2);
             var fakeNotifications = FakeDataGenerator.GenerateNotificationUsers(2, fakeUsers);
 
-            // شبیه‌سازی متد GetAllByFilterAsync
-            _mockNotificationUserRepository
-                .Setup(repo => repo.GetAllByFilterAsync(
-                    It.IsAny<Expression<Func<Notification_User, bool>>>(),
-                    It.IsAny<Expression<Func<Notification_User, object>>[]>()
-                ))
-                .ReturnsAsync(fakeNotifications);
+            TestHelper.SetupNotificationRepo(_mockNotificationUserRepository, fakeNotifications);
 
-            // Act
-            var result = await _controller.GetNotifications(fakeUsers[0].Id, "Alert");
-
-            // Assert
+            var result = await _controller.GetNotifications(userId, alarmType);
             var okResult = Assert.IsType<OkObjectResult>(result);
+            var notificationsList = TestHelper.ExtractListFromResult<Notification_User>(okResult);
 
-            // ✅ تبدیل OrderedEnumerable به لیست
-            var orderedNotifications = okResult.Value as IOrderedEnumerable<Notification_User>;
-            Assert.NotNull(orderedNotifications);
-
-            var notificationsList = orderedNotifications.ToList(); // تبدیل به لیست
             Assert.Equal(2, notificationsList.Count);
-
-            // بررسی مرتب‌سازی (اگر نیاز است)
-            Assert.True(notificationsList[0].CreatedAt >= notificationsList[1].CreatedAt); // به عنوان مثال: مرتب‌سازی نزولی
+            Assert.True(notificationsList[0].CreatedAt >= notificationsList[1].CreatedAt);
         }
 
-        [Fact]
-        public async Task GetNotifications_WithInvalidAlarmType_ReturnsBadRequest()
+        [Theory]
+        [InlineData(1, "InvalidType")]
+        public async Task GetNotifications_InvalidAlarmType_ReturnsBadRequest(int userId, string alarmType)
         {
-            // Arrange
-            var userId = 1;
-            var alarmType = "InvalidType";
-
-            // Act
             var result = await _controller.GetNotifications(userId, alarmType);
-
-            // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
-
-            // ✅ تبدیل Value به کلاس مدل
-            var errorResponse = JsonConvert.DeserializeObject<ResponseStatus>(JsonConvert.SerializeObject(badRequestResult.Value));
-            Assert.NotNull(errorResponse);
-            Assert.Equal("امکان ارسال اعلان با روش انتخاب شده وجود ندارد", errorResponse.StatusMessage);
+            TestHelper.AssertBadRequestWithMessage(result, "امکان ارسال اعلان با روش انتخاب شده وجود ندارد");
         }
 
         [Fact]
         public async Task GetNotifications_ThrowsException_ReturnsBadRequest()
         {
-            // Arrange
-            var userId = 1;
-            var alarmType = "Alert";
+            _mockNotificationUserRepository.Setup(repo => repo.GetAllByFilterAsync(It.IsAny<Expression<Func<Notification_User, bool>>>(), It.IsAny<Expression<Func<Notification_User, object>>[]>())).ThrowsAsync(new Exception("Test Exception"));
+            var result = await _controller.GetNotifications(1, "Alert");
+            TestHelper.AssertBadRequestWithMessage(result, "عملیات با خطا مواجه شد\nخطا : Test Exception");
+        }
 
-            // شبیه‌سازی خطا در متد GetAllByFilterAsync
-            _mockNotificationUserRepository
-                .Setup(repo => repo.GetAllByFilterAsync(
-                    It.IsAny<Expression<Func<Notification_User, bool>>>(),
-                    It.IsAny<Expression<Func<Notification_User, object>>[]>()
-                ))
-                .ThrowsAsync(new Exception("Test Exception"));
-
-            // Act
-            var result = await _controller.GetNotifications(userId, alarmType);
-
-            // Assert
-            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+        [Fact]
+        public async Task GetNotifications_NoNotifications_ReturnsEmptyList()
+        {
+            TestHelper.SetupNotificationRepo(_mockNotificationUserRepository, new List<Notification_User>());
+            var result = await _controller.GetNotifications(1, "Alert");
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var notificationsList = TestHelper.ExtractListFromResult<Notification_User>(okResult);
+            Assert.Empty(notificationsList);
+        }
 
             // ✅ تبدیل Value به کلاس مدل
             var errorResponse = JsonConvert.DeserializeObject<ResponseStatus>(JsonConvert.SerializeObject(badRequestResult.Value));
