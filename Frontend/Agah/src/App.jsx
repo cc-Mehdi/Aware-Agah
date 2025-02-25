@@ -1,5 +1,8 @@
 import Home from './Pages/Home'
 import ErrorHandler from "./components/ErrorHandler";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from './pages/Login';
+import NotFound from './pages/NotFound';
 import { useEffect } from 'react';
 
 
@@ -14,7 +17,13 @@ useEffect(() => {
     return (
         <>
             <ErrorHandler />
-            <Home />
+            <Router>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/Login" element={<Login />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </Router>
         </>
     )
 }
