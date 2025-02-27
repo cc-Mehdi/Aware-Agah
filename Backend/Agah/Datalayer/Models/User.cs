@@ -10,11 +10,9 @@ namespace Datalayer.Models
         public int Id { get; set; }
 
         [Display(Name = "نام کامل")]
-        [Required(ErrorMessage = "لطفا مقدار {0} را وارد کنید")]
-        [MinLength(3, ErrorMessage = "مقدار {0} باید حداقل 3 کاراکتر باشد")]
         [MaxLength(300, ErrorMessage = "مقدار {0} باید حداکثر 300 کاراکتر باشد")]
         [DataType(DataType.Text)]
-        public string Fullname { get; set; }
+        public string? Fullname { get; set; }
 
         [Display(Name = "ایمیل")]
         [Required(ErrorMessage = "لطفا مقدار {0} را وارد کنید")]
