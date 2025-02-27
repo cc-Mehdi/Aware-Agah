@@ -40,6 +40,12 @@ namespace Datalayer.Models
         [DataType(DataType.Password)]
         public string HashedPassword { get; set; }
 
+        [Display(Name = "سمت")]
+        [Required(ErrorMessage = "لطفا مقدار {0} را وارد کنید")]
+        [MaxLength(300, ErrorMessage = "مقدار {0} باید 300 کاراکتر باشد")]
+        [DataType(DataType.Text)]
+        public string Role { get; set; }
+
         [Display(Name = "تاریخ ایجاد")]
         [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; }
