@@ -220,7 +220,6 @@ namespace Datalayer.Migrations
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Fullname")
-                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
@@ -238,6 +237,11 @@ namespace Datalayer.Migrations
                     b.Property<string>("Phone")
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("Id");
 

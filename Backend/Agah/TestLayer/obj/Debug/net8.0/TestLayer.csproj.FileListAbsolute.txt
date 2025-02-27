@@ -194,3 +194,6 @@ C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\TestLayer\obj\Debug\net8.0\re
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\TestLayer\obj\Debug\net8.0\TestLayer.pdb
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\TestLayer\obj\Debug\net8.0\TestLayer.genruntimeconfig.cache
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\TestLayer\obj\Debug\net8.0\ref\TestLayer.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\TestLayer\bin\Debug\net8.0\BCrypt.Net.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\TestLayer\bin\Debug\net8.0\Microsoft.Bcl.Memory.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\TestLayer\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

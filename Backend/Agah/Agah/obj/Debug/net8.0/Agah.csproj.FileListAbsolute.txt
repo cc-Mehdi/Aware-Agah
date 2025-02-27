@@ -191,3 +191,6 @@ C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\refint\
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\Agah.pdb
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\Agah.genruntimeconfig.cache
 C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\obj\Debug\net8.0\ref\Agah.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\BCrypt.Net.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\Agah\bin\Debug\net8.0\Microsoft.Bcl.Memory.dll
