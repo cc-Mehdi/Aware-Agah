@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 import { useEffect } from 'react';
+import ProtectedRoute from './components/ProtectedRoute';
 
 
 function App() {
@@ -19,8 +20,10 @@ function App() {
             <ErrorHandler />
             <Router>
                 <Routes>
-                    <Route path="/" element={<Home />} />
                     <Route path="/Login" element={<Login />} />
+                    <Route element={<ProtectedRoute />}>
+                        <Route path="/" element={<Home />} />
+                    </Route>
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Router>
