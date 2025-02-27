@@ -26,6 +26,7 @@ namespace Datalayer.Repositories
             objFromDb.Phone = item.Phone;
             objFromDb.IsPhoneVerivied = item.IsPhoneVerivied;
             objFromDb.HashedPassword = item.HashedPassword;
+            objFromDb.Role = item.Role;
             objFromDb.CreatedAt = item.CreatedAt;
             objFromDb.DeletedAt = item.DeletedAt;
         }
