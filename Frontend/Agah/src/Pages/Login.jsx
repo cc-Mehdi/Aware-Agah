@@ -1,9 +1,14 @@
 import Logo from './../assets/images/logos/Full color.png';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { api_HandleLogin } from './../services/api_HandleLogin';
 
 
 const Login = () => {
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const link = document.createElement('link');
@@ -12,6 +17,18 @@ const Login = () => {
         document.head.appendChild(link);
         document.body.style.fontFamily = 'Vazirmatn, sans-serif';
     }, []);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const data = await api_HandleLogin(email, password); // Use email and password
+            if (data.token) {
+                navigate('/'); // Navigate to the home page
+            }
+        } catch (error) {
+            console.error('Login failed', error);
+        }
+    };
 
     return (
         <>
@@ -41,6 +58,8 @@ const Login = () => {
                                     required
                                     autoComplete="email"
                                     className="block w-full rounded-md bg-gray-800 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -64,12 +83,15 @@ const Login = () => {
                                     required
                                     autoComplete="current-password"
                                     className="block w-full rounded-md bg-gray-800 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
                         </div>
 
                         <div>
                             <button
+                                onClick={handleSubmit}
                                 type="submit"
                                 className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                             >
