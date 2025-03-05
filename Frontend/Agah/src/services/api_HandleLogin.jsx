@@ -1,6 +1,8 @@
+import { API_BASE_URL } from "./../../config.js";
+
 export const api_HandleLogin = async (email, password) => {
     try {
-        const response = await fetch('https://localhost:44314/api/auth/login', {
+        const response = await fetch(`${API_BASE_URL}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

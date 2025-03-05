@@ -1,6 +1,8 @@
+import { API_BASE_URL } from "./../../config.js";
+
 export const readAllNotifications = async ({ userId }) => {
     try {
-        const response = await fetch(`https://localhost:44314/api/Notification/ReadAllNotifications/${userId}`, {
+        const response = await fetch(`${API_BASE_URL}/Notification/ReadAllNotifications/${userId}`, {
             method: 'Get',
         });
 

@@ -1,6 +1,8 @@
+import { API_BASE_URL } from "./../../config.js";
+
 export const getProductNames = async () => {
     try {
-        const response = await fetch('https://localhost:44314/api/Product/GetProducts', {
+        const response = await fetch(`${API_BASE_URL}/Product/GetProducts`, {
             method: 'Get',
         });
 

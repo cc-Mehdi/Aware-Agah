@@ -1,6 +1,8 @@
+import { API_BASE_URL } from "./../../config.js";
+
 export const getAlarms = async () => {
     try {
-        const response = await fetch('https://localhost:44314/api/Alarms/GetAlarms', {
+        const response = await fetch(`${API_BASE_URL}/Alarms/GetAlarms`, {
             method: 'Get',
         });
 

@@ -1,6 +1,8 @@
+import { API_BASE_URL } from "./../../config.js";
+
 export const setPriceRangeReservation = async ({ userId, productId, alarmId, minPrice, maxPrice }) => {
     try {
-        const response = await fetch('https://localhost:44314/api/PriceAlert/SetPriceRangeReservation', {
+        const response = await fetch(`${API_BASE_URL}/PriceAlert/SetPriceRangeReservation`, {
             method: 'POST',
             headers: {
                 'Accept': '*/*',

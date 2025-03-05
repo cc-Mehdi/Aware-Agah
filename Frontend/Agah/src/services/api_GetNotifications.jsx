@@ -1,6 +1,8 @@
+import { API_BASE_URL } from "./../../config.js";
+
 export const getNotifications = async ({ userId, alarmEnglishName }) => {
     try {
-        const response = await fetch(`https://localhost:44314/api/Notification/GetNotifications/${userId}/${alarmEnglishName}`, {
+        const response = await fetch(`${API_BASE_URL}/Notification/GetNotifications/${userId}/${alarmEnglishName}`, {
             method: 'Get',
             headers: {
                 'Accept': '*/*',
