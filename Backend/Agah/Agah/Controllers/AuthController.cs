@@ -1,5 +1,6 @@
 ﻿using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -70,6 +71,13 @@ namespace Agah.Controllers
             await _unitOfWork.SaveAsync();
 
             return Ok();
+        }
+
+        [Authorize]
+        [HttpGet("ValidateToken")]
+        public IActionResult ValidateToken()
+        {
+            return Ok(new { valid = true });
         }
     }
 }
