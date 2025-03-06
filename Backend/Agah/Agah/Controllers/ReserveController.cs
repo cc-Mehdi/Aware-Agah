@@ -1,4 +1,4 @@
-using Agah.Services;
+﻿using Agah.Services;
 using Agah.ViewModels;
 using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
@@ -66,7 +66,6 @@ namespace Agah.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet("CheckPriceInReserveds/{userId}")]
         public async Task<IActionResult> CheckPriceInReserveds(int userId)
         {
@@ -118,7 +117,6 @@ namespace Agah.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet("GetReserves")]
         public async Task<IActionResult> GetReserves()
         {

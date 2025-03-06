@@ -120,7 +120,6 @@ namespace Agah.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet("UpdateProductLog")]
         public async Task<IActionResult> UpdateProductLog() // this method responsible for checking product price. if product changed, add new log and else no changes happend.
         {
