@@ -6,6 +6,11 @@ namespace Datalayer.Models
 {
     public class User
     {
+        public User()
+        {
+            this.CreatedAt = DateTime.Now;    
+        }
+
         [Key]
         public int Id { get; set; }
 
