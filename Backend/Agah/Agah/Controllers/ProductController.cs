@@ -1,6 +1,7 @@
 ﻿using Datalayer.Models;
 using Datalayer.Repositories;
 using Datalayer.Repositories.IRepositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace Agah.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [Authorize]
         [HttpGet("GetProducts")]
         public async Task<IActionResult> GetProducts()
         {
@@ -67,6 +69,7 @@ namespace Agah.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("SeedProducts")]
         public async Task<IActionResult> SeedProducts() // this method responsible for adding new products to database. read the api and split the product name and added to Product table in db.
         {
@@ -117,6 +120,7 @@ namespace Agah.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("UpdateProductLog")]
         public async Task<IActionResult> UpdateProductLog() // this method responsible for checking product price. if product changed, add new log and else no changes happend.
         {

@@ -1,4 +1,5 @@
 ﻿using Datalayer.Repositories.IRepositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agah.Controllers
@@ -14,6 +15,7 @@ namespace Agah.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [Authorize]
         [HttpGet("GetAlarms")]
         public async Task<IActionResult> GetAlarms()
         {

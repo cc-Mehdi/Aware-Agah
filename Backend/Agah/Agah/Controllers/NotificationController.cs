@@ -1,5 +1,6 @@
 ﻿using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@ namespace Agah.Controllers
             _unitOfWork = unitOfWork;
         }
 
-
+        [Authorize]
         [HttpGet("GetNotifications/{userId}/{alarmType}")]
         public async Task<IActionResult> GetNotifications(int userId, string alarmType)
         {
@@ -38,6 +39,7 @@ namespace Agah.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("ReadAllNotifications/{userId}")]
         public async Task<IActionResult> ReadAllNotifications(int userId)
         {

@@ -2,6 +2,7 @@
 using Agah.ViewModels;
 using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agah.Controllers
@@ -17,6 +18,7 @@ namespace Agah.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [Authorize]
         [HttpPost("SetPriceRangeReservation")]
         public async Task<IActionResult> SetPriceRangeReservation([FromBody] Reserve_ViewModel bodyContent)
         {
@@ -64,6 +66,7 @@ namespace Agah.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("CheckPriceInReserveds/{userId}")]
         public async Task<IActionResult> CheckPriceInReserveds(int userId)
         {
@@ -115,6 +118,7 @@ namespace Agah.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("GetReserves")]
         public async Task<IActionResult> GetReserves()
         {
