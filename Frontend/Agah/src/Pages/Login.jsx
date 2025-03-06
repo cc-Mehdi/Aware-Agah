@@ -1,7 +1,8 @@
 import Logo from './../assets/images/logos/Full color.png';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api_HandleLogin } from './../services/api_HandleLogin';
+import Toastr from './../components/toastr';
 
 
 const Login = () => {
@@ -9,21 +10,37 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const [toastr, setToastr] = useState(null); // State to manage Toastr message
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const data = await api_HandleLogin(email, password); // Use email and password
-            if (data.token) {
-                navigate('/'); // Navigate to the home page
+            if (email === "" || password === "") {
+                setToastr({ type: "error", title: 'اطلاعات را با دقت وارد کنید!' });
+            }
+            else {
+                const data = await api_HandleLogin(email, password); // Use email and password
+                if (data.statusCode === 200) {
+                    setToastr({ type: "success", title: data.statusMessage || "عملیات با موفقیت انجام شد" });
+                    navigate('/'); // Navigate to the home page
+                }
+                else {
+                    setToastr({ type: "error", title: data.statusMessage });
+                }
             }
         } catch (error) {
-            console.error('Login failed', error);
+            setToastr({ type: "error", title: "عملیات با شکست مواجه شد\nخطا: " + error });
         }
+
+        setTimeout(() => setToastr(null), 3000);
     };
 
     return (
         <>
+            {/* Conditionally render Toastr */}
+            {toastr && <Toastr toastrType={toastr.type} title={toastr.title} />}
+
             <div className="flex min-h-full w-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-gray-900">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <img
