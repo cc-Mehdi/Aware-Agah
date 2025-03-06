@@ -13,6 +13,13 @@ namespace Datalayer.Repositories
             _db = db;
         }
 
+        public bool IsUserExist(string userEmail)
+        {
+            if (_db.User.Any(u => u.Email == userEmail))
+                return true;
+            return false;
+        }
+
         public async Task UpdateAsync(User item)
         {
             var objFromDb = await _db.User.FirstOrDefaultAsync(u => u.Id == item.Id);
