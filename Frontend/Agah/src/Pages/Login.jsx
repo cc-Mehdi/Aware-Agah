@@ -69,11 +69,6 @@ const Login = () => {
                                 <label htmlFor="password" className="block text-sm/6 font-medium text-gray-300">
                                     رمز عبور
                                 </label>
-                                <div className="text-sm">
-                                    <a href="#" className="font-semibold text-indigo-400 hover:text-indigo-300">
-                                        رمز عبور را فراموش کرده‌اید؟
-                                    </a>
-                                </div>
                             </div>
                             <div className="mt-2">
                                 <input
@@ -86,6 +81,11 @@ const Login = () => {
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
+                                <div className="text-sm">
+                                    <a href="#" className="font-semibold text-indigo-400 hover:text-indigo-300">
+                                        رمز عبور را فراموش کرده‌اید؟
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
