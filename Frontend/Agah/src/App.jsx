@@ -2,6 +2,7 @@ import Home from './Pages/Home'
 import ErrorHandler from "./components/ErrorHandler";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from './pages/Login';
+import Register from './pages/Register';
 import NotFound from './pages/NotFound';
 import { useEffect } from 'react';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -21,6 +22,7 @@ function App() {
             <Router>
                 <Routes>
                     <Route path="/Login" element={<Login />} />
+                    <Route path="/Register" element={<Register />} />
                     <Route element={<ProtectedRoute />}>
                         <Route path="/" element={<Home />} />
                     </Route>
