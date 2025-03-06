@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "./../../config.js";
+import { API_BASE_URL, getToken } from "./../../config.js";
 
 export const getNotifications = async ({ userId, alarmEnglishName }) => {
     try {
@@ -6,7 +6,8 @@ export const getNotifications = async ({ userId, alarmEnglishName }) => {
             method: 'Get',
             headers: {
                 'Accept': '*/*',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${getToken()}`
             }
         });
 

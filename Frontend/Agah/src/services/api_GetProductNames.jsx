@@ -1,9 +1,10 @@
-import { API_BASE_URL } from "./../../config.js";
+import { API_BASE_URL, getToken } from "./../../config.js";
 
 export const getProductNames = async () => {
     try {
         const response = await fetch(`${API_BASE_URL}/Product/GetProducts`, {
             method: 'Get',
+            headers: { authorization: `Bearer ${getToken()}` },
         });
 
         if (!response.ok) {
