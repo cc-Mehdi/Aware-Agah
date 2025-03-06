@@ -60,6 +60,9 @@ namespace Agah.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterRequest request)
         {
+            if (_unitOfWork.UserRepository.IsUserExist(request.Email))
+                return Ok(new { StatusCode = 400, statusMessage = "ایمیل وارد شده قبلا ثبت نام شده است" });
+
             var user = new User
             {
                 Email = request.Email,
@@ -70,7 +73,7 @@ namespace Agah.Controllers
             await _unitOfWork.UserRepository.AddAsync(user);
             await _unitOfWork.SaveAsync();
 
-            return Ok();
+            return Ok(new { StatusCode = 200, statusMessage = "ثبت نام شما با موفقیت انجام شد" });
         }
 
         [Authorize]
