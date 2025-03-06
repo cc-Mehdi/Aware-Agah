@@ -1,6 +1,7 @@
 ﻿using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace Agah.Services
 {
@@ -31,7 +32,7 @@ namespace Agah.Services
         {
             using (HttpClient client = new HttpClient())
             {
-                string apiUrl = "https://localhost:44314/api/PriceAlert/GetReserves";
+                string apiUrl = "https://localhost:44314/api/Reserve/GetReserves";
 
                 try
                 {
@@ -45,7 +46,7 @@ namespace Agah.Services
 
                     foreach (var reserve in reservesList)
                     {
-                        checkPriceUrl = $"https://localhost:44314/api/PriceAlert/CheckPriceInReserveds/{reserve.User_Id}";
+                        checkPriceUrl = $"https://localhost:44314/api/Reserve/CheckPriceInReserveds/{reserve.User_Id}";
                         response = await client.GetAsync(checkPriceUrl);
                         response.EnsureSuccessStatusCode();
 
