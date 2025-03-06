@@ -1,12 +1,13 @@
-import { API_BASE_URL } from "./../../config.js";
+import { API_BASE_URL, getToken } from "./../../config.js";
 
 export const setPriceRangeReservation = async ({ userId, productId, alarmId, minPrice, maxPrice }) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/PriceAlert/SetPriceRangeReservation`, {
+        const response = await fetch(`${API_BASE_URL}/Reserve/SetPriceRangeReservation`, {
             method: 'POST',
             headers: {
                 'Accept': '*/*',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${getToken()}`
             },
             body: JSON.stringify({
                 userId,
