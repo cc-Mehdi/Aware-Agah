@@ -30,10 +30,10 @@ namespace Agah.Controllers
         {
             var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Email == request.Email);
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.HashedPassword))
-                return Unauthorized();
+                return Ok(new ViewModels.ResponseStatus { StatusCode = 401, StatusMessage = "ایمیل یا کلمه عبور اشتباه است!"});
 
             var token = GenerateJwtToken(user);
-            return Ok(new { Token = token });
+            return Ok(new { StatusCode = 200, StatusMessage = "ثبت نام شما با موفقیت انجام شد", Token = token });
         }
 
         private string GenerateJwtToken(User user)
@@ -61,7 +61,7 @@ namespace Agah.Controllers
         public async Task<IActionResult> Register(RegisterRequest request)
         {
             if (_unitOfWork.UserRepository.IsUserExist(request.Email))
-                return Ok(new { StatusCode = 400, statusMessage = "ایمیل وارد شده قبلا ثبت نام شده است" });
+                return Ok(new ViewModels.ResponseStatus { StatusCode = 400, StatusMessage = "ایمیل وارد شده قبلا ثبت نام شده است" });
 
             var user = new User
             {
@@ -73,7 +73,7 @@ namespace Agah.Controllers
             await _unitOfWork.UserRepository.AddAsync(user);
             await _unitOfWork.SaveAsync();
 
-            return Ok(new { StatusCode = 200, statusMessage = "ثبت نام شما با موفقیت انجام شد" });
+            return Ok(new ViewModels.ResponseStatus { StatusCode = 200, StatusMessage = "ثبت نام شما با موفقیت انجام شد" });
         }
 
         [Authorize]
