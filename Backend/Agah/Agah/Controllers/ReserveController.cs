@@ -1,4 +1,4 @@
-﻿using Agah.Services;
+using Agah.Services;
 using Agah.ViewModels;
 using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
@@ -97,7 +97,7 @@ namespace Agah.Controllers
                         User = reserve.User,
                         NotificationType = reserve.Alarm.EnglishName,
                         MessageSubject = $"قیمت {reserve.Product.PersianName} بیش از حد تغییر کرده است!",
-                        MessageContent = $"قیمت محصول {productName} از محدوده ثبت شده خارج شده است.\nقیمت فعلی محصول : {lastProductsPrice.ToString("N0")}\nبازه رزرو شده : {reserve.MinPrice.ToString("N0")} - {reserve.MaxPrice.ToString("N0")}",
+                        MessageContent = $"محصول : {productName}\nقیمت فعلی : {lastProductsPrice.ToString("N0")}\nبازه رزرو شده : {reserve.MinPrice.ToString("N0")} - {reserve.MaxPrice.ToString("N0")}",
                     });
                     if(response.StatusCode == 200)
                     {
