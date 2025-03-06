@@ -10,14 +10,6 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const link = document.createElement('link');
-        link.href = 'https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap';
-        link.rel = 'stylesheet';
-        document.head.appendChild(link);
-        document.body.style.fontFamily = 'Vazirmatn, sans-serif';
-    }, []);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -102,12 +94,12 @@ const Login = () => {
 
                     <p className="mt-10 text-center text-sm/6 text-gray-400">
                         هنوز عضو نیستید؟{' '}
-                        <a href="#" className="font-semibold text-indigo-400 hover:text-indigo-300">
+                        <button onClick={() => navigate('/Register')} className="font-semibold text-indigo-400 hover:text-indigo-300">
                             ثبت نام رایگان
-                        </a>
+                        </button>
                     </p>
                 </div>
-            </div>
+            </div >
         </>
     )
 }
