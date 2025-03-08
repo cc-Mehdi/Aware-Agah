@@ -43,7 +43,7 @@ const Register = () => {
 
     return (
         <>
-            <div className="flex min-h-full w-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-gray-900">
+            <div className="flex min-h-full w-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-gray-900">
 
                 {/* Conditionally render Toastr */}
                 {toastr && <Toastr toastrType={toastr.type} title={toastr.title} onClose={() => setToastr(null)} />}
@@ -114,7 +114,7 @@ const Register = () => {
                             <button
                                 onClick={handleSubmit}
                                 type="submit"
-                                className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                                className="cursor-pointer flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                             >
                                 ثبت نام
                             </button>
@@ -123,7 +123,7 @@ const Register = () => {
 
                     <p className="mt-10 text-center text-sm/6 text-gray-400">
                         قبلاً ثبت‌نام کرده‌اید؟{' '}
-                        <button onClick={() => navigate('/Login')} className="font-semibold text-indigo-400 hover:text-indigo-300">
+                        <button onClick={() => navigate('/Login')} className="cursor-pointer font-semibold text-indigo-400 hover:text-indigo-300">
                             ورود به حساب کاربری
                         </button>
                     </p>
