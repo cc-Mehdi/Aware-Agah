@@ -23,16 +23,11 @@ namespace Agah.Controllers
         {
             try
             {
-                // Extract email from the JWT token (assuming it's stored in the claims)
-                var userEmail = HttpContext.User.Identities.First().Name;
-
-                if (string.IsNullOrEmpty(userEmail))
-                {
+                if (!Auth.IsUserExist(HttpContext))
                     return BadRequest("کاربر شناسایی نشد.");
-                }
 
                 // Fetch user from the database using the email
-                User user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Email == userEmail);
+                User user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Email == Auth.GetUserEmail(HttpContext));
 
                 if (user == null)
                 {
