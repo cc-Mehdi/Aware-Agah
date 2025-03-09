@@ -81,7 +81,6 @@ const set_price_alert_box = () => {
             }
 
             const response = await setPriceRangeReservation({
-                userId: 2,
                 alarmId: selectedPlatform,
                 productId: selectedProductId,
                 minPrice: selectedMinPrice,
