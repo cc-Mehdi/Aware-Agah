@@ -2,7 +2,7 @@ import { API_BASE_URL, getToken } from "./../../config.js";
 
 export const getUser = async () => {
     try {
-        const response = await fetch(`${API_BASE_URL}/Users/GetUser`, {
+        const response = await fetch(`${API_BASE_URL}/Users/User`, {
             method: 'Get',
             headers: { authorization: `Bearer ${getToken()}` },
         });
