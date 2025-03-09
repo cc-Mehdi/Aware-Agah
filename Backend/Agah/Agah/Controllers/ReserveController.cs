@@ -1,5 +1,7 @@
 ﻿using Agah.Services;
+using Agah.Utility;
 using Agah.ViewModels;
+using Azure.Messaging;
 using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
 using Microsoft.AspNetCore.Authorization;
@@ -24,8 +26,11 @@ namespace Agah.Controllers
         {
             try
             {
+                if (!Auth.IsUserExist(HttpContext))
+                    return BadRequest("کاربر شناسایی نشد.");
+
                 // Validation Id's
-                var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Id == bodyContent.UserId);
+                var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Email == Auth.GetUserEmail(HttpContext));
                 if (user == null)
                     return BadRequest(new { message = "کاربر یافت نشد" });
 
@@ -38,12 +43,14 @@ namespace Agah.Controllers
                     return BadRequest(new { message = "هشدار یافت نشد" });
 
                 // Delete old user reservation
-                _unitOfWork.ReserveRepository.Remove(await _unitOfWork.ReserveRepository.GetFirstOrDefaultAsync(u => u.User_Id == bodyContent.UserId));
+                var oldReservesList = await _unitOfWork.ReserveRepository.GetFirstOrDefaultAsync(u => u.User_Id == user.Id);
+                if (oldReservesList != null)
+                    _unitOfWork.ReserveRepository.Remove(oldReservesList);
 
                 // Create new model and add them to database
                 await _unitOfWork.ReserveRepository.AddAsync(new Reserve()
                 {
-                    User_Id = bodyContent.UserId,
+                    User_Id = user.Id,
                     User = user,
                     Product_Id = bodyContent.ProductId,
                     Product = product,
@@ -71,7 +78,7 @@ namespace Agah.Controllers
         {
             try
             {
-                var reserve = await _unitOfWork.ReserveRepository.GetFirstOrDefaultAsync(u => u.User_Id == userId, u=> u.User, u=> u.Product ,u=> u.Alarm);
+                var reserve = await _unitOfWork.ReserveRepository.GetFirstOrDefaultAsync(u => u.User_Id == userId, u => u.User, u => u.Product, u => u.Alarm);
                 if (reserve == null)
                     return BadRequest(new { statusMessage = "رزرو بازه زمانی برای کاربر انتخابی یافت نشد" });
 
@@ -98,7 +105,7 @@ namespace Agah.Controllers
                         MessageSubject = $"قیمت {reserve.Product.PersianName} بیش از حد تغییر کرده است!",
                         MessageContent = $"محصول : {productName}\nقیمت فعلی : {lastProductsPrice.ToString("N0")}\nبازه رزرو شده : {reserve.MinPrice.ToString("N0")} - {reserve.MaxPrice.ToString("N0")}",
                     });
-                    if(response.StatusCode == 200)
+                    if (response.StatusCode == 200)
                     {
                         // change status of isSent in reserve
                         reserve.IsSent = true;
@@ -120,15 +127,39 @@ namespace Agah.Controllers
         [HttpGet("GetReserves")]
         public async Task<IActionResult> GetReserves()
         {
-            var reservesUserIdList = await _unitOfWork.ReserveRepository.GetAllByFilterAsync(u=> u.IsSent != true);
+            var reservesUserIdList = await _unitOfWork.ReserveRepository.GetAllByFilterAsync(u => u.IsSent != true);
 
             return Ok(reservesUserIdList);
+        }
+
+        [Authorize]
+        [HttpGet("Reserve")]
+        public async Task<IActionResult> GetReserve()
+        {
+            if (!Auth.IsUserExist(HttpContext))
+                return BadRequest("کاربر شناسایی نشد.");
+
+            // Fetch user from the database using the email
+            User user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Email == Auth.GetUserEmail(HttpContext));
+
+            if (user == null)
+                return NotFound("کاربر پیدا نشد.");
+
+
+            var reservesList = await _unitOfWork.ReserveRepository.GetAllByFilterAsync(u => u.IsSent != true, u => u.User);
+            var reserve = reservesList.FirstOrDefault(u => u.User.Email == user.Email);
+
+            if (reserve == null)
+                return BadRequest("بازه رزرو شده فعالی یافت نشد");
+
+            var result = await _unitOfWork.ReserveRepository.GetFirstOrDefaultAsync(u => u.Id == reserve.Id, u => u.User, u => u.Alarm, u => u.Product);
+
+            return Ok(result);
         }
     }
 
     public class Reserve_ViewModel
     {
-        public int UserId { get; set; }
         public int ProductId { get; set; }
         public int AlarmId { get; set; }
         public string MinPrice { get; set; }
