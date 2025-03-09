@@ -1,6 +1,6 @@
 import { API_BASE_URL, getToken } from "./../../config.js";
 
-export const setPriceRangeReservation = async ({ userId, productId, alarmId, minPrice, maxPrice }) => {
+export const setPriceRangeReservation = async ({ productId, alarmId, minPrice, maxPrice }) => {
     try {
         const response = await fetch(`${API_BASE_URL}/Reserve/SetPriceRangeReservation`, {
             method: 'POST',
@@ -10,7 +10,6 @@ export const setPriceRangeReservation = async ({ userId, productId, alarmId, min
                 authorization: `Bearer ${getToken()}`
             },
             body: JSON.stringify({
-                userId,
                 productId,
                 alarmId,
                 minPrice,
