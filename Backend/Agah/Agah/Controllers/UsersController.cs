@@ -18,8 +18,8 @@ namespace Agah.Controllers
         }
 
         [Authorize]
-        [HttpGet("GetUser")]
-        public async Task<IActionResult> GetUser()
+        [HttpGet("User")]
+        public async Task<IActionResult> User()
         {
             try
             {
