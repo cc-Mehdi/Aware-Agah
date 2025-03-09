@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from './pages/Login';
 import Register from './pages/Register';
 import NotFound from './pages/NotFound';
-import Profile from './pages/Profile'
+import Profile from './pages/profilePages/Profile'
 import { useEffect } from 'react';
 import ProtectedRoute from './components/ProtectedRoute';
 
