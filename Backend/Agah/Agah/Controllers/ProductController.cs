@@ -101,6 +101,8 @@ namespace Agah.Controllers
                             // Add new product
                             var newProduct = new Product
                             {
+                                PersianName = "",
+                                IconName = "",
                                 EnglishName = key,
                                 CreatedAt = DateTime.UtcNow
                             };
