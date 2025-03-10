@@ -12,6 +12,14 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Listen(System.Net.IPAddress.Parse("192.168.2.137"), 5000); // HTTP
+    options.Listen(System.Net.IPAddress.Parse("192.168.2.137"), 5001, listenOptions => listenOptions.UseHttps()); // HTTPS
+});
+
+
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -25,9 +33,9 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Enable CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost", policy =>
+    options.AddPolicy("AllowSpecificOrigin", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")  // Allow frontend URL
+        policy.WithOrigins("http://localhost:5173", "http://192.168.2.137:5173", "http://192.168.2.126:5173")  // Allow frontend URL for both localhost and your IP
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials(); // Allow credentials if needed
@@ -104,7 +112,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 // **Apply CORS before Authorization**
-app.UseCors("AllowLocalhost");
+app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthentication();
 app.UseAuthorization();
