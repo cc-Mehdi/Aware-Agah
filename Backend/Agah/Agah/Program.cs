@@ -1,4 +1,5 @@
-﻿using Agah.Filters;
+﻿using Agah.Extensions;
+using Agah.Filters;
 using Agah.Services;
 using Datalayer.Data;
 using Datalayer.Repositories;
@@ -12,13 +13,14 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.Listen(System.Net.IPAddress.Parse("192.168.2.137"), 5000); // HTTP
-    options.Listen(System.Net.IPAddress.Parse("192.168.2.137"), 5001, listenOptions => listenOptions.UseHttps()); // HTTPS
-});
+//builder.WebHost.ConfigureKestrel(options =>
+//{
+//    options.Listen(System.Net.IPAddress.Parse("192.168.2.137"), 5000); // HTTP
+//    options.Listen(System.Net.IPAddress.Parse("192.168.2.137"), 5001, listenOptions => listenOptions.UseHttps()); // HTTPS
+//});
 
-
+// Register EmailService
+builder.Services.ConfigureEmailService(builder.Configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -35,7 +37,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin", policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "http://192.168.2.137:5173", "http://192.168.2.126:5173")  // Allow frontend URL for both localhost and your IP
+        policy.WithOrigins("http://localhost:5173", "http://192.168.2.137:5173")  // Allow frontend URL for both localhost and IP
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials(); // Allow credentials if needed

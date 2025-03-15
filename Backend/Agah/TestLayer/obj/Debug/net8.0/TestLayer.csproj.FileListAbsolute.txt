@@ -401,3 +401,8 @@ C:\Users\mehdi.gholami\Documents\Temp\Aware-Agah\Backend\Agah\TestLayer\obj\Debu
 C:\Users\mehdi.gholami\Documents\Temp\Aware-Agah\Backend\Agah\TestLayer\obj\Debug\net8.0\TestLayer.pdb
 C:\Users\mehdi.gholami\Documents\Temp\Aware-Agah\Backend\Agah\TestLayer\obj\Debug\net8.0\TestLayer.genruntimeconfig.cache
 C:\Users\mehdi.gholami\Documents\Temp\Aware-Agah\Backend\Agah\TestLayer\obj\Debug\net8.0\ref\TestLayer.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\TestLayer\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\TestLayer\bin\Debug\net8.0\MailKit.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\TestLayer\bin\Debug\net8.0\MimeKit.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\TestLayer\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\cc-mehdi\Desktop\Aware-Aghah\Backend\Agah\TestLayer\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
