@@ -6,9 +6,11 @@ import SetPriceRangeReservation from './../components/setPriceRangeReservation_s
 import NotificationSidebar from './../components/notification_sidebar';
 import { validateToken } from './../services/api_ValidateToken';
 
+
 const Home = () => {
     const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(null); // `null` means "still checking"
+
 
     useEffect(() => {
         const checkAuth = async () => {
