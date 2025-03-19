@@ -35,8 +35,6 @@ const ProfileSetting = () => {
             setToastr({ type: 'error', title: 'اطلاعات را با دقت وارد کنید!' });
         } else {
             try {
-                const updateResponse = await putUser(user.email, user.fullname);
-                console.log(updateResponse);
                 const response = await getUser(); // Fetch updated user data
                 setUser(response || {});
                 setToastr({ type: 'success', title: 'اطلاعات با موفقیت به‌روزرسانی شد!' });

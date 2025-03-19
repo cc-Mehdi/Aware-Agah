@@ -87,12 +87,11 @@ const set_price_alert_box = () => {
                 maxPrice: selectedMaxPrice,
             });
 
-            if (response.status === 200) {
-                setToastr({ type: "success", title: response.message || "عملیات با موفقیت انجام شد" });
-                // Hide Toastr after a few seconds
+            if (response.statusCode === 200) {
+                setToastr({ type: "success", title: response.statusMessage || "عملیات با موفقیت انجام شد" });
             }
             else
-                setToastr({ type: "error", title: "عملیات با شکست مواجه شد" });
+                setToastr({ type: "error", title: response.statusMessage || "عملیات با شکست مواجه شد" });
 
             setTimeout(() => setToastr(null), 5000);
 
