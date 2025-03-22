@@ -36,7 +36,7 @@ namespace Agah.Controllers
                     return NotFound("کاربر پیدا نشد.");
                 }
 
-                return Ok(new { result = user });
+                return Ok(user);
             }
             catch (Exception ex)
             {

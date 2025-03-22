@@ -1,4 +1,5 @@
-﻿using Datalayer.Models;
+﻿using Agah.Utility;
+using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -17,15 +18,24 @@ namespace Agah.Controllers
         }
 
         [Authorize]
-        [HttpGet("GetNotifications/{userId}/{alarmType}")]
-        public async Task<IActionResult> GetNotifications(int userId, string alarmType)
+        [HttpGet("GetNotifications/{alarmType}")]
+        public async Task<IActionResult> GetNotifications(string alarmType)
         {
             try
             {
+                if (!Auth.IsUserExist(HttpContext))
+                    return BadRequest("کاربر شناسایی نشد.");
+
+                // Fetch user from the database using the email
+                User user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Email == Auth.GetUserEmail(HttpContext));
+
+                if (user == null)
+                    return NotFound("کاربر پیدا نشد.");
+
                 switch (alarmType)
                 {
                     case "Alert":
-                        var notificationsList = await _unitOfWork.Notification_UserRepository.GetAllByFilterAsync(u => u.UserId == userId, includeProperties: u => u.User);
+                        var notificationsList = await _unitOfWork.Notification_UserRepository.GetAllByFilterAsync(u => u.UserId == user.Id, includeProperties: u => u.User);
                         return Ok(notificationsList.OrderByDescending(u => u.CreatedAt));
                     default:
                         break;
@@ -40,18 +50,21 @@ namespace Agah.Controllers
         }
 
         [Authorize]
-        [HttpGet("ReadAllNotifications/{userId}")]
-        public async Task<IActionResult> ReadAllNotifications(int userId)
+        [HttpGet("ReadAllNotifications")]
+        public async Task<IActionResult> ReadAllNotifications()
         {
             try
             {
-                // TODO : check user token with user id
-                var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Id == userId);
+                if (!Auth.IsUserExist(HttpContext))
+                    return BadRequest("کاربر شناسایی نشد.");
 
-                if(user == null)
-                    return BadRequest(new { statusMessage = "کاربر مورد نظر یافت نشد" });
+                // Fetch user from the database using the email
+                User user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Email == Auth.GetUserEmail(HttpContext));
 
-                var notificationsList = await _unitOfWork.Notification_UserRepository.GetAllByFilterAsync(u => u.UserId == userId);
+                if (user == null)
+                    return NotFound("کاربر پیدا نشد.");
+
+                var notificationsList = await _unitOfWork.Notification_UserRepository.GetAllByFilterAsync(u => u.UserId == user.Id);
 
                 if (notificationsList == null || !notificationsList.Any())
                     return BadRequest(new { statusMessage = "اعلانی برای کاربر مورد نظر یافت نشد" });

@@ -30,7 +30,7 @@ namespace Agah.Controllers
                 var products = await _unitOfWork.ProductRepository.GetAllAsync();
                 var list = products.Select(u => new { u.Id, u.PersianName, u.IconName }).ToList();
 
-                return Ok(new {result = list});
+                return Ok(list);
             }
             catch (Exception ex)
             {
@@ -61,7 +61,7 @@ namespace Agah.Controllers
                     .ToList();
 
 
-                return Ok(new { result = list });
+                return Ok(list);
             }
             catch (Exception ex)
             {

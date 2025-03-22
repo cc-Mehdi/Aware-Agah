@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { getNotifications } from './../services/api_GetNotifications';
-import { readAllNotifications } from './../services/api_ReadAllNotifications';
+import { getNotifications, readAllNotifications } from './../services/api_BaseAPICaller'
 import NotificationCard from './notification_card';
 
 const NotificationSidebar = () => {

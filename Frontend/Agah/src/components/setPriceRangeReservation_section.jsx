@@ -2,12 +2,10 @@ import { React, useState, useEffect, useRef } from 'react'
 import Dropdown from './dropdown'
 import NumericalInput from './numerical_input'
 import PlatformSelector from './radiobutton_platform_selector'
-import { setPriceRangeReservation } from '../services/api_SetPriceRangeReservation';
-import { getProductNames } from '../services/api_GetProductNames';
-import { getAlarms } from '../services/api_GetAlarms';
 import Toastr from './toastr';
 import { useDispatch } from "react-redux";
 import { setError } from "./../redux/errorSlice";
+import { getAlarms, setPriceRangeReservation, getProductNames } from "./../services/api_BaseAPICaller"
 
 const set_price_alert_box = () => {
 

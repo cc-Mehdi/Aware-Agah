@@ -25,7 +25,7 @@ namespace Agah.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
             var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Email == request.Email);
@@ -57,7 +57,7 @@ namespace Agah.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterRequest request)
         {
             if (_unitOfWork.UserRepository.IsUserExist(request.Email))

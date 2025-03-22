@@ -16,7 +16,7 @@ namespace Agah.Controllers
             _emailService = emailService;
         }
 
-        [HttpPost("send")]
+        [HttpPost("Send")]
         public async Task<IActionResult> SendEmail([FromBody] EmailRequest request)
         {
             await _emailService.SendEmailAsync(request.ToAddress, request.Subject, request.Body, request.IsBodyHtml);

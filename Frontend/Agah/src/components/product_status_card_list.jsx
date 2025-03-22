@@ -1,6 +1,6 @@
-﻿import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import ProductStatusCard from './product_status_card';
-import { getProductsLog } from './../services/api_GetProductsLog';
+import { getProductsLog } from './../services/api_BaseAPICaller';
 import Skeleton from './skeleton';
 import moment from "moment-jalaali";
 

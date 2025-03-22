@@ -1,5 +1,5 @@
 import { React, useState, useEffect, useRef } from 'react'
-import { getReserve } from '../../services/api_GetReserve';
+import { getReserve } from '../../services/api_BaseAPICaller';
 import { useDispatch } from "react-redux";
 import { formatNumber, convertToPersianDate } from '../../utility/helper';
 

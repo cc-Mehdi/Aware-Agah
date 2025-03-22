@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "./../assets/images/logos/Full color.png";
-import { getUser } from '../services/api_GetUser';
+import { getUser } from '../services/api_BaseAPICaller';
 
 
 const Navbar = () => {

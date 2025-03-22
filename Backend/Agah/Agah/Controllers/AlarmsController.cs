@@ -24,7 +24,7 @@ namespace Agah.Controllers
             {
                 var list = await _unitOfWork.AlarmRepository.GetAllAsync();
 
-                return Ok(new {result = list.Select(u => new { u.Id, u.PersianName, u.ShortDescription, u.IsActive }).ToList() });
+                return Ok( list.Select(u => new { u.Id, u.PersianName, u.ShortDescription, u.IsActive }).ToList() );
             }
             catch (Exception ex)
             {
