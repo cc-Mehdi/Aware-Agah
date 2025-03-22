@@ -1,4 +1,4 @@
-﻿using Agah.Services;
+using Agah.Services;
 using Agah.Utility;
 using Agah.ViewModels;
 using Azure.Messaging;
@@ -14,10 +14,13 @@ namespace Agah.Controllers
     public class ReserveController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IEmailService _emailService;
 
-        public ReserveController(IUnitOfWork unitOfWork)
+
+        public ReserveController(IUnitOfWork unitOfWork, IEmailService emailService)
         {
             _unitOfWork = unitOfWork;
+            _emailService = emailService;
         }
 
         [Authorize]
@@ -41,6 +44,12 @@ namespace Agah.Controllers
                 var alarm = await _unitOfWork.AlarmRepository.GetFirstOrDefaultAsync(u => u.Id == bodyContent.AlarmId);
                 if (alarm == null)
                     return BadRequest(new { message = "هشدار یافت نشد" });
+                if (alarm.EnglishName == "Email" && user.IsEmailVerified != true)
+                    return BadRequest(new ResponseStatus { StatusCode = 400, StatusMessage = "لطفا نسبت به فعال سازی ایمیل خود اقدام کنید" });
+
+                if ((alarm.EnglishName == "Phone" || alarm.EnglishName == "SMS") && user.IsPhoneVerivied != true)
+                    return BadRequest(new ResponseStatus { StatusCode = 400, StatusMessage = "لطفا نسبت به فعال سازی شماره تلفن خود اقدام کنید" });
+
 
                 // Delete old user reservation
                 var oldReservesList = await _unitOfWork.ReserveRepository.GetFirstOrDefaultAsync(u => u.User_Id == user.Id);
@@ -97,7 +106,7 @@ namespace Agah.Controllers
 
                 if (lastProductsPrice < reserve.MinPrice || lastProductsPrice > reserve.MaxPrice)
                 {
-                    NotificationService notificationService = new NotificationService(_unitOfWork);
+                    NotificationService notificationService = new NotificationService(_unitOfWork, _emailService);
                     ResponseStatus response = await notificationService.SendNotification(new Notification_MessageOptions()
                     {
                         User = reserve.User,
