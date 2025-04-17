@@ -31,28 +31,26 @@ namespace Agah.Services
                 var notificationUsersList = await _unitOfWork.Notification_UserRepository
                     .GetAllAsync();
 
+                var notificationsToRemove = notificationUsersList // Ensure this returns IQueryable<T>
+                          .Where(n => n.UserId == messageOptions.User.Id) // Filter for the specific user
+                          .OrderByDescending(n => n.CreatedAt) // Sort by newest first
+                          .Skip(9) // Keep the latest 9, remove the rest
+                          .ToList(); // Convert to list for deletion
+
+                // Remove old notifications if any exist
+                if (notificationsToRemove.Any())
+                    _unitOfWork.Notification_UserRepository.RemoveRange(notificationsToRemove);
+
+                await _unitOfWork.Notification_UserRepository.AddAsync(new Notification_User()
+                {
+                    UserId = messageOptions.User.Id,
+                    MessageSubject = messageOptions.MessageSubject,
+                    MessageContent = messageOptions.MessageContent,
+                });
+                await _unitOfWork.SaveAsync();
+
                 switch (alarm.EnglishName)
                 {
-                    case "Alert":
-
-                        var notificationsToRemove = notificationUsersList // Ensure this returns IQueryable<T>
-                            .Where(n => n.UserId == messageOptions.User.Id) // Filter for the specific user
-                            .OrderByDescending(n => n.CreatedAt) // Sort by newest first
-                            .Skip(9) // Keep the latest 9, remove the rest
-                            .ToList(); // Convert to list for deletion
-
-                        // Remove old notifications if any exist
-                        if (notificationsToRemove.Any())
-                            _unitOfWork.Notification_UserRepository.RemoveRange(notificationsToRemove);
-
-                        await _unitOfWork.Notification_UserRepository.AddAsync(new Notification_User()
-                        {
-                            UserId = messageOptions.User.Id,
-                            MessageSubject = messageOptions.MessageSubject,
-                            MessageContent = messageOptions.MessageContent,
-                        });
-                        await _unitOfWork.SaveAsync();
-                        return new ResponseStatus() { StatusCode = 200, StatusMessage = "عملیات با موفقیت انجام شد" };
                     case "Email":
 
                         var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Id == messageOptions.User.Id);
