@@ -111,3 +111,17 @@ export const api_HandleRegister = async (email, password) => {
         body: { email, password }
     });
 };
+
+export const api_SendEmailVerification = async () => {
+    return fetchApi({
+        url: `/auth/SendEmailVerification`,
+        method: 'POST'
+    });
+};
+
+export const api_VerifyEmail = async (token) => {
+    return fetchApi({
+        url: `/auth/VerifyEmail/${token}`,
+        method: 'POST'
+    });
+};
