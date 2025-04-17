@@ -1,7 +1,7 @@
 import Logo from './../assets/images/logos/Full color.png';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { api_HandleLogin } from './../services/api_HandleLogin';
+import { api_HandleLogin } from './../services/api_BaseAPICaller';
 import Toastr from './../components/toastr';
 
 
@@ -22,6 +22,7 @@ const Login = () => {
             else {
                 const data = await api_HandleLogin(email, password); // Use email and password
                 if (data.statusCode === 200) {
+                    localStorage.setItem('token', data.token);
                     setToastr({ type: "success", title: data.statusMessage || "عملیات با موفقیت انجام شد" });
                     navigate('/'); // Navigate to the home page
                 }

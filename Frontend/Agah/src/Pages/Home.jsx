@@ -1,13 +1,16 @@
 import { React, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './../components/navbar';
 import ProductStatusList from './../components/product_status_card_list';
 import SetPriceRangeReservation from './../components/setPriceRangeReservation_section';
 import NotificationSidebar from './../components/notification_sidebar';
 import { validateToken } from './../services/api_ValidateToken';
 
+
 const Home = () => {
     const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(null); // `null` means "still checking"
+
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -29,6 +32,7 @@ const Home = () => {
 
     return (
         <>
+            <Navbar />
             <NotificationSidebar />
             <ProductStatusList />
             <SetPriceRangeReservation />

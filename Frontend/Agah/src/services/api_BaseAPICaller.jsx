@@ -1,24 +1,24 @@
 import { API_BASE_URL, getToken } from "./../../config.js";
 
 const fetchApi = async ({ url, method = 'GET', body = null, headers = {}, requiresAuth = true }) => {
-        const requestHeaders = {
-            'Accept': '*/*',
-            'Content-Type': 'application/json',
-            ...headers
-        };
+    const requestHeaders = {
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        ...headers
+    };
 
-        if (requiresAuth) {
-            requestHeaders.authorization = `Bearer ${getToken()}`;
-        }
+    if (requiresAuth) {
+        requestHeaders.authorization = `Bearer ${getToken()}`;
+    }
 
-        const response = await fetch(`${API_BASE_URL}${url}`, {
-            method,
-            headers: requestHeaders,
-            body: body ? JSON.stringify(body) : null
-        });
+    const response = await fetch(`${API_BASE_URL}${url}`, {
+        method,
+        headers: requestHeaders,
+        body: body ? JSON.stringify(body) : null
+    });
 
-        const data = await response.json();
-        return data;
+    const data = await response.json();
+    return data;
 };
 
 

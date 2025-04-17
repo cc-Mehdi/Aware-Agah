@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GAxVCg6g62IHBdq2VUKWeW0YC70ut5R4pUB2puyqV/mZs60fjN1xwEDek8t2ugQhwtJ8C3ZSKOJT8OEyZzerVw==",
+  "dgSpecHash": "TC50gHzrNeg=",
   "success": true,
   "projectFilePath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Agah.csproj",
   "expectedPackageFiles": [
@@ -99,7 +99,11 @@
     "C:\\Users\\cc-mehdi\\.nuget\\packages\\system.text.json\\9.0.1\\system.text.json.9.0.1.nupkg.sha512",
     "C:\\Users\\cc-mehdi\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
     "C:\\Users\\cc-mehdi\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\cc-mehdi\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
+    "C:\\Users\\cc-mehdi\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
+    "C:\\Users\\cc-mehdi\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.13\\microsoft.netcore.app.ref.8.0.13.nupkg.sha512",
+    "C:\\Users\\cc-mehdi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.13\\microsoft.windowsdesktop.app.ref.8.0.13.nupkg.sha512",
+    "C:\\Users\\cc-mehdi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.13\\microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512",
+    "C:\\Users\\cc-mehdi\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.13\\microsoft.netcore.app.host.win-x64.8.0.13.nupkg.sha512"
   ],
   "logs": [
     {
