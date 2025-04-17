@@ -18,9 +18,9 @@ services:
 
   web:
     build:
-      context: .
+      context: ./Backend/Agah
       dockerfile: Dockerfile
-    container_name: agah_web
+    container_name: agah_backend
     depends_on:
       sqlserver:
         condition: service_healthy
@@ -28,3 +28,17 @@ services:
       - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=Agah_Db;User Id=sa;Password=AgahOfficialP@ssword2030;MultipleActiveResultSets=True;TrustServerCertificate=True
     ports:
       - "8080:8080"
+
+  frontend:
+    build:
+      context: ./Frontend/Agah
+      dockerfile: Dockerfile
+    container_name: agah_frontend
+    depends_on:
+      - web
+    ports:
+      - "5173:5173"
+    environment:
+      - API_BASE_URL=http://web:8080/api
+    stdin_open: true
+    tty: true
