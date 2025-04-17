@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import Logo from "./../assets/images/logos/Full color.png";
 import { getUser } from '../services/api_BaseAPICaller';
 
-
 const Navbar = () => {
     const navigate = useNavigate();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const buttonRef = useRef(null);
     const [user, setUser] = useState(false);
 
     const handleLogout = () => {
@@ -32,10 +32,15 @@ const Navbar = () => {
             }
         };
 
-
         fetchUser();
+
         const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target) &&
+                buttonRef.current &&
+                !buttonRef.current.contains(event.target)
+            ) {
                 setIsDropdownOpen(false);
             }
         };
@@ -46,6 +51,11 @@ const Navbar = () => {
         };
     }, []);
 
+    useEffect(() => {
+        if (isDropdownOpen && dropdownRef.current && buttonRef.current) {
+            const dropdownRect = dropdownRef.current.getBoundingClientRect();
+        }
+    }, [isDropdownOpen]);
 
     return (
         <nav className="bg-white border-gray-200 mb-5 px-6 rounded-b-lg border shadow-sm dark:bg-gray-800 dark:border-gray-700">
@@ -62,6 +72,7 @@ const Navbar = () => {
                 <div className="relative">
                     {/* Avatar Button */}
                     <img
+                        ref={buttonRef}
                         id="avatarButton"
                         type="button"
                         className="w-10 h-10 bg-white rounded-full cursor-pointer shadow-lg"
@@ -75,7 +86,7 @@ const Navbar = () => {
                         <div
                             ref={dropdownRef}
                             id="userDropdown"
-                            className="absolute right-0 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600 mt-2"
+                            className={`absolute left-0 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow-sm max-w-[90vw] min-w-max dark:bg-gray-700 dark:divide-gray-600 mt-2`}
                         >
                             <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
                                 <div>{user.fullname ? user.fullname : 'کاربر آگاه'}</div>

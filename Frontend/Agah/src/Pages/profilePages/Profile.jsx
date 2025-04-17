@@ -1,7 +1,8 @@
 import { React, useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { validateToken } from '../../services/api_ValidateToken';
-import ProfileSetting from './profile_setting';
+import ProfileSettingEditUser from './profile_setting_editUser';
+import ProfileSettingActivation from './profile_setting_activation';
 import ProfileActiveReserve from './profile_active_reserves';
 import Navbar from './../../components/navbar';
 
@@ -57,7 +58,12 @@ const Profile = () => {
                     </div>
                 </div>
 
-                {activeComponent === 'settings' && <ProfileSetting />}
+                {activeComponent === 'settings' && (
+                    <>
+                        <ProfileSettingEditUser />
+                        <ProfileSettingActivation />
+                    </>
+                )}
                 {activeComponent === 'reserves' && <ProfileActiveReserve />}
             </div>
         </>

@@ -5,14 +5,15 @@ import NotificationCard from './notification_card';
 const NotificationSidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [notReadedNotificationsCount, setnotReadedNotificationsCount] = useState(0);
-    const isMounted = useRef(false); // for fixing bug (this component send 2 request when loaded and this code fix this send just 1 request)
+    const isMounted = useRef(false);
     const [notifications, setNotifications] = useState([]);
     const sidebarRef = useRef(null);
+    const buttonRef = useRef(null); // Add reference for button
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await getNotifications({ userId: 2, alarmEnglishName: "Alert" }); // TODO: Dynamic UserID
+                const response = await getNotifications({ alarmEnglishName: "Alert" });
                 setnotReadedNotificationsCount(response.filter(notification => !notification.isRead).length);
                 setNotifications(response);
             } catch (error) {
@@ -20,8 +21,6 @@ const NotificationSidebar = () => {
             }
         };
 
-
-        // Fetch only once
         if (!isMounted.current) {
             fetchData();
             isMounted.current = true;
@@ -35,14 +34,19 @@ const NotificationSidebar = () => {
     }, []);
 
     const ReadAllNotifications_handler = async () => {
-        const response = await readAllNotifications({ userId: 2 }); // TODO: Dynamic UserID
+        const response = await readAllNotifications();
         setnotReadedNotificationsCount(response.filter(notification => !notification.isRead).length);
         setNotifications(response);
     };
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+            if (
+                sidebarRef.current &&
+                !sidebarRef.current.contains(event.target) &&
+                buttonRef.current &&
+                !buttonRef.current.contains(event.target) // Ignore clicks on the button
+            ) {
                 setIsOpen(false);
             }
         };
@@ -60,14 +64,13 @@ const NotificationSidebar = () => {
 
     return (
         <>
-            {/* Toggle Button (Fixed at Bottom Right) */}
+            {/* Toggle Button */}
             <button
+                ref={buttonRef} // Attach ref to the button
                 onClick={() => setIsOpen(!isOpen)}
                 className="fixed bottom-5 right-5 z-50 p-4 cursor-pointer text-white bg-gray-600 rounded-full shadow-lg hover:bg-gray-700 focus:outline-none"
             >
                 <i className="fa-solid fa-comments-dollar"></i>
-
-                {/* Badge (only shown if count > 0) */}
                 {notReadedNotificationsCount > 0 && (
                     <span className="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full">
                         {notReadedNotificationsCount > 9 ? <i className="fa-solid fa-infinity"></i> : notReadedNotificationsCount}
@@ -75,6 +78,7 @@ const NotificationSidebar = () => {
                 )}
             </button>
 
+            {/* Sidebar */}
             <aside
                 ref={sidebarRef}
                 className={`fixed top-0 right-0 z-40 w-100 h-screen bg-gray-50 dark:bg-gray-800 shadow-lg transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"}`}

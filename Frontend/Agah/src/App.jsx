@@ -1,4 +1,4 @@
-import Home from './Pages/Home'
+import Home from './pages/Home'
 import ErrorHandler from "./components/ErrorHandler";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from './pages/Login';

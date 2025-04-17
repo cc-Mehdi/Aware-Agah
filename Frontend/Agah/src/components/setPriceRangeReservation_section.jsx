@@ -15,12 +15,13 @@ const set_price_alert_box = () => {
     const isMounted = useRef(false); // for fixing bug (this component send 2 request when loaded and this code fix this send just 1 request)
     const [selectedPlatform, setSelectedPlatform] = useState();
     const [toastr, setToastr] = useState(null); // State to manage Toastr message
+    var response;
 
 
     useEffect(() => {
         const fetchProducts = async () => {     // Fetch product names when the component mounts
             try {
-                const response = await getProductNames();
+                response = await getProductNames();
                 setProductList(response || []);
             } catch (error) {
                 dispatch(setError(error.message)); // ارسال خطا به Redux
@@ -30,7 +31,7 @@ const set_price_alert_box = () => {
 
         const fetchAlarms = async () => {     // Fetch product names when the component mounts
             try {
-                const response = await getAlarms();
+                response = await getAlarms();
                 setAlarmList(response || []);
             } catch (error) {
                 dispatch(setError(error.message)); // ارسال خطا به Redux
@@ -78,7 +79,7 @@ const set_price_alert_box = () => {
                 return;
             }
 
-            const response = await setPriceRangeReservation({
+            response = await setPriceRangeReservation({
                 alarmId: selectedPlatform,
                 productId: selectedProductId,
                 minPrice: selectedMinPrice,
@@ -91,10 +92,15 @@ const set_price_alert_box = () => {
             else
                 setToastr({ type: "error", title: response.statusMessage || "عملیات با شکست مواجه شد" });
 
-            setTimeout(() => setToastr(null), 5000);
 
         } catch (error) {
-            dispatch(setError(error.message)); // ارسال خطا به Redux
+            if (response.statusCode === 400)
+                setToastr({ type: "error", title: response.statusMessage || "عملیات با شکست مواجه شد" });
+            else
+                dispatch(setError(error.message)); // ارسال خطا به Redux
+        }
+        finally {
+            setTimeout(() => setToastr(null), 5000);
         }
     };
 

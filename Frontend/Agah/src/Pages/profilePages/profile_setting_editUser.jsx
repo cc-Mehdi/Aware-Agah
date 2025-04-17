@@ -1,10 +1,9 @@
 import { React, useState, useEffect, useRef } from 'react';
-import { getUser } from '../../services/api_BaseAPICaller';
+import { getUser, putUser } from '../../services/api_BaseAPICaller';
 import { useDispatch } from 'react-redux';
-import Toastr from './../../components/toastr';
-import { putUser } from '../../services/api_PutUser';
+import Toastr from '../../components/toastr';
 
-const ProfileSetting = () => {
+const profile_setting_editUser = () => {
     const [user, setUser] = useState({});
     const dispatch = useDispatch();
     const isMounted = useRef(false); // for fixing bug (this component sends 2 requests when loaded, and this code fixes it to send just 1 request)
@@ -91,4 +90,4 @@ const ProfileSetting = () => {
     );
 };
 
-export default ProfileSetting;
+export default profile_setting_editUser;
