@@ -1,4 +1,5 @@
-using Agah.Services;
+﻿using Agah.Services;
+using Agah.Services.Interfaces;
 using Agah.Utility;
 using Agah.ViewModels;
 using Azure.Messaging;
@@ -15,12 +16,14 @@ namespace Agah.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEmailService _emailService;
+        private readonly ReserveService _reserveService;
 
 
-        public ReserveController(IUnitOfWork unitOfWork, IEmailService emailService)
+        public ReserveController(IUnitOfWork unitOfWork, IEmailService emailService, ReserveService reserveService)
         {
             _unitOfWork = unitOfWork;
             _emailService = emailService;
+            _reserveService = reserveService;
         }
 
         [Authorize]
@@ -35,15 +38,16 @@ namespace Agah.Controllers
                 // Validation Id's
                 var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Email == Auth.GetUserEmail(HttpContext));
                 if (user == null)
-                    return BadRequest(new { message = "کاربر یافت نشد" });
+                    return BadRequest(new ResponseStatus { StatusCode = 400, StatusMessage = "کاربر یافت نشد" });
 
                 var product = await _unitOfWork.ProductRepository.GetFirstOrDefaultAsync(u => u.Id == bodyContent.ProductId);
                 if (product == null)
-                    return BadRequest(new { message = "محصول یافت نشد" });
+                    return BadRequest(new ResponseStatus { StatusCode = 400, StatusMessage = "محصول یافت نشد" });
 
                 var alarm = await _unitOfWork.AlarmRepository.GetFirstOrDefaultAsync(u => u.Id == bodyContent.AlarmId);
                 if (alarm == null)
-                    return BadRequest(new { message = "هشدار یافت نشد" });
+                    return BadRequest(new ResponseStatus { StatusCode = 400, StatusMessage = "هشدار یافت نشد" });
+
                 if (alarm.EnglishName == "Email" && user.IsEmailVerified != true)
                     return BadRequest(new ResponseStatus { StatusCode = 400, StatusMessage = "لطفا نسبت به فعال سازی ایمیل خود اقدام کنید" });
 
@@ -74,71 +78,32 @@ namespace Agah.Controllers
                 await _unitOfWork.SaveAsync();
 
                 // Return result
-                return Ok(new { message = "عملیات با موفقیت انجام شد" });
+                return Ok(new ResponseStatus { StatusCode = 200, StatusMessage = "عملیات با موفقیت انجام شد" });
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
+                return BadRequest(new ResponseStatus { StatusCode = 400, StatusMessage = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
             }
         }
 
         [HttpGet("CheckPriceInReserveds/{userId}")]
         public async Task<IActionResult> CheckPriceInReserveds(int userId)
         {
-            try
-            {
-                var reserve = await _unitOfWork.ReserveRepository.GetFirstOrDefaultAsync(u => u.User_Id == userId, u => u.User, u => u.Product, u => u.Alarm);
-                if (reserve == null)
-                    return BadRequest(new { statusMessage = "رزرو بازه زمانی برای کاربر انتخابی یافت نشد" });
-
-                var product = await _unitOfWork.ProductRepository.GetFirstOrDefaultAsync(u => u.Id == reserve.Product_Id);
-                string productName = product?.PersianName ?? "";
-
-                // get last products price
-                var lastProductsLog = await _unitOfWork.ProductLogRepository.GetAllAsync(includeProperties: u => u.Product);
-                decimal lastProductsPrice = lastProductsLog.Where(u => u.Product_Id == reserve.Product_Id)
-                    .OrderByDescending(u => u.CreatedAt)
-                    .GroupBy(u => u.Product_Id)
-                    .Select(g => g.First())
-                    .Select(u => u.Price)
-                    .FirstOrDefault();
-
-
-                if (lastProductsPrice < reserve.MinPrice || lastProductsPrice > reserve.MaxPrice)
-                {
-                    NotificationService notificationService = new NotificationService(_unitOfWork, _emailService);
-                    ResponseStatus response = await notificationService.SendNotification(new Notification_MessageOptions()
-                    {
-                        User = reserve.User,
-                        NotificationType = reserve.Alarm.EnglishName,
-                        MessageSubject = $"قیمت {reserve.Product.PersianName} بیش از حد تغییر کرده است!",
-                        MessageContent = $"محصول : {productName}\nقیمت فعلی : {lastProductsPrice.ToString("N0")}\nبازه رزرو شده : {reserve.MinPrice.ToString("N0")} - {reserve.MaxPrice.ToString("N0")}",
-                    });
-                    if (response.StatusCode == 200)
-                    {
-                        // change status of isSent in reserve
-                        reserve.IsSent = true;
-                        await _unitOfWork.ReserveRepository.UpdateAsync(reserve);
-                        await _unitOfWork.SaveAsync();
-                        return Ok(new { statusMessage = "پیام اطلاع رسانی در صف ارسال قرار گرفت" });
-                    }
-                    else
-                        return BadRequest(new { statusMessage = $"عملیات با خطا مواجه شد" });
-                }
-                return Ok(new { statusMessage = "قیمت در بازه رزرو شده میباشد" });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { statusMessage = $"عملیات با خطا مواجه شد\nخطا : {ex.Message}" });
-            }
+            var response = await _reserveService.CheckPriceInReserveds(userId);
+            if (response.StatusCode == 200)
+                return Ok(response);
+            else
+                return BadRequest(response);
         }
 
         [HttpGet("GetReserves")]
         public async Task<IActionResult> GetReserves()
         {
-            var reservesUserIdList = await _unitOfWork.ReserveRepository.GetAllByFilterAsync(u => u.IsSent != true);
-
-            return Ok(reservesUserIdList);
+            var response = await _reserveService.GetReserves();
+            if (response != null)
+                return Ok(response);
+            else
+                return BadRequest("داده ای یافت نشد");
         }
 
         [Authorize]

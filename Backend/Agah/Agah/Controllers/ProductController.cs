@@ -1,4 +1,6 @@
-﻿using Datalayer.Models;
+﻿using Agah.Services;
+using Agah.ViewModels;
+using Datalayer.Models;
 using Datalayer.Repositories;
 using Datalayer.Repositories.IRepositories;
 using Microsoft.AspNetCore.Authorization;
@@ -15,10 +17,12 @@ namespace Agah.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ProductService _productService;
 
-        public ProductController(IUnitOfWork unitOfWork)
+        public ProductController(IUnitOfWork unitOfWork, ProductService productService)
         {
             _unitOfWork = unitOfWork;
+            _productService = productService;
         }
 
         [Authorize]
@@ -125,75 +129,11 @@ namespace Agah.Controllers
         [HttpGet("UpdateProductLog")]
         public async Task<IActionResult> UpdateProductLog() // this method responsible for checking product price. if product changed, add new log and else no changes happend.
         {
-            string url = "https://milli.gold/api/v1/public/milli-price/detail";
-
-            using (HttpClient httpClient = new HttpClient())
-            {
-                try
-                {
-                    HttpResponseMessage response = await httpClient.GetAsync(url);
-                    response.EnsureSuccessStatusCode();
-
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    var apiResponse = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseBody);
-
-                    if (apiResponse != null && apiResponse.FirstOrDefault().Value != null)
-                    {
-                        string responseKey = apiResponse.FirstOrDefault().Key;
-                        string responseValue = apiResponse.FirstOrDefault().Value;
-
-                        // Get last submited product log
-                        var lastProductLogList = await _unitOfWork.ProductLogRepository.GetAllByFilterAsync(u=> u.Product.EnglishName == responseKey);
-                        var lastProductLog = lastProductLogList.OrderByDescending(u => u.CreatedAt).FirstOrDefault();
-
-                        decimal.TryParse(responseValue, out decimal price); // Get current product price
-
-                        if (lastProductLog == null) // if not save any product log for this product
-                        {
-                            var productList = await _unitOfWork.ProductRepository.GetFirstOrDefaultAsync(u => u.EnglishName == responseKey);
-                            int productId = productList.Id; // Get product id
-
-                            if (productId == 0)
-                                return Ok("Not submited any product log for this product");
-
-
-                            await _unitOfWork.ProductLogRepository.AddAsync(new ProductLog()
-                            {
-                                Product_Id = productId,
-                                Price = price,
-                                CreatedAt = DateTime.Now
-                            });
-
-                            await _unitOfWork.SaveAsync();
-
-                            return Ok($"New product log for product {responseKey} added. In price {responseValue}");
-                        }
-                        else // if product log for this product was submited
-                        {
-                            if(lastProductLog.Price != price) // check if price changed after last time
-                            {
-                                await _unitOfWork.ProductLogRepository.AddAsync(new ProductLog()
-                                {
-                                    Product_Id = lastProductLog.Product_Id,
-                                    Price = price,
-                                    CreatedAt = DateTime.Now
-                                });
-
-                                await _unitOfWork.SaveAsync();
-
-                                return Ok($"product log for product {responseKey} updated. {lastProductLog.Price} => {responseValue}");
-                            }
-
-                            return Ok($"No price change for product {responseKey}. Current price is {responseValue}");
-                        }
-                    }
-                    return BadRequest("Invalid API response");
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest($"ما با خطای {ex.Message} رو به رو شده ایم 😖");
-                }
-            }
+            ResponseStatus response = await _productService.UpdateProductLog();
+            if (response.StatusCode == 200)
+                return Ok(response);
+            else
+                return BadRequest(response);
         }
 
     }
