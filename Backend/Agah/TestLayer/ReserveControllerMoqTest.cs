@@ -1,4 +1,6 @@
 ﻿using Agah.Controllers;
+using Agah.Services;
+using Agah.Services.Interfaces;
 using Agah.ViewModels;
 using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
@@ -18,7 +20,8 @@ namespace TestLayer
         private readonly Mock<IAlarmRepository> _mockAlarmRepository;
         private readonly ReserveController _controller;
 
-        public ReserveControllerMoqTest()
+
+        public ReserveControllerMoqTest(IEmailService emailService, ReserveService reserveService)
         {
             _mockUnitOfWork = new Mock<IUnitOfWork>();
             _mockReserveRepository = new Mock<IReserveRepository>();
@@ -31,7 +34,7 @@ namespace TestLayer
             _mockUnitOfWork.Setup(u => u.ProductLogRepository).Returns(_mockProductLogRepository.Object);
             _mockUnitOfWork.Setup(u => u.AlarmRepository).Returns(_mockAlarmRepository.Object);
 
-            _controller = new ReserveController(_mockUnitOfWork.Object);
+            _controller = new ReserveController(_mockUnitOfWork.Object, emailService, reserveService);
         }
 
         // =========> GetReserves Endpoint

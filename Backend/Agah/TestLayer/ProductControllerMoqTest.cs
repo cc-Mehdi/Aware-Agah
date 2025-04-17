@@ -1,4 +1,5 @@
 ﻿using Agah.Controllers;
+using Agah.Services;
 using Agah.ViewModels;
 using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
@@ -16,7 +17,7 @@ namespace TestLayer
         private readonly Mock<IProductLogRepository> _mockProductLogsRepository;
         private readonly ProductController _controller;
 
-        public ProductControllerMoqTest()
+        public ProductControllerMoqTest(ProductService productService)
         {
             _mockUnitOfWork = new Mock<IUnitOfWork>();
             _mockProductRepository = new Mock<IProductRepository>();
@@ -25,7 +26,7 @@ namespace TestLayer
             _mockUnitOfWork.Setup(u => u.ProductRepository).Returns(_mockProductRepository.Object);
             _mockUnitOfWork.Setup(u => u.ProductLogRepository).Returns(_mockProductLogsRepository.Object);
 
-            _controller = new ProductController(_mockUnitOfWork.Object);
+            _controller = new ProductController(_mockUnitOfWork.Object, productService);
         }
 
         // =========> GetProductsLog Endpoint
