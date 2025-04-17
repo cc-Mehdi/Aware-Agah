@@ -1,66 +1,38 @@
-﻿using Datalayer.Models;
-using Datalayer.Repositories.IRepositories;
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
+﻿using Agah.ViewModels;
 
 namespace Agah.Services
 {
-    public static class ApiJobService
+    public class ApiJobService
     {
-        public static async Task CallUpdateProductLogApi()
+        private readonly ProductService _productService;
+        private readonly ReserveService _reserveService;
+
+        public ApiJobService(ProductService productService, ReserveService reserveService)
         {
-            using (HttpClient client = new HttpClient())
-            {
-                string apiUrl = "https://localhost:44314/api/Product/UpdateProductLog";
-
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync(apiUrl);
-                    response.EnsureSuccessStatusCode();
-
-                    string result = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine($"UpdateProductLog API Response: {result}");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error calling UpdateProductLog API: {ex.Message}");
-                }
-            }
+            _productService = productService;
+            _reserveService = reserveService;
         }
 
-        public static async Task CallCheckPriceInReservedsApi()
+        public async Task CallUpdateProductLogApi()
         {
-            using (HttpClient client = new HttpClient())
+            ResponseStatus result = await _productService.UpdateProductLog();
+            Console.WriteLine($"Code : {result.StatusCode} | Message : {result.StatusMessage}");
+        }
+
+        public async Task CallCheckPriceInReservedsApi()
+        {
+            var reservesList = await _reserveService.GetReserves();
+            if (reservesList == null)
             {
-                string apiUrl = "https://localhost:44314/api/Reserve/GetReserves";
+                Console.WriteLine("No data found in GetReserves service calling");
+                return;
+            }
 
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync(apiUrl);
-                    response.EnsureSuccessStatusCode();
-                    string result = await response.Content.ReadAsStringAsync();
-                    var reservesList = JsonConvert.DeserializeObject<List<Reserve>>(result);
-
-                    string checkPriceUrl = "";
-
-
-                    foreach (var reserve in reservesList)
-                    {
-                        checkPriceUrl = $"https://localhost:44314/api/Reserve/CheckPriceInReserveds/{reserve.User_Id}";
-                        response = await client.GetAsync(checkPriceUrl);
-                        response.EnsureSuccessStatusCode();
-
-                        result = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine($"Checked price for User {reserve.User_Id}: {result}");
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error calling CheckPriceInReserveds API: {ex.Message}");
-                }
+            foreach (var reserve in reservesList)
+            {
+                var result = await _reserveService.CheckPriceInReserveds(reserve.User_Id);
+                Console.WriteLine($"Checked price for User {reserve.User_Id}: {result}");
             }
         }
     }
-
 }

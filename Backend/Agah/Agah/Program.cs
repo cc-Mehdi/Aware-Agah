@@ -2,6 +2,7 @@
 using Agah.Filters;
 using Agah.Services;
 using Datalayer.Data;
+using Datalayer.Models;
 using Datalayer.Repositories;
 using Datalayer.Repositories.IRepositories;
 using Hangfire;
@@ -31,6 +32,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 ));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<ReserveService>();
 
 // Enable CORS
 builder.Services.AddCors(options =>
@@ -43,11 +46,6 @@ builder.Services.AddCors(options =>
               .AllowCredentials(); // Allow credentials if needed
     });
 });
-
-// Add Hangfire services
-builder.Services.AddHangfire(config =>
-    config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddHangfireServer();
 
 // 🔹 Add Swagger services
 builder.Services.AddSwaggerGen(options =>
@@ -105,6 +103,39 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+
+// Apply migrations and seed data
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var dbContext = services.GetRequiredService<ApplicationDbContext>();
+        dbContext.Database.Migrate();
+
+        if (!dbContext.Product.Any())
+        {
+            dbContext.Product.AddRange(
+                new Product { PersianName = "طلای 18عیار", EnglishName = "price18", IconName = "fa-solid fa-ring", CreatedAt = DateTime.Now }
+            );
+
+            dbContext.Alarm.AddRange(
+                new Alarm { PersianName = "نوتیف درون برنامه", AlarmPrice = 10000, CreatedAt = DateTime.Now, EnglishName = "Alert", IsActive = true, ShortDescription = "اطلاع رسانی با نوتیفیکیشن" },
+                new Alarm { PersianName = "ایمیل", AlarmPrice = 10000, CreatedAt = DateTime.Now, EnglishName = "Email", IsActive = true, ShortDescription = "اطلاع رسانی با ایمیل" },
+                new Alarm { PersianName = "پیامک", AlarmPrice = 10000, CreatedAt = DateTime.Now, EnglishName = "SMS", IsActive = false, ShortDescription = "اطلاع رسانی با پیامک" },
+                new Alarm { PersianName = "تلفن", AlarmPrice = 10000, CreatedAt = DateTime.Now, EnglishName = "Phone", IsActive = false, ShortDescription = "اطلاع رسانی با تماس تلفنی" }
+                );
+
+            dbContext.SaveChanges();
+        }
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating the database.");
+    }
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -119,6 +150,11 @@ app.UseCors("AllowSpecificOrigin");
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Add Hangfire services
+builder.Services.AddHangfire(config =>
+    config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHangfireServer();
+
 app.UseHangfireDashboard("/Hangfire", new DashboardOptions
 {
     Authorization = new[] { new BasicAuthAuthorizationFilter("admin", "2ea34b097a6a3bb800f0a13108b92d93") }
@@ -127,13 +163,23 @@ app.UseHangfireDashboard("/Hangfire", new DashboardOptions
 
 app.MapControllers();
 
-RecurringJob.AddOrUpdate(
-    "update-product-log",
-    () => ApiJobService.CallUpdateProductLogApi(),
-    Cron.Minutely);
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
 
-RecurringJob.AddOrUpdate(
-    "check-price-in-reserve",
-    () => ApiJobService.CallCheckPriceInReservedsApi(),
-    Cron.Minutely);
+    var productService = services.GetRequiredService<ProductService>();
+    var reserveService = services.GetRequiredService<ReserveService>();
+    var apiJobService = new ApiJobService(productService, reserveService);
+
+    RecurringJob.AddOrUpdate(
+        "update-product-log",
+        () => apiJobService.CallUpdateProductLogApi(),
+        Cron.Minutely);
+
+    RecurringJob.AddOrUpdate(
+        "check-price-in-reserve",
+        () => apiJobService.CallCheckPriceInReservedsApi(),
+        Cron.Minutely);
+}
+
 app.Run();
