@@ -1,7 +1,6 @@
 import { API_BASE_URL, getToken } from "./../../config.js";
 
 const fetchApi = async ({ url, method = 'GET', body = null, headers = {}, requiresAuth = true }) => {
-    try {
         const requestHeaders = {
             'Accept': '*/*',
             'Content-Type': 'application/json',
@@ -18,15 +17,8 @@ const fetchApi = async ({ url, method = 'GET', body = null, headers = {}, requir
             body: body ? JSON.stringify(body) : null
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
         const data = await response.json();
         return data;
-    } catch (error) {
-        throw error;
-    }
 };
 
 
