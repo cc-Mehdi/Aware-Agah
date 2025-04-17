@@ -1,7 +1,12 @@
-﻿using Datalayer.Models;
+﻿using Agah.Services;
+using Agah.Services.Interfaces;
+using Agah.Utility;
+using Agah.ViewModels;
+using Datalayer.Models;
 using Datalayer.Repositories.IRepositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,11 +23,14 @@ namespace Agah.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _configuration;
+        private readonly IEmailService _emailService;
 
-        public AuthController(IUnitOfWork unitOfWork, IConfiguration configuration)
+
+        public AuthController(IUnitOfWork unitOfWork, IConfiguration configuration, IEmailService emailService)
         {
             _unitOfWork = unitOfWork;
             _configuration = configuration;
+            _emailService = emailService;
         }
 
         [HttpPost("Login")]
@@ -30,10 +38,10 @@ namespace Agah.Controllers
         {
             var user = await _unitOfWork.UserRepository.GetFirstOrDefaultAsync(u => u.Email == request.Email);
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.HashedPassword))
-                return Ok(new ViewModels.ResponseStatus { StatusCode = 401, StatusMessage = "ایمیل یا کلمه عبور اشتباه است!"});
+                return Ok(new ViewModels.ResponseStatus { StatusCode = 401, StatusMessage = "ایمیل یا کلمه عبور اشتباه است!" });
 
             var token = GenerateJwtToken(user);
-            return Ok(new { StatusCode = 200, StatusMessage = "ثبت نام شما با موفقیت انجام شد", Token = token });
+            return Ok(new { StatusCode = 200, StatusMessage = "ورود شما با موفقیت انجام شد", Token = token });
         }
 
         private string GenerateJwtToken(User user)
@@ -81,6 +89,45 @@ namespace Agah.Controllers
         public IActionResult ValidateToken()
         {
             return Ok(new { valid = true });
+        }
+
+        // ارسال کد تأیید ایمیل
+        [Authorize]
+        [HttpPost("SendEmailVerification")]
+        public async Task<IActionResult> SendEmailVerification()
+        {
+            User user = await Auth.GetLoggedInUserAsync(HttpContext, _unitOfWork);
+            if (user == null)
+                return BadRequest(new ResponseStatus() { StatusCode = 200, StatusMessage = "کاربر یافت نشد." });
+
+            var token = Auth.GenerateRandomToken(); // مثلاً: "123456"
+            user.EmailVerificationToken = token;
+            user.EmailVerificationTokenExpiry = DateTime.Now.AddMinutes(10);
+
+            await _unitOfWork.UserRepository.UpdateAsync(user);
+            await _unitOfWork.SaveAsync();
+            await _emailService.SendVerificationEmailAsync(user.Email, token);
+
+            return Ok(new ResponseStatus() { StatusCode = 200, StatusMessage = "کد تأیید به ایمیل شما ارسال شد." });
+        }
+
+        // تأیید ایمیل
+        [Authorize]
+        [HttpPost("VerifyEmail/{token}")]
+        public async Task<IActionResult> VerifyEmail(string token)
+        {
+            User user = await Auth.GetLoggedInUserAsync(HttpContext, _unitOfWork);
+            if (user == null)
+                return Ok(new ResponseStatus() { StatusCode = 400, StatusMessage = "کاربر یافت نشد." });
+
+            if (user.EmailVerificationToken != token || user.EmailVerificationTokenExpiry < DateTime.Now)
+                return Ok(new ResponseStatus() { StatusCode = 400, StatusMessage = "کد نامعتبر یا منقضی شده است." });
+
+            user.IsEmailVerified = true;
+
+            await _unitOfWork.UserRepository.UpdateAsync(user);
+            await _unitOfWork.SaveAsync();
+            return Ok(new ResponseStatus() { StatusCode = 200, StatusMessage = "ایمیل با موفقیت تأیید شد." });
         }
     }
 }
