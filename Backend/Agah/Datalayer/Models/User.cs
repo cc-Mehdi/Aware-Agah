@@ -28,6 +28,8 @@ namespace Datalayer.Models
 
         [DefaultValue(false)]
         public bool IsEmailVerified { get; set; }
+        public string? EmailVerificationToken { get; set; }
+        public DateTime? EmailVerificationTokenExpiry { get; set; }
 
         [Display(Name = "تلفن")]
         [MinLength(11, ErrorMessage = "مقدار {0} باید 11 کاراکتر باشد")]
@@ -37,6 +39,9 @@ namespace Datalayer.Models
 
         [DefaultValue(false)]
         public bool IsPhoneVerivied { get; set; }
+        public string? PhoneVerificationToken { get; set; }
+        public DateTime? PhoneVerificationTokenExpiry { get; set; }
+
 
         [Display(Name = "کلمه عبور")]
         [Required(ErrorMessage = "لطفا مقدار {0} را وارد کنید")]

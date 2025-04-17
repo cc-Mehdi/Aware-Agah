@@ -30,8 +30,12 @@ namespace Datalayer.Repositories
             objFromDb.Fullname = item.Fullname;
             objFromDb.Email = item.Email;
             objFromDb.IsEmailVerified = item.IsEmailVerified;
+            objFromDb.EmailVerificationToken= item.EmailVerificationToken;
+            objFromDb.EmailVerificationTokenExpiry = item.EmailVerificationTokenExpiry;
             objFromDb.Phone = item.Phone;
             objFromDb.IsPhoneVerivied = item.IsPhoneVerivied;
+            objFromDb.PhoneVerificationToken = item.PhoneVerificationToken;
+            objFromDb.PhoneVerificationTokenExpiry = item.PhoneVerificationTokenExpiry;
             objFromDb.HashedPassword = item.HashedPassword;
             objFromDb.Role = item.Role;
             objFromDb.CreatedAt = item.CreatedAt;
