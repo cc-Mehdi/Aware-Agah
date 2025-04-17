@@ -32,16 +32,9 @@ namespace Agah.Controllers
                 if (user == null)
                     return NotFound("کاربر پیدا نشد.");
 
-                switch (alarmType)
-                {
-                    case "Alert":
-                        var notificationsList = await _unitOfWork.Notification_UserRepository.GetAllByFilterAsync(u => u.UserId == user.Id, includeProperties: u => u.User);
-                        return Ok(notificationsList.OrderByDescending(u => u.CreatedAt));
-                    default:
-                        break;
-                }
+                var notificationsList = await _unitOfWork.Notification_UserRepository.GetAllByFilterAsync(u => u.UserId == user.Id, includeProperties: u => u.User);
+                return Ok(notificationsList.OrderByDescending(u => u.CreatedAt));
 
-                return BadRequest(new { statusMessage = "امکان ارسال اعلان با روش انتخاب شده وجود ندارد" });
             }
             catch (Exception ex)
             {
@@ -76,7 +69,9 @@ namespace Agah.Controllers
                 }
 
                 await _unitOfWork.SaveAsync();
-                return Ok(notificationsList);
+
+                var result = notificationsList.OrderByDescending(u => u.CreatedAt).ToList();
+                return Ok(result);
 
             }
             catch (Exception ex)
