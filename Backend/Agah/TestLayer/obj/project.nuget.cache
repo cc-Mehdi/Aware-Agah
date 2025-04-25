@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "W9nEBfAWu5c=",
+  "dgSpecHash": "z+LT0KT7irP661iYOb1OVNSxx5KFenFvo1fm8F228q+FolqDV5sr/hbyxjUhseVR7MBAq3tYBpEIoy6cwcZWgA==",
   "success": true,
   "projectFilePath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\TestLayer\\TestLayer.csproj",
   "expectedPackageFiles": [
@@ -187,10 +187,7 @@
     "C:\\Users\\cc-mehdi\\.nuget\\packages\\xunit.core\\2.5.3\\xunit.core.2.5.3.nupkg.sha512",
     "C:\\Users\\cc-mehdi\\.nuget\\packages\\xunit.extensibility.core\\2.5.3\\xunit.extensibility.core.2.5.3.nupkg.sha512",
     "C:\\Users\\cc-mehdi\\.nuget\\packages\\xunit.extensibility.execution\\2.5.3\\xunit.extensibility.execution.2.5.3.nupkg.sha512",
-    "C:\\Users\\cc-mehdi\\.nuget\\packages\\xunit.runner.visualstudio\\2.5.3\\xunit.runner.visualstudio.2.5.3.nupkg.sha512",
-    "C:\\Users\\cc-mehdi\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.13\\microsoft.netcore.app.ref.8.0.13.nupkg.sha512",
-    "C:\\Users\\cc-mehdi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.13\\microsoft.windowsdesktop.app.ref.8.0.13.nupkg.sha512",
-    "C:\\Users\\cc-mehdi\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.13\\microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512"
+    "C:\\Users\\cc-mehdi\\.nuget\\packages\\xunit.runner.visualstudio\\2.5.3\\xunit.runner.visualstudio.2.5.3.nupkg.sha512"
   ],
   "logs": [
     {
