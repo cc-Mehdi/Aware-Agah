@@ -14,12 +14,6 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.WebHost.ConfigureKestrel(options =>
-//{
-//    options.Listen(System.Net.IPAddress.Parse("192.168.2.137"), 5000); // HTTP
-//    options.Listen(System.Net.IPAddress.Parse("192.168.2.137"), 5001, listenOptions => listenOptions.UseHttps()); // HTTPS
-//});
-
 // Register EmailService
 builder.Services.ConfigureEmailService(builder.Configuration);
 
@@ -101,8 +95,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
-var app = builder.Build();
+// Add Hangfire services
+builder.Services.AddHangfire(config =>
+    config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHangfireServer();
 
+var app = builder.Build();
 
 // Apply migrations and seed data
 using (var scope = app.Services.CreateScope())
@@ -149,11 +147,6 @@ app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-// Add Hangfire services
-builder.Services.AddHangfire(config =>
-    config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddHangfireServer();
 
 app.UseHangfireDashboard("/Hangfire", new DashboardOptions
 {
