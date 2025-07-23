@@ -107,7 +107,7 @@ docker-compose up --d
 
 4. پیکربندی Frontend
 
-- وارد آدرس `Frontend` شوید.
+- وارد آدرس `Frontend>Agah` شوید.
 - در فایل تنظیمات (`.env`) مقدار VITE_API_BASE_URL را روی آدرس لوکال سرویس بک‌اند قرار دهید:
 ```bash
 VITE_API_BASE_URL=http://localhost:8080/api
