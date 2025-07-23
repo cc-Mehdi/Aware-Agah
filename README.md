@@ -1,55 +1,4 @@
 # آگاه - پلتفرم هوشمند مدیریت تغییرات قیمت
-
-![GitHub repo size](https://img.shields.io/github/repo-size/cc-mehdi/Aware-Agah)
-![GitHub stars](https://img.shields.io/github/stars/cc-mehdi/Aware-Agah?style=social)
-![GitHub forks](https://img.shields.io/github/forks/cc-mehdi/Aware-Agah?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/cc-mehdi/Aware-Agah?style=social)
-![GitHub last commit](https://img.shields.io/github/last-commit/cc-mehdi/Aware-Agah)
-![GitHub issues](https://img.shields.io/github/issues/cc-mehdi/Aware-Agah)
-
----
-
-## ✨ معرفی پروژه
-
-**آگاه** یک پلتفرم هوشمند برای رصد لحظه‌ای و مدیریت تغییرات قیمت در بازارهای مالی و کالایی است. این سامانه به کاربران کمک می‌کند با صرف کمترین زمان از نوسانات قیمتی مطلع شده و تصمیمات مالی آگاهانه‌تری بگیرند.
-
----
-
-## 🖼️ تصاویر رابط کاربری
-
-#### دسکتاپ
-<img width="477" height="556" alt="image" src="https://github.com/user-attachments/assets/da4437e9-0ba6-4740-916b-edad3cf5d80d" />
-
-<img width="620" height="959" alt="image" src="https://github.com/user-attachments/assets/721431f6-cb29-49c3-94e2-5d2e2ed1f31d" />
-
-<img width="754" height="560" alt="image" src="https://github.com/user-attachments/assets/20a215ff-5f35-436a-87e7-d3c985694d96" />
-
-<img width="766" height="781" alt="image" src="https://github.com/user-attachments/assets/53d10332-efae-4183-83e1-a34515650f8c" />
-
-<img width="1920" height="960" alt="image" src="https://github.com/user-attachments/assets/47cdd766-5cc7-40a4-82b5-a856eff79d73" />
-
-#### موبایل
-<img width="418" height="776" alt="image" src="https://github.com/user-attachments/assets/54af8ea5-f1cb-49e2-aee6-671cbe61e8ae" />
-
-<img width="455" height="769" alt="image" src="https://github.com/user-attachments/assets/518d513e-a92b-40d0-b2f4-683848efcc5b" />
-
----
-
-## ⚙️ ویژگی‌های کلیدی
-
-- **هشدار چندکاناله:** اعلان از طریق ایمیل، پیامک، تماس تلفنی و اعلان درون‌برنامه‌ای  
-- **رصد لحظه‌ای بازار:** مشاهده نوسانات به‌صورت لحظه‌ای  
-- **تنظیم بازه قیمتی:** تعیین حداقل و حداکثر قیمت برای هر دارایی  
-- **پشتیبانی از چندین دارایی مالی:** طلا، ارز، و به‌زودی سایر رمزارزها  
-- **رابط کاربری ساده:** مناسب برای تمامی کاربران با هر سطح دانش  
-
----
-
-## ✅ قابلیت‌های پیاده‌سازی‌شده
-
-- هشدار از طریق **ایمیل** و **اعلان درون‌برنامه‌ای**  
-- رصد قیمت **طلا** و **ارز**  
-- اتصال کامل به **پایگاه‌داده SQL**  
 - استفاده از **Docker و Docker Compose** برای اجرا و مدیریت سرویس‌ها  
 
 ---
@@ -102,6 +51,16 @@ docker-compose up --d
 
 3. پس از اجرا، پلتفرم روی http://localhost:5173 در دسترس خواهد بود (در صورت تنظیم این پورت).
 
+<img width="1000" height="211" alt="image" src="https://github.com/user-attachments/assets/530aa294-9247-4074-9f95-f93c64ced156" />
+
+
+### *توجه!!!*
+
+در صورتی که کانتینرهای داکر به درستی اجرا نشدند ، آن ها را به ترتیب و به صورت دستی روشن کنید. 
+1. SQL Server (به دلیل وابستگی سرویس backend برای seed کردن داده های پیشفرض)
+2. Backend
+3. Frontend
+
 ---
 
 ## 🧪 راه‌اندازی دستی پروژه
@@ -135,27 +94,3 @@ VITE_API_BASE_URL=http://localhost:8080/api
 
 5. اجرای Frontend
 ```bash
-cd frontend
-npm i
-npm run dev
-```
-
-رابط کاربری روی ```http://localhost:5173``` اجرا خواهد شد.
-
----
-## 🤝 مشارکت
-
-برای مشارکت در توسعه این پروژه:
-
-1. این مخزن را فورک کنید
-2. تغییرات خود را در یک Branch جدید اعمال کنید
-3. در نهایت Pull Request بفرستید
-
----
-
-## 📬 تماس
-
-برای هرگونه سؤال یا همکاری:
-
-📧 Email: [mailto:cc.mehdigholami@gmail.com](cc.mehdigholami@gmail.com)
-🌐 Github: [https://github.com/cc-mehdi](cc-Mehdi)
