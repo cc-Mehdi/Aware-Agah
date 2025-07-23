@@ -79,3 +79,5 @@ cd agah
 ```bash
 docker-compose up --build
 ```
+
+3. پس از اجرا، پلتفرم روی http://localhost:5173 در دسترس خواهد بود (در صورت تنظیم این پورت).
