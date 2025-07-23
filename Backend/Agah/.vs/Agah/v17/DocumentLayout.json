@@ -1,12 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|c:\\users\\cc-mehdi\\desktop\\aware-aghah\\backend\\agah\\agah\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41E2E210-AE1D-4B8F-B3B2-1FFE3CC16EAC}|Agah\\Agah.csproj|solutionrelative:agah\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -14,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 281,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -27,19 +22,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Program.cs",
-              "RelativeDocumentMoniker": "Agah\\Program.cs",
-              "ToolTip": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Program.cs",
-              "RelativeToolTip": "Agah\\Program.cs",
-              "ViewState": "AQIAAFMAAAAAAAAAAAAIwHIAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T11:57:39.16Z",
-              "EditorCaption": ""
             }
           ]
         }

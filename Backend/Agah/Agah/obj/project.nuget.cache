@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GAxVCg6g62IHBdq2VUKWeW0YC70ut5R4pUB2puyqV/mZs60fjN1xwEDek8t2ugQhwtJ8C3ZSKOJT8OEyZzerVw==",
+  "dgSpecHash": "d1gYkRxbG20=",
   "success": true,
   "projectFilePath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Agah.csproj",
   "expectedPackageFiles": [
@@ -105,8 +105,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Package 'BCrypt.Net 0.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "projectPath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Agah.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Agah.csproj",
       "libraryId": "BCrypt.Net",
       "targetGraphs": [
         "net8.0"
@@ -115,8 +117,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Package 'Hangfire.Dashboard.Authorization 3.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "projectPath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Agah.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Agah.csproj",
       "libraryId": "Hangfire.Dashboard.Authorization",
       "targetGraphs": [
         "net8.0"
@@ -125,8 +129,10 @@
     {
       "code": "NU1701",
       "level": "Warning",
-      "warningLevel": 1,
       "message": "Package 'Owin 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "projectPath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Agah.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\cc-mehdi\\Desktop\\Aware-Aghah\\Backend\\Agah\\Agah\\Agah.csproj",
       "libraryId": "Owin",
       "targetGraphs": [
         "net8.0"

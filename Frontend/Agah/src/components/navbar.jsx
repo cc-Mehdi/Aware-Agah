@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from "./../assets/images/logos/Full color.png";
+import imgPerson from "./../assets/images/user-male-circle-blue-512.webp";
 import { getUser } from '../services/api_BaseAPICaller';
 
 const Navbar = () => {
@@ -76,7 +77,7 @@ const Navbar = () => {
                         id="avatarButton"
                         type="button"
                         className="w-10 h-10 bg-white rounded-full cursor-pointer shadow-lg"
-                        src="https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/user-male-circle-blue-512.png"
+                        src={imgPerson}
                         alt="User dropdown"
                         onClick={toggleDropdown}
                     />

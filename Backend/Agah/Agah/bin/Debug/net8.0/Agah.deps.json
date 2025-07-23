@@ -1291,7 +1291,10 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.1"
         },
         "runtime": {
-          "Datalayer.dll": {}
+          "Datalayer.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

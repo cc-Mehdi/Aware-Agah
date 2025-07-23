@@ -22,7 +22,7 @@
   {
     "ContainingType": "Agah.Controllers.AuthController",
     "Method": "Login",
-    "RelativePath": "api/Auth/login",
+    "RelativePath": "api/Auth/Login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -38,7 +38,7 @@
   {
     "ContainingType": "Agah.Controllers.AuthController",
     "Method": "Register",
-    "RelativePath": "api/Auth/register",
+    "RelativePath": "api/Auth/Register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -53,6 +53,16 @@
   },
   {
     "ContainingType": "Agah.Controllers.AuthController",
+    "Method": "SendEmailVerification",
+    "RelativePath": "api/Auth/SendEmailVerification",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Agah.Controllers.AuthController",
     "Method": "ValidateToken",
     "RelativePath": "api/Auth/ValidateToken",
     "HttpMethod": "GET",
@@ -62,18 +72,45 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Agah.Controllers.NotificationController",
-    "Method": "GetNotifications",
-    "RelativePath": "api/Notification/GetNotifications/{userId}/{alarmType}",
-    "HttpMethod": "GET",
+    "ContainingType": "Agah.Controllers.AuthController",
+    "Method": "VerifyEmail",
+    "RelativePath": "api/Auth/VerifyEmail/{token}",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "userId",
-        "Type": "System.Int32",
+        "Name": "token",
+        "Type": "System.String",
         "IsRequired": true
-      },
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Agah.Controllers.EmailController",
+    "Method": "SendEmail",
+    "RelativePath": "api/Email/Send",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Agah.Models.EmailRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Agah.Controllers.NotificationController",
+    "Method": "GetNotifications",
+    "RelativePath": "api/Notification/GetNotifications/{alarmType}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
         "Name": "alarmType",
         "Type": "System.String",
@@ -85,17 +122,11 @@
   {
     "ContainingType": "Agah.Controllers.NotificationController",
     "Method": "ReadAllNotifications",
-    "RelativePath": "api/Notification/ReadAllNotifications/{userId}",
+    "RelativePath": "api/Notification/ReadAllNotifications",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
