@@ -17,11 +17,21 @@
 
 ## 🖼️ تصاویر رابط کاربری
 
-#### صفحه ورود/ثبت‌نام
-<img width="447" height="505" alt="image" src="https://github.com/user-attachments/assets/a5fe60df-4773-442f-90c0-6dfa1e2ef870" />
+#### دسکتاپ
 <img width="477" height="556" alt="image" src="https://github.com/user-attachments/assets/da4437e9-0ba6-4740-916b-edad3cf5d80d" />
 
+<img width="620" height="959" alt="image" src="https://github.com/user-attachments/assets/721431f6-cb29-49c3-94e2-5d2e2ed1f31d" />
 
+<img width="754" height="560" alt="image" src="https://github.com/user-attachments/assets/20a215ff-5f35-436a-87e7-d3c985694d96" />
+
+<img width="766" height="781" alt="image" src="https://github.com/user-attachments/assets/53d10332-efae-4183-83e1-a34515650f8c" />
+
+<img width="1920" height="960" alt="image" src="https://github.com/user-attachments/assets/47cdd766-5cc7-40a4-82b5-a856eff79d73" />
+
+#### موبایل
+<img width="418" height="776" alt="image" src="https://github.com/user-attachments/assets/54af8ea5-f1cb-49e2-aee6-671cbe61e8ae" />
+
+<img width="455" height="769" alt="image" src="https://github.com/user-attachments/assets/518d513e-a92b-40d0-b2f4-683848efcc5b" />
 
 ---
 
