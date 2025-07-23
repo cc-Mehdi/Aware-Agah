@@ -66,3 +66,16 @@
 
 ---
 
+
+## 🐳 اجرای پروژه با Docker Compose
+
+1. ابتدا مخزن را کلون کنید:
+```bash
+git clone https://github.com/yourusername/agah.git
+cd agah
+```
+
+2. سپس با اجرای دستور زیر، کل سیستم را بالا بیاورید:
+```bash
+docker-compose up --build
+```
