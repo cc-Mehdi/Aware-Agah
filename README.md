@@ -80,6 +80,7 @@
 آگاه با استفاده از معماری ماژولار و تکنولوژی‌های روز پیاده‌سازی شده است:
 
 - Backend: C# / .NET Core 8 | WEB API | EFCore 6
+- Tests : Unit Test | Integration Test
 - Database: SQL Server
 - Docker & Docker Compose
 - Frontend: React / Tailwind | Redux
